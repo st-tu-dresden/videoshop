@@ -1,11 +1,13 @@
 package videoshop;
 
+import static org.joda.money.CurrencyUnit.*;
+
 import java.util.Arrays;
 
+import org.joda.money.Money;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.core.inventory.Inventory;
 import org.salespointframework.core.inventory.InventoryItem;
-import org.salespointframework.core.money.Money;
 import org.salespointframework.core.quantity.Units;
 import org.salespointframework.core.useraccount.Role;
 import org.salespointframework.core.useraccount.UserAccount;
@@ -59,25 +61,26 @@ public class VideoShopDataInitializer implements DataInitializer {
 			return;
 		}
 
-		videoCatalog.add(new Dvd("Last Action Hero", "lac", new Money(9.99), "Äktschn/Comedy"));
-		videoCatalog.add(new Dvd("Back to the Future", "bttf", new Money(9.99), "Sci-Fi"));
-		videoCatalog.add(new Dvd("Fido", "fido", new Money(9.99), "Comedy/Drama/Horror"));
-		videoCatalog.add(new Dvd("Super Fuzz", "sf", new Money(19.99), "Action/Sci-Fi/Comedy"));
-		videoCatalog.add(new Dvd("Armour of God II: Operation Condor", "aog2oc", new Money(14.99),
+		videoCatalog.add(new Dvd("Last Action Hero", "lac", Money.of(EUR, 9.99), "Äktschn/Comedy"));
+		videoCatalog.add(new Dvd("Back to the Future", "bttf", Money.of(EUR, 9.99), "Sci-Fi"));
+		videoCatalog.add(new Dvd("Fido", "fido", Money.of(EUR, 9.99), "Comedy/Drama/Horror"));
+		videoCatalog.add(new Dvd("Super Fuzz", "sf", Money.of(EUR, 9.99), "Action/Sci-Fi/Comedy"));
+		videoCatalog.add(new Dvd("Armour of God II: Operation Condor", "aog2oc", Money.of(EUR, 14.99),
 				"Action/Adventure/Comedy"));
-		videoCatalog.add(new Dvd("Persepolis", "pers", new Money(14.99), "Animation/Biography/Drama"));
-		videoCatalog.add(new Dvd("Hot Shots! Part Deux", "hspd", Money.OVER9000, "Action/Comedy/War"));
-		videoCatalog.add(new Dvd("Avatar: The Last Airbender", "tla", new Money(19.99), "Animation/Action/Adventure"));
+		videoCatalog.add(new Dvd("Persepolis", "pers", Money.of(EUR, 14.99), "Animation/Biography/Drama"));
+		videoCatalog.add(new Dvd("Hot Shots! Part Deux", "hspd", Money.of(EUR, 9999.0), "Action/Comedy/War"));
+		videoCatalog.add(new Dvd("Avatar: The Last Airbender", "tla", Money.of(EUR, 19.99), "Animation/Action/Adventure"));
 
-		videoCatalog.add(new BluRay("Secretary", "secretary", new Money(6.99), "Political Drama"));
-		videoCatalog.add(new BluRay("The Godfather", "tg", new Money(19.99), "Crime/Drama"));
-		videoCatalog.add(new BluRay("No Retreat, No Surrender", "nrns", new Money(29.99), "Martial Arts"));
-		videoCatalog.add(new BluRay("The Princess Bride", "tpb", new Money(39.99), "Adventure/Comedy/Family"));
-		videoCatalog.add(new BluRay("Top Secret!", "ts", new Money(39.99), "Comedy"));
-		videoCatalog.add(new BluRay("The Iron Giant", "tig", new Money(34.99), "Animation/Action/Adventure"));
-		videoCatalog.add(new BluRay("Battle Royale", "br", new Money(19.99), "Action/Drama/Thriller"));
-		videoCatalog.add(new BluRay("Oldboy", "old", new Money(24.99), "Action/Drama/Thriller"));
-		videoCatalog.add(new BluRay("Bill & Ted's Excellent Adventure", "bt", new Money(29.99), "Adventure/Comedy/Family"));
+		videoCatalog.add(new BluRay("Secretary", "secretary", Money.of(EUR, 6.99), "Political Drama"));
+		videoCatalog.add(new BluRay("The Godfather", "tg", Money.of(EUR, 19.99), "Crime/Drama"));
+		videoCatalog.add(new BluRay("No Retreat, No Surrender", "nrns", Money.of(EUR, 29.99), "Martial Arts"));
+		videoCatalog.add(new BluRay("The Princess Bride", "tpb", Money.of(EUR, 39.99), "Adventure/Comedy/Family"));
+		videoCatalog.add(new BluRay("Top Secret!", "ts", Money.of(EUR, 39.99), "Comedy"));
+		videoCatalog.add(new BluRay("The Iron Giant", "tig", Money.of(EUR, 34.99), "Animation/Action/Adventure"));
+		videoCatalog.add(new BluRay("Battle Royale", "br", Money.of(EUR, 19.99), "Action/Drama/Thriller"));
+		videoCatalog.add(new BluRay("Oldboy", "old", Money.of(EUR, 24.99), "Action/Drama/Thriller"));
+		videoCatalog.add(new BluRay("Bill & Ted's Excellent Adventure", "bt", Money.of(EUR, 29.99),
+				"Adventure/Comedy/Family"));
 
 		// (｡◕‿◕｡)
 		// Über alle eben hinzugefügten Discs iterieren und jeweils ein InventoryItem mit der Quantity 10 setzen
