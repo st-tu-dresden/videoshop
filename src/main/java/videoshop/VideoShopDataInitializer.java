@@ -6,21 +6,21 @@ import java.util.Arrays;
 
 import org.joda.money.Money;
 import org.salespointframework.core.DataInitializer;
-import org.salespointframework.core.inventory.Inventory;
-import org.salespointframework.core.inventory.InventoryItem;
-import org.salespointframework.core.quantity.Units;
-import org.salespointframework.core.useraccount.Role;
-import org.salespointframework.core.useraccount.UserAccount;
-import org.salespointframework.core.useraccount.UserAccountIdentifier;
-import org.salespointframework.core.useraccount.UserAccountManager;
+import org.salespointframework.inventory.Inventory;
+import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.quantity.Units;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
-import videoshop.model.BluRay;
 import videoshop.model.Customer;
 import videoshop.model.CustomerRepository;
 import videoshop.model.Disc;
-import videoshop.model.Dvd;
+import videoshop.model.Disc.DiscType;
 import videoshop.model.VideoCatalog;
 
 // (｡◕‿◕｡)
@@ -30,14 +30,20 @@ import videoshop.model.VideoCatalog;
 @Component
 public class VideoShopDataInitializer implements DataInitializer {
 
-	private final Inventory inventory;
+	private final Inventory<InventoryItem> inventory;
 	private final VideoCatalog videoCatalog;
 	private final UserAccountManager userAccountManager;
 	private final CustomerRepository customerRepository;
 
 	@Autowired
-	public VideoShopDataInitializer(CustomerRepository customerRepository, Inventory inventory,
+	public VideoShopDataInitializer(CustomerRepository customerRepository, Inventory<InventoryItem> inventory,
 			UserAccountManager userAccountManager, VideoCatalog videoCatalog) {
+
+		Assert.notNull(customerRepository, "CustomerRepository must not be null!");
+		Assert.notNull(inventory, "Inventory must not be null!");
+		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
+		Assert.notNull(videoCatalog, "VideoCatalog must not be null!");
+
 		this.customerRepository = customerRepository;
 		this.inventory = inventory;
 		this.userAccountManager = userAccountManager;
@@ -55,32 +61,37 @@ public class VideoShopDataInitializer implements DataInitializer {
 		initializeCatalog(videoCatalog, inventory);
 	}
 
-	private void initializeCatalog(VideoCatalog videoCatalog, Inventory inventory) {
+	private void initializeCatalog(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory) {
 
 		if (videoCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
 
-		videoCatalog.add(new Dvd("Last Action Hero", "lac", Money.of(EUR, 9.99), "Äktschn/Comedy"));
-		videoCatalog.add(new Dvd("Back to the Future", "bttf", Money.of(EUR, 9.99), "Sci-Fi"));
-		videoCatalog.add(new Dvd("Fido", "fido", Money.of(EUR, 9.99), "Comedy/Drama/Horror"));
-		videoCatalog.add(new Dvd("Super Fuzz", "sf", Money.of(EUR, 9.99), "Action/Sci-Fi/Comedy"));
-		videoCatalog.add(new Dvd("Armour of God II: Operation Condor", "aog2oc", Money.of(EUR, 14.99),
-				"Action/Adventure/Comedy"));
-		videoCatalog.add(new Dvd("Persepolis", "pers", Money.of(EUR, 14.99), "Animation/Biography/Drama"));
-		videoCatalog.add(new Dvd("Hot Shots! Part Deux", "hspd", Money.of(EUR, 9999.0), "Action/Comedy/War"));
-		videoCatalog.add(new Dvd("Avatar: The Last Airbender", "tla", Money.of(EUR, 19.99), "Animation/Action/Adventure"));
+		videoCatalog.save(new Disc("Last Action Hero", "lac", Money.of(EUR, 9.99), "Äktschn/Comedy", DiscType.DVD));
+		videoCatalog.save(new Disc("Back to the Future", "bttf", Money.of(EUR, 9.99), "Sci-Fi", DiscType.DVD));
+		videoCatalog.save(new Disc("Fido", "fido", Money.of(EUR, 9.99), "Comedy/Drama/Horror", DiscType.DVD));
+		videoCatalog.save(new Disc("Super Fuzz", "sf", Money.of(EUR, 9.99), "Action/Sci-Fi/Comedy", DiscType.DVD));
+		videoCatalog.save(new Disc("Armour of God II: Operation Condor", "aog2oc", Money.of(EUR, 14.99),
+				"Action/Adventure/Comedy", DiscType.DVD));
+		videoCatalog.save(new Disc("Persepolis", "pers", Money.of(EUR, 14.99), "Animation/Biography/Drama", DiscType.DVD));
+		videoCatalog
+				.save(new Disc("Hot Shots! Part Deux", "hspd", Money.of(EUR, 9999.0), "Action/Comedy/War", DiscType.DVD));
+		videoCatalog.save(new Disc("Avatar: The Last Airbender", "tla", Money.of(EUR, 19.99), "Animation/Action/Adventure",
+				DiscType.DVD));
 
-		videoCatalog.add(new BluRay("Secretary", "secretary", Money.of(EUR, 6.99), "Political Drama"));
-		videoCatalog.add(new BluRay("The Godfather", "tg", Money.of(EUR, 19.99), "Crime/Drama"));
-		videoCatalog.add(new BluRay("No Retreat, No Surrender", "nrns", Money.of(EUR, 29.99), "Martial Arts"));
-		videoCatalog.add(new BluRay("The Princess Bride", "tpb", Money.of(EUR, 39.99), "Adventure/Comedy/Family"));
-		videoCatalog.add(new BluRay("Top Secret!", "ts", Money.of(EUR, 39.99), "Comedy"));
-		videoCatalog.add(new BluRay("The Iron Giant", "tig", Money.of(EUR, 34.99), "Animation/Action/Adventure"));
-		videoCatalog.add(new BluRay("Battle Royale", "br", Money.of(EUR, 19.99), "Action/Drama/Thriller"));
-		videoCatalog.add(new BluRay("Oldboy", "old", Money.of(EUR, 24.99), "Action/Drama/Thriller"));
-		videoCatalog.add(new BluRay("Bill & Ted's Excellent Adventure", "bt", Money.of(EUR, 29.99),
-				"Adventure/Comedy/Family"));
+		videoCatalog.save(new Disc("Secretary", "secretary", Money.of(EUR, 6.99), "Political Drama", DiscType.BLURAY));
+		videoCatalog.save(new Disc("The Godfather", "tg", Money.of(EUR, 19.99), "Crime/Drama", DiscType.BLURAY));
+		videoCatalog.save(new Disc("No Retreat, No Surrender", "nrns", Money.of(EUR, 29.99), "Martial Arts",
+				DiscType.BLURAY));
+		videoCatalog.save(new Disc("The Princess Bride", "tpb", Money.of(EUR, 39.99), "Adventure/Comedy/Family",
+				DiscType.BLURAY));
+		videoCatalog.save(new Disc("Top Secret!", "ts", Money.of(EUR, 39.99), "Comedy", DiscType.BLURAY));
+		videoCatalog.save(new Disc("The Iron Giant", "tig", Money.of(EUR, 34.99), "Animation/Action/Adventure",
+				DiscType.BLURAY));
+		videoCatalog.save(new Disc("Battle Royale", "br", Money.of(EUR, 19.99), "Action/Drama/Thriller", DiscType.BLURAY));
+		videoCatalog.save(new Disc("Oldboy", "old", Money.of(EUR, 24.99), "Action/Drama/Thriller", DiscType.BLURAY));
+		videoCatalog.save(new Disc("Bill & Ted's Excellent Adventure", "bt", Money.of(EUR, 29.99),
+				"Adventure/Comedy/Family", DiscType.BLURAY));
 
 		// (｡◕‿◕｡)
 		// Über alle eben hinzugefügten Discs iterieren und jeweils ein InventoryItem mit der Quantity 10 setzen
@@ -88,7 +99,7 @@ public class VideoShopDataInitializer implements DataInitializer {
 
 		for (Disc disc : videoCatalog.findAll()) {
 			InventoryItem inventoryItem = new InventoryItem(disc, Units.TEN);
-			inventory.add(inventoryItem);
+			inventory.save(inventoryItem);
 		}
 	}
 

@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.salespointframework.core.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccount;
 
 // (｡◕‿◕｡)
 // Salespoint bietet nur eine UserAccount Verwaltung, für weitere Attribute sollte eine extra Klasse geschriebenw werden 

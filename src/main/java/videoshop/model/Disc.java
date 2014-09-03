@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import org.joda.money.Money;
-import org.salespointframework.core.catalog.Product;
-import org.salespointframework.core.quantity.Units;
-import org.salespointframework.util.Iterables;
+import org.salespointframework.catalog.Product;
+import org.salespointframework.quantity.Units;
 
 //(｡◕‿◕｡)
 // Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
@@ -19,10 +18,15 @@ import org.salespointframework.util.Iterables;
 @Entity
 public class Disc extends Product {
 
+	public static enum DiscType {
+		BLURAY, DVD;
+	}
+
 	// (｡◕‿◕｡)
 	// primitve Typen oder Strings müssen nicht extra für JPA annotiert werden
 	private String genre;
 	private String image;
+	private DiscType type;
 
 	// (｡◕‿◕｡)
 	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
@@ -36,10 +40,11 @@ public class Disc extends Product {
 	@Deprecated
 	protected Disc() {}
 
-	public Disc(String name, String image, Money price, String genre) {
+	public Disc(String name, String image, Money price, String genre, DiscType type) {
 		super(name, price, Units.METRIC);
 		this.image = image;
 		this.genre = genre;
+		this.type = type;
 	}
 
 	public String getGenre() {
@@ -56,10 +61,14 @@ public class Disc extends Product {
 	// Weil wir keine Liste zurück geben, verhindern wir auch, dass jemand die comments-Liste einfach durch clear() leert.
 	// Deswegen geben auch so viele Salespoint Klassen nur Iterable<T> zurück ;)
 	public Iterable<Comment> getComments() {
-		return Iterables.of(comments);
+		return comments;
 	}
 
 	public String getImage() {
 		return image;
+	}
+
+	public DiscType getType() {
+		return type;
 	}
 }

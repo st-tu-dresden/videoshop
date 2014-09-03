@@ -1,10 +1,12 @@
 package videoshop.controller;
 
-import org.salespointframework.core.inventory.Inventory;
-import org.salespointframework.core.inventory.InventoryItem;
-import org.salespointframework.core.quantity.Quantity;
-import org.salespointframework.core.quantity.Units;
-import org.salespointframework.core.time.BusinessTime;
+import java.util.Optional;
+
+import org.salespointframework.inventory.Inventory;
+import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.quantity.Quantity;
+import org.salespointframework.quantity.Units;
+import org.salespointframework.time.BusinessTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -18,13 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import videoshop.model.Comment;
 import videoshop.model.Disc;
+import videoshop.model.Disc.DiscType;
 import videoshop.model.VideoCatalog;
 
 @Controller
 class CatalogController {
 
 	private final VideoCatalog videoCatalog;
-	private final Inventory inventory;
+	private final Inventory<InventoryItem> inventory;
 	private final BusinessTime businessTime;
 
 	// (｡◕‿◕｡)
@@ -33,7 +36,7 @@ class CatalogController {
 	private final MessageSourceAccessor messageSourceAccessor;
 
 	@Autowired
-	public CatalogController(VideoCatalog videoCatalog, Inventory inventory, BusinessTime businessTime,
+	public CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime,
 			MessageSource messageSource) {
 
 		this.videoCatalog = videoCatalog;
@@ -44,19 +47,20 @@ class CatalogController {
 
 	@RequestMapping("/dvdCatalog")
 	public String dvdCatalog(ModelMap modelMap) {
-		modelMap.addAttribute("catalog", videoCatalog.findDvds());
-		String title = messageSourceAccessor.getMessage("catalog.dvd.title");
-		modelMap.addAttribute("title", title);
-		return "catalog";
+
+		modelMap.addAttribute("catalog", videoCatalog.findByType(DiscType.DVD));
+		modelMap.addAttribute("title", messageSourceAccessor.getMessage("catalog.dvd.title"));
+
+		return "discCatalog";
 	}
 
 	@RequestMapping("/blurayCatalog")
 	public String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", videoCatalog.findBluRays());
+		model.addAttribute("catalog", videoCatalog.findByType(DiscType.BLURAY));
 		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.bluray.title"));
 
-		return "catalog";
+		return "discCatalog";
 	}
 
 	// (｡◕‿◕｡)
@@ -65,10 +69,10 @@ class CatalogController {
 	@RequestMapping("/detail/{pid}")
 	public String detail(@PathVariable("pid") Disc disc, Model model) {
 
-		model.addAttribute("disc", disc);
+		Optional<InventoryItem> item = inventory.findByProductProductIdentifier(disc.getIdentifier());
+		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(Units.ZERO);
 
-		InventoryItem item = inventory.getByProductIdentifier(InventoryItem.class, disc.getIdentifier());
-		Quantity quantity = item == null ? Units.ZERO : item.getQuantity();
+		model.addAttribute("disc", disc);
 		model.addAttribute("quantity", quantity);
 
 		return "detail";
@@ -80,8 +84,10 @@ class CatalogController {
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public String comment(@RequestParam("pid") Disc disc, @RequestParam("comment") String comment,
 			@RequestParam("rating") int rating) {
+
 		disc.addComment(new Comment(comment, rating, businessTime.getTime()));
-		videoCatalog.update(disc);
+		videoCatalog.save(disc);
+
 		return "redirect:detail/" + disc.getIdentifier();
 	}
 }
