@@ -11,6 +11,10 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.1.8.RELEASE</version>
 	</parent>
+	
+	<properties>
+		<tomcat.version>8.0.14</tomcat.version>
+	</properties>
 
 	<dependencies>
 
