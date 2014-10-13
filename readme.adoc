@@ -1,5 +1,7 @@
 = VideoShop - A Salespoint example project
 
+image:https://travis-ci.org/st-tu-dresden/videoshop.svg?branch=master["Build Status", link="https://travis-ci.org/st-tu-dresden/videoshop"]
+
 Purpose of this sample project is to make students familiar with basic technologies they're going to use during the Software Engineering Lab at Technical University of Dresden.
 
 ## Quickstart
