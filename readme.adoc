@@ -1,4 +1,5 @@
 = VideoShop - A Salespoint example project
+:experimental:
 
 image:https://travis-ci.org/st-tu-dresden/videoshop.svg?branch=master["Build Status", link="https://travis-ci.org/st-tu-dresden/videoshop"]
 
