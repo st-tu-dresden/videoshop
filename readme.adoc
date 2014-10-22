@@ -96,5 +96,5 @@ Spring module to easily build data acess layers using JPA 2.1 (Java Persistence 
 
 Library to build HTML web views using natural templating.
 
-- https://spring.io/guides/gs/serving-web-content[Getting stared guide]
+- https://spring.io/guides/gs/serving-web-content[Getting started guide]
 - http://www.thymeleaf.org/doc/usingthymeleaf.html[Tutorial]
