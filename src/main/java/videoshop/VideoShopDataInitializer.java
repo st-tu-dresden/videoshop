@@ -113,7 +113,7 @@ public class VideoShopDataInitializer implements DataInitializer {
 		// Security nötig ist.
 
 		// Skip creation if database was already populated
-		if (userAccountManager.get(new UserAccountIdentifier("boss")) != null) {
+		if (userAccountManager.get(new UserAccountIdentifier("boss")).isPresent()) {
 			return;
 		}
 
