@@ -82,7 +82,8 @@ class BasketController {
 
 	// (｡◕‿◕｡)
 	// Über @LoggedIn können wir uns den gerade eingeloggten UserAccount geben lassen
-	@RequestMapping("/buy")
+	//string debug this shit !!!
+	@RequestMapping(value="/buy", method=RequestMethod.POST)
 	public String buy(HttpSession session, @LoggedIn UserAccount userAccount) {
 
 		Basket basket = this.getBasket(session);
@@ -105,12 +106,12 @@ class BasketController {
 	// (｡◕‿◕｡)
 	// Warenkorb (Basket) aus der Session holen, existiert keiner so legen wir einen an und packen den in die Session
 	// Außerdem wird der Basket bei jedem Aufruf des Controllers durch das @ModelAttribute in die ModelMap abgelegt
-	@ModelAttribute("basket")
+	@ModelAttribute("shoppingBasket")
 	private Basket getBasket(HttpSession session) {
-		Basket basket = (Basket) session.getAttribute("basket");
+		Basket basket = (Basket) session.getAttribute("shoppingBasket");
 		if (basket == null) {
 			basket = new Basket();
-			session.setAttribute("basket", basket);
+			session.setAttribute("shoppingBasket", basket);
 		}
 		return basket;
 

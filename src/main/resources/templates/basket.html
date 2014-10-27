@@ -14,7 +14,7 @@
 		<nav th:include="navigation :: navigation"></nav>
 
 		<div class="content">
-			<div th:unless="${basket.empty}">
+			<div th:unless="${shoppingBasket.empty}">
 				<table>
 					<caption th:text="#{shoppingBasket.title}">Warenkorb</caption>
 					<thead>
@@ -26,9 +26,9 @@
 					</thead>
 					<tbody th:remove="all-but-first">
 
-						<tr th:each="orderline : ${basket.orderLines} ">
+						<tr th:each="orderline : ${shoppingBasket.orderLines} ">
 							<td th:text="${orderline.productName}">Last Action Hero</td>
-							<td th:text="${orderline.quantity}">10</td>
+							<td th:text="${orderline.quantity.amount}">10</td>
 							<td th:text="${orderline.price}">10 Euro</td>
 						</tr>
 						<tr>
@@ -49,7 +49,7 @@
 
 					</tbody>
 				</table>
-				<p th:text="#{shoppingBasket.total} + ': ' + ${basket.price}">Summe: 100 Euro</p>
+				<p th:text="#{shoppingBasket.total} + ': ' + ${shoppingBasket.getTotalPrice()}">Summe: 100 Euro</p>
 				<div class="salespoint" sec:authorize="hasRole('ROLE_CUSTOMER')">
 					<form method="post" action="buy">
 						<input type="submit" th:value="#{shoppingBasket.buy}" value="Kaufen" />
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 
-			<p th:if="${basket.empty}" th:text="#{shoppingBasket.empty}">Leer</p>
+			<p th:if="${shoppingBasket.empty}" th:text="#{shoppingBasket.empty}">Leer</p>
 		</div>
 	</div>
 </body>
