@@ -9,20 +9,20 @@
 	<nav th:fragment="navigation">
 
 		<ul>
-			<li sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"><a th:href="@{/register}" href="register.html">Registrierung</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/orders}" href="orders.html">Bestellungen</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/stock}" href="stock.html">Lager</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/customers}" href="customers.html">Kundenliste</a></li>
+			<li sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"><a th:href="@{/register}" href="register.html" th:text="#{nav.register}">Registrierung</a></li>
+			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/orders}" href="orders.html" th:text="#{nav.orders}">Bestellungen</a></li>
+			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/stock}" href="stock.html" th:text="#{nav.stock}">Lager</a></li>
+			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/customers}" href="customers.html" th:text="#{nav.customers}">Kundenliste</a></li>
 
-			<li><a th:href="@{/dvdCatalog}" href="catalog.html">Dvd Catalog</a></li>
-			<li><a th:href="@{/blurayCatalog}" href="catalog.html">Blu-ray Catalog</a></li>
+			<li><a th:href="@{/dvdCatalog}" href="catalog.html" th:text="#{nav.dvdCatalog}">Dvd Catalog</a></li>
+			<li><a th:href="@{/blurayCatalog}" href="catalog.html" th:text="#{nav.blurayCatalog}">Blu-ray Catalog</a></li>
 			<li><a th:href="@{/cart}" href="cart.html" th:text="#{nav.cart}">Warenkorb</a></li>
 
-			<li sec:authorize="!isAuthenticated()" class="loginlogout"><a href="login">Login</a></li>
+			<li sec:authorize="!isAuthenticated()" class="loginlogout"><a th:href="@{/login}" th:text="#{nav.login}">Login</a></li>
 
 			<li sec:authorize="isAuthenticated()" class="loginlogout">
-				<form action="/logout" method="post">
-					<input type="submit" value="Logout" />
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Logout" th:value="#{nav.logout}" />
 				</form>
 			</li>
 			

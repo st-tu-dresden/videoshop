@@ -69,11 +69,12 @@ class CatalogController {
 	@RequestMapping("/detail/{pid}")
 	public String detail(@PathVariable("pid") Disc disc, Model model) {
 
-		Optional<InventoryItem> item = inventory.findByProductProductIdentifier(disc.getIdentifier());
+		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getIdentifier());
 		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(Units.ZERO);
 
 		model.addAttribute("disc", disc);
 		model.addAttribute("quantity", quantity);
+		model.addAttribute("orderable", quantity.isGreaterThan(Units.ZERO));
 
 		return "detail";
 	}

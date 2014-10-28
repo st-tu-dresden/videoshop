@@ -23,10 +23,13 @@ import videoshop.model.Disc;
 import videoshop.model.Disc.DiscType;
 import videoshop.model.VideoCatalog;
 
-// (｡◕‿◕｡)
-// Zum testen bzw. während der Entwicklung sind schon vorhandene Dummy Daten sinnvoll, 
-// diese werden hier erzeugt und hinzugefügt.
-
+/**
+ * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
+ * 
+ * @author Paul Henke
+ * @author Oliver Gierke
+ * @see DataInitializer
+ */
 @Component
 public class VideoShopDataInitializer implements DataInitializer {
 

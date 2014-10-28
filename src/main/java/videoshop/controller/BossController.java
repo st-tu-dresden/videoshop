@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import videoshop.model.Customer;
 import videoshop.model.CustomerRepository;
 
 // (｡◕‿◕｡)
@@ -37,8 +36,7 @@ class BossController {
 	@RequestMapping("/customers")
 	public String customers(ModelMap modelMap) {
 
-		Iterable<Customer> customerList = customerRepository.findAll();
-		modelMap.addAttribute("customerList", customerList);
+		modelMap.addAttribute("customerList", customerRepository.findAll());
 
 		return "customers";
 	}
@@ -46,8 +44,7 @@ class BossController {
 	@RequestMapping("/orders")
 	public String orders(ModelMap modelMap) {
 
-		Iterable<Order> completedOrders = orderManager.find(OrderStatus.COMPLETED);
-		modelMap.addAttribute("ordersCompleted", completedOrders);
+		modelMap.addAttribute("ordersCompleted", orderManager.find(OrderStatus.COMPLETED));
 
 		return "orders";
 	}
@@ -55,8 +52,7 @@ class BossController {
 	@RequestMapping("/stock")
 	public String stock(ModelMap modelMap) {
 
-		Iterable<InventoryItem> stock = inventory.findAll();
-		modelMap.addAttribute("stock", stock);
+		modelMap.addAttribute("stock", inventory.findAll());
 
 		return "stock";
 	}
