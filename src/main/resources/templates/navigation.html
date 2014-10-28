@@ -16,7 +16,7 @@
 
 			<li><a th:href="@{/dvdCatalog}" href="catalog.html">Dvd Catalog</a></li>
 			<li><a th:href="@{/blurayCatalog}" href="catalog.html">Blu-ray Catalog</a></li>
-			<li><a th:href="@{/shoppingBasket}" href="basket.html">Warenkorb</a></li>
+			<li><a th:href="@{/cart}" href="cart.html" th:text="#{nav.cart}">Warenkorb</a></li>
 
 			<li sec:authorize="!isAuthenticated()" class="loginlogout"><a href="login">Login</a></li>
 
