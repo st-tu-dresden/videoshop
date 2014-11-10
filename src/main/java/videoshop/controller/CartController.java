@@ -2,16 +2,12 @@ package videoshop.controller;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
-import org.salespointframework.order.OrderLine;
 import org.salespointframework.order.OrderManager;
 import org.salespointframework.payment.Cash;
-import org.salespointframework.quantity.Quantity;
 import org.salespointframework.quantity.Units;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -24,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import videoshop.model.Disc;
 
@@ -35,7 +32,8 @@ import videoshop.model.Disc;
  * @author Oliver Gierke
  */
 @Controller
-@PreAuthorize("hasRole('ROLE_CUSTOMER')")
+@PreAuthorize("isAuthenticated()")
+@SessionAttributes("cart")
 class CartController {
 
 	private final OrderManager<Order> orderManager;
@@ -53,6 +51,17 @@ class CartController {
 	}
 
 	/**
+	 * Creates a new {@link Cart} instance to be stored in the session (see the class-level {@link SessionAttributes}
+	 * annotation).
+	 * 
+	 * @return a new {@link Cart} instance.
+	 */
+	@ModelAttribute("cart")
+	public Cart initializeCart() {
+		return new Cart();
+	}
+
+	/**
 	 * Adds a {@link Disc} to the {@link Cart}. Note how the type of the parameter taking the request parameter
 	 * {@code pid} is {@link Disc}. For all domain types extening {@link AbstractEntity} (directly or indirectly) a tiny
 	 * Salespoint extension will directly load the object instance from the database. If the identifier provided is
@@ -65,7 +74,7 @@ class CartController {
 	 * @return
 	 */
 	@RequestMapping(value = "/cart", method = RequestMethod.POST)
-	public String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, HttpSession session,
+	public String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart,
 			ModelMap modelMap) {
 
 		// (｡◕‿◕｡)
@@ -77,12 +86,7 @@ class CartController {
 		// (｡◕‿◕｡)
 		// Eine OrderLine besteht aus einem Produkt und einer Quantity, diese kann auch direkt in eine Order eingefügt
 		// werden
-
-		Quantity quantity = Units.of(number);
-		OrderLine orderLine = new OrderLine(disc, quantity);
-
-		Cart cart = getCart(session);
-		cart.add(orderLine);
+		cart.addOrUpdateItem(disc, Units.of(number));
 
 		// (｡◕‿◕｡)
 		// Je nachdem ob disc eine Dvd oder eine Bluray ist, leiten wir auf die richtige Seite weiter
@@ -110,7 +114,7 @@ class CartController {
 	 * @return
 	 */
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String buy(HttpSession session, @LoggedIn Optional<UserAccount> userAccount) {
+	public String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
 		return userAccount.map(account -> {
 
@@ -118,8 +122,8 @@ class CartController {
 			// Mit commit wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
 				Order order = new Order(account, Cash.CASH);
-				Cart cart = getCart(session);
-				cart.toOrder(order);
+
+				cart.addItemsTo(order);
 
 				orderManager.payOrder(order);
 				orderManager.completeOrder(order);
@@ -129,25 +133,5 @@ class CartController {
 
 				return "redirect:/";
 			}).orElse("redirect:/cart");
-	}
-
-	/**
-	 * Puts a {@link Cart} object under the key {@code cart} into the model for every request. Uses the
-	 * {@link HttpSession} to keep the very same Cart instance around for a user session.
-	 * 
-	 * @param session
-	 * @return
-	 */
-	@ModelAttribute("cart")
-	private Cart getCart(HttpSession session) {
-
-		Cart cart = (Cart) session.getAttribute("cart");
-
-		if (cart == null) {
-			cart = new Cart();
-			session.setAttribute("cart", cart);
-		}
-
-		return cart;
 	}
 }
