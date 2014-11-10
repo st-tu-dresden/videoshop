@@ -11,7 +11,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.1.8.RELEASE</version>
 	</parent>
-	
+
 	<properties>
 		<tomcat.version>8.0.14</tomcat.version>
 	</properties>
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>salespoint-framework</artifactId>
-			<version>6.0.0.RC1</version>
+			<version>6.0.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
