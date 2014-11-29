@@ -74,7 +74,7 @@ This sample application is build on top of the following technologies:
 
 Rapid application development framework based on Spring (see below).
 
-- http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle[Reference documentation]
+- http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle[Reference documentation]
 - https://spring.io/guides[Getting started guides]
 - http://projects.spring.io/spring-boot[Project home]
 
