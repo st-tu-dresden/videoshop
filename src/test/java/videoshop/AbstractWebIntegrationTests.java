@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = VideoShop.class)
-public class AbstractWebIntegrationTests {
+public abstract class AbstractWebIntegrationTests {
 
 	@Autowired WebApplicationContext context;
 	protected MockMvc mvc;

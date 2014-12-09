@@ -11,6 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VideoShop.class)
-public class AbstractIntegrationTests {
+public abstract class AbstractIntegrationTests {
 
 }
