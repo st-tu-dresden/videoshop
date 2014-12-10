@@ -26,10 +26,10 @@
 					</thead>
 					<tbody th:remove="all-but-first">
 
-						<tr th:each="orderline : ${cart} ">
-							<td th:text="${orderline.productName}">Last Action Hero</td>
-							<td th:text="${orderline.quantity}">10</td>
-							<td th:text="${orderline.price}">10 Euro</td>
+						<tr th:each="item : ${cart} ">
+							<td th:text="${item.productName}">Last Action Hero</td>
+							<td th:text="${item.quantity}">10</td>
+							<td th:text="${item.price}">10 Euro</td>
 						</tr>
 						<tr>
 							<td>Last Action Hero</td>
