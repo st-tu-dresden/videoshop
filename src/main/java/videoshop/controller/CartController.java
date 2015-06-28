@@ -15,6 +15,8 @@
  */
 package videoshop.controller;
 
+import videoshop.model.Disc;
+
 import java.util.Optional;
 
 import org.salespointframework.catalog.Product;
@@ -23,7 +25,7 @@ import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManager;
 import org.salespointframework.payment.Cash;
-import org.salespointframework.quantity.Units;
+import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +37,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-import videoshop.model.Disc;
 
 /**
  * A Spring MVC controller to manage the {@link Cart}. {@link Cart} instances are held in the session as they're
@@ -99,7 +99,7 @@ class CartController {
 		// (｡◕‿◕｡)
 		// Eine OrderLine besteht aus einem Produkt und einer Quantity, diese kann auch direkt in eine Order eingefügt
 		// werden
-		cart.addOrUpdateItem(disc, Units.of(number));
+		cart.addOrUpdateItem(disc, Quantity.of(number));
 
 		// (｡◕‿◕｡)
 		// Je nachdem ob disc eine Dvd oder eine Bluray ist, leiten wir auf die richtige Seite weiter
@@ -134,16 +134,16 @@ class CartController {
 			// (｡◕‿◕｡)
 			// Mit commit wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
-				Order order = new Order(account, Cash.CASH);
+			Order order = new Order(account, Cash.CASH);
 
-				cart.addItemsTo(order);
+			cart.addItemsTo(order);
 
-				orderManager.payOrder(order);
-				orderManager.completeOrder(order);
+			orderManager.payOrder(order);
+			orderManager.completeOrder(order);
 
-				cart.clear();
+			cart.clear();
 
-				return "redirect:/";
-			}).orElse("redirect:/cart");
+			return "redirect:/";
+		}).orElse("redirect:/cart");
 	}
 }

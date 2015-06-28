@@ -29,7 +29,7 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.quantity.Units;
+import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -115,7 +115,7 @@ public class VideoShopDataInitializer implements DataInitializer {
 		// Das heißt: Von jeder Disc sind 10 Stück im Inventar.
 
 		for (Disc disc : videoCatalog.findAll()) {
-			InventoryItem inventoryItem = new InventoryItem(disc, Units.TEN);
+			InventoryItem inventoryItem = new InventoryItem(disc, Quantity.of(10));
 			inventory.save(inventoryItem);
 		}
 	}

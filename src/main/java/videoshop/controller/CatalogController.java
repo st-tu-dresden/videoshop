@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,16 @@
  */
 package videoshop.controller;
 
+import videoshop.model.Comment;
+import videoshop.model.Disc;
+import videoshop.model.Disc.DiscType;
+import videoshop.model.VideoCatalog;
+
 import java.util.Optional;
 
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.quantity.Quantity;
-import org.salespointframework.quantity.Units;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,13 +37,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import videoshop.model.Comment;
-import videoshop.model.Disc;
-import videoshop.model.Disc.DiscType;
-import videoshop.model.VideoCatalog;
-
 @Controller
 class CatalogController {
+
+	private static final Quantity NONE = Quantity.of(0);
 
 	private final VideoCatalog videoCatalog;
 	private final Inventory<InventoryItem> inventory;
@@ -85,11 +86,11 @@ class CatalogController {
 	public String detail(@PathVariable("pid") Disc disc, Model model) {
 
 		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getIdentifier());
-		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(Units.ZERO);
+		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
 
 		model.addAttribute("disc", disc);
 		model.addAttribute("quantity", quantity);
-		model.addAttribute("orderable", quantity.isGreaterThan(Units.ZERO));
+		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 
 		return "detail";
 	}

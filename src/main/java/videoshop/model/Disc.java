@@ -24,7 +24,6 @@ import javax.persistence.OneToMany;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-import org.salespointframework.quantity.Units;
 
 //(｡◕‿◕｡)
 // Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
@@ -56,7 +55,7 @@ public class Disc extends Product {
 	protected Disc() {}
 
 	public Disc(String name, String image, Money price, String genre, DiscType type) {
-		super(name, price, Units.METRIC);
+		super(name, price);
 		this.image = image;
 		this.genre = genre;
 		this.type = type;
