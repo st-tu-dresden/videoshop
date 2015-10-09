@@ -32,14 +32,15 @@ import org.salespointframework.catalog.Product;
 @Entity
 public class Disc extends Product {
 
+	private static final long serialVersionUID = 3602164805477720501L;
+
 	public static enum DiscType {
 		BLURAY, DVD;
 	}
 
 	// (｡◕‿◕｡)
 	// primitve Typen oder Strings müssen nicht extra für JPA annotiert werden
-	private String genre;
-	private String image;
+	private String genre, image;
 	private DiscType type;
 
 	// (｡◕‿◕｡)
@@ -48,14 +49,13 @@ public class Disc extends Product {
 	// "interagiert"
 	@OneToMany(cascade = CascadeType.ALL) private List<Comment> comments = new LinkedList<Comment>();
 
-	// (｡◕‿◕｡)
-	// Ein paremterloser public oder protected Konstruktor ist zwingend notwendig für JPA,
-	// damit dieser nicht genutzt wird, markieren wir in mit @Deprecated
-	@Deprecated
-	protected Disc() {}
+	@SuppressWarnings("unused")
+	private Disc() {}
 
 	public Disc(String name, String image, Money price, String genre, DiscType type) {
+
 		super(name, price);
+
 		this.image = image;
 		this.genre = genre;
 		this.type = type;

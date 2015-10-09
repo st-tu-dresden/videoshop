@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,12 @@
  */
 package videoshop.model;
 
-import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.repository.CrudRepository;
 
-// (｡◕‿◕｡)
-// Spring biete sehr guten Support um schnell eigene "Managerklassen" wie Catalog oder UserAccountManager zu schreiben
-// Pflichtlektüre: http://docs.spring.io/spring-data/jpa/docs/1.4.2.RELEASE/reference/html/repositories.html
-// via http://docs.spring.io/spring-data/jpa/docs/1.4.2.RELEASE/reference/html/
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
-
-	Customer findByUserAccount(UserAccount userAccount);
-}
+/**
+ * A repository interface to manage {@link Customer} instances.
+ * 
+ * @author Paul Henke
+ * @author Oliver Gierke
+ */
+public interface CustomerRepository extends CrudRepository<Customer, Long> {}

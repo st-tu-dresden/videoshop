@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,22 @@
  */
 package videoshop.model;
 
-import org.salespointframework.catalog.Catalog;
-
 import videoshop.model.Disc.DiscType;
 
+import org.salespointframework.catalog.Catalog;
+
 /**
+ * An extension of {@link Catalog} to add video shop specific query methods.
+ * 
  * @author Oliver Gierke
  */
 public interface VideoCatalog extends Catalog<Disc> {
 
+	/**
+	 * Returns all {@link Disc}s by type.
+	 * 
+	 * @param type must not be {@literal null}.
+	 * @return
+	 */
 	Iterable<Disc> findByType(DiscType type);
 }

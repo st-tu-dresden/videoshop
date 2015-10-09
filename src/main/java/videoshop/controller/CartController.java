@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,14 +92,12 @@ class CartController {
 
 		// (｡◕‿◕｡)
 		// Das Inputfeld im View ist eigentlich begrenz, allerdings sollte man immer Clientseitig validieren
-		if (number <= 0 || number > 5) {
-			number = 1;
-		}
+		int amount = number <= 0 || number > 5 ? 1 : number;
 
 		// (｡◕‿◕｡)
 		// Eine OrderLine besteht aus einem Produkt und einer Quantity, diese kann auch direkt in eine Order eingefügt
 		// werden
-		cart.addOrUpdateItem(disc, Quantity.of(number));
+		cart.addOrUpdateItem(disc, Quantity.of(amount));
 
 		// (｡◕‿◕｡)
 		// Je nachdem ob disc eine Dvd oder eine Bluray ist, leiten wir auf die richtige Seite weiter

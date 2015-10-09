@@ -15,6 +15,7 @@
  */
 package videoshop.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -29,25 +30,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "COMMENTS")
-public class Comment {
+public class Comment implements Serializable {
+
+	private static final long serialVersionUID = -7114101035786254953L;
 
 	// (｡◕‿◕｡)
 	// Falls man die Id nicht selber setzen will, kann die mit @GeneratedValue vom JPA-Provider generiert und gesetzt
 	// werden
-	@Id @GeneratedValue private long id;
+	private @Id @GeneratedValue long id;
 
 	private String text;
 	private int rating;
 
 	private LocalDateTime date;
 
-	@Deprecated
-	protected Comment() {}
+	@SuppressWarnings("unused")
+	private Comment() {}
 
 	public Comment(String text, int rating, LocalDateTime dateTime) {
+
 		this.text = text;
 		this.rating = rating;
 		this.date = dateTime;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getText() {
@@ -62,6 +70,10 @@ public class Comment {
 		return rating;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return text;

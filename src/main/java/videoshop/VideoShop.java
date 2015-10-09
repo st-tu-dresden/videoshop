@@ -31,6 +31,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 @EnableSalespoint
 public class VideoShop {
 
+	private static final String LOGIN_ROUTE = "/login";
+
 	public static void main(String[] args) {
 		SpringApplication.run(VideoShop.class, args);
 	}
@@ -46,7 +48,7 @@ public class VideoShop {
 		 */
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
-			registry.addViewController("/login").setViewName("login");
+			registry.addViewController(LOGIN_ROUTE).setViewName("login");
 		}
 	}
 
@@ -65,7 +67,7 @@ public class VideoShop {
 			http.csrf().disable();
 
 			http.authorizeRequests().antMatchers("/**").permitAll().and().//
-					formLogin().loginPage("/login").loginProcessingUrl("/login").and(). //
+					formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).and(). //
 					logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}

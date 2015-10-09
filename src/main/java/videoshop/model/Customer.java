@@ -30,7 +30,7 @@ import org.salespointframework.useraccount.UserAccount;
 @Entity
 public class Customer {
 
-	@Id @GeneratedValue private long id;
+	private @Id @GeneratedValue long id;
 
 	private String address;
 
@@ -39,12 +39,16 @@ public class Customer {
 	// speichern wir den hier
 	@OneToOne private UserAccount userAccount;
 
-	@Deprecated
-	protected Customer() {}
+	@SuppressWarnings("unused")
+	private Customer() {}
 
 	public Customer(UserAccount userAccount, String address) {
 		this.userAccount = userAccount;
 		this.address = address;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getAddress() {
@@ -58,5 +62,4 @@ public class Customer {
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}
-
 }
