@@ -15,6 +15,8 @@
  */
 package videoshop.controller;
 
+import videoshop.model.CustomerRepository;
+
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.order.Order;
@@ -26,9 +28,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import videoshop.model.CustomerRepository;
-
-// (｡◕‿◕｡)
 // Straight forward?
 
 @Controller
@@ -59,7 +58,7 @@ class BossController {
 	@RequestMapping("/orders")
 	public String orders(ModelMap modelMap) {
 
-		modelMap.addAttribute("ordersCompleted", orderManager.find(OrderStatus.COMPLETED));
+		modelMap.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
 
 		return "orders";
 	}
