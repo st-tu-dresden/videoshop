@@ -15,6 +15,10 @@
  */
 package videoshop.controller;
 
+import videoshop.model.Customer;
+import videoshop.model.CustomerRepository;
+import videoshop.model.validation.RegistrationForm;
+
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
@@ -27,10 +31,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import videoshop.model.Customer;
-import videoshop.model.CustomerRepository;
-import videoshop.model.validation.RegistrationForm;
 
 @Controller
 class ShopController {
@@ -57,7 +57,7 @@ class ShopController {
 	// Über @Valid können wir die Eingaben automagisch prüfen lassen, ob es Fehler gab steht im BindingResult,
 	// dies muss direkt nach dem @Valid Parameter folgen.
 	// Siehe außerdem videoshop.model.validation.RegistrationForm
-	// Lektüre: http://docs.spring.io/spring/docs/3.2.4.RELEASE/spring-framework-reference/html/validation.html
+	// Lektüre: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
 	@RequestMapping("/registerNew")
 	public String registerNew(@ModelAttribute("registrationForm") @Valid RegistrationForm registrationForm,
 			BindingResult result) {
@@ -69,7 +69,7 @@ class ShopController {
 		// (｡◕‿◕｡)
 		// Falles alles in Ordnung ist legen wir einen UserAccount und einen passenden Customer an und speichern beides.
 		UserAccount userAccount = userAccountManager.create(registrationForm.getName(), registrationForm.getPassword(),
-				new Role("ROLE_CUSTOMER"));
+				Role.of("ROLE_CUSTOMER"));
 		userAccountManager.save(userAccount);
 
 		Customer customer = new Customer(userAccount, registrationForm.getAddress());

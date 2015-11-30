@@ -134,10 +134,10 @@ public class VideoShopDataInitializer implements DataInitializer {
 			return;
 		}
 
-		UserAccount bossAccount = userAccountManager.create("boss", "123", new Role("ROLE_BOSS"));
+		UserAccount bossAccount = userAccountManager.create("boss", "123", Role.of("ROLE_BOSS"));
 		userAccountManager.save(bossAccount);
 
-		final Role customerRole = new Role("ROLE_CUSTOMER");
+		final Role customerRole = Role.of("ROLE_CUSTOMER");
 
 		UserAccount ua1 = userAccountManager.create("hans", "123", customerRole);
 		userAccountManager.save(ua1);
