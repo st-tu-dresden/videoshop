@@ -18,7 +18,12 @@ package videoshop.model;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.util.Iterator;
+
+import org.javamoney.moneta.Money;
 import org.junit.Test;
+import org.salespointframework.core.Currencies;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import videoshop.AbstractIntegrationTests;
@@ -38,5 +43,29 @@ public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 
 		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
 		assertThat(result, is(iterableWithSize(9)));
+	}
+
+	@Test
+	public void lazyLoadExceptionTest() {
+
+		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
+		assertThat(result, is(iterableWithSize(9)));
+
+		Disc disc = new Disc("TestDisc", "Image", Money.of(BigDecimal.TEN, Currencies.EURO), "Roman", DiscType.BLURAY);
+		catalog.save(disc);
+
+		result = catalog.findByType(DiscType.BLURAY);
+		assertThat(result, is(iterableWithSize(10)));
+
+		Iterator<Disc> it = result.iterator();
+		while (it.hasNext()) {
+			Disc d = it.next();
+			assertThat(d.getType(), is(DiscType.BLURAY));
+
+			Iterable<String> iterable = d.getCategories();
+			assertThat(iterable, is(iterableWithSize(0)));
+		}
+
+		assertThat(result, hasItem(disc));
 	}
 }
