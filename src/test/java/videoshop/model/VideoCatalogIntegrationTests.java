@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +18,17 @@ package videoshop.model;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.util.Iterator;
-
-import org.javamoney.moneta.Money;
-import org.junit.Test;
-import org.salespointframework.core.Currencies;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import videoshop.AbstractIntegrationTests;
 import videoshop.model.Disc.DiscType;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Integration tests for {@link VideoCatalog}.
  * 
  * @author Oliver Gierke
+ * @author Andreas Zaschka
  */
 public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 
@@ -45,27 +41,14 @@ public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 		assertThat(result, is(iterableWithSize(9)));
 	}
 
+	/**
+	 * @see #50
+	 */
 	@Test
-	public void lazyLoadExceptionTest() {
+	public void discsDontHaveAnyCategoriesAssigned() {
 
-		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
-		assertThat(result, is(iterableWithSize(9)));
-
-		Disc disc = new Disc("TestDisc", "Image", Money.of(BigDecimal.TEN, Currencies.EURO), "Roman", DiscType.BLURAY);
-		catalog.save(disc);
-
-		result = catalog.findByType(DiscType.BLURAY);
-		assertThat(result, is(iterableWithSize(10)));
-
-		Iterator<Disc> it = result.iterator();
-		while (it.hasNext()) {
-			Disc d = it.next();
-			assertThat(d.getType(), is(DiscType.BLURAY));
-
-			Iterable<String> iterable = d.getCategories();
-			assertThat(iterable, is(iterableWithSize(0)));
+		for (Disc disc : catalog.findByType(DiscType.BLURAY)) {
+			assertThat(disc.getCategories(), is(emptyIterable()));
 		}
-
-		assertThat(result, hasItem(disc));
 	}
 }
