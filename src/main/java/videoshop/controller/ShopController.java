@@ -15,10 +15,6 @@
  */
 package videoshop.controller;
 
-import videoshop.model.Customer;
-import videoshop.model.CustomerRepository;
-import videoshop.model.validation.RegistrationForm;
-
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
@@ -26,11 +22,16 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import videoshop.model.Customer;
+import videoshop.model.CustomerRepository;
+import videoshop.model.validation.RegistrationForm;
 
 @Controller
 class ShopController {
@@ -54,20 +55,25 @@ class ShopController {
 	}
 
 	// (｡◕‿◕｡)
-	// Über @Valid können wir die Eingaben automagisch prüfen lassen, ob es Fehler gab steht im BindingResult,
+	// Über @Valid können wir die Eingaben automagisch prüfen lassen, ob es
+	// Fehler gab steht im BindingResult,
 	// dies muss direkt nach dem @Valid Parameter folgen.
 	// Siehe außerdem videoshop.model.validation.RegistrationForm
-	// Lektüre: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
+	// Lektüre:
+	// http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
 	@RequestMapping("/registerNew")
 	public String registerNew(@ModelAttribute("registrationForm") @Valid RegistrationForm registrationForm,
-			BindingResult result) {
+			BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-		if (result.hasErrors()) {
+		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registrationForm", bindingResult);
+			redirectAttributes.addFlashAttribute("registrationForm", registrationForm);
 			return "redirect:/register";
 		}
 
 		// (｡◕‿◕｡)
-		// Falles alles in Ordnung ist legen wir einen UserAccount und einen passenden Customer an und speichern beides.
+		// Falles alles in Ordnung ist legen wir einen UserAccount und einen
+		// passenden Customer an und speichern beides.
 		UserAccount userAccount = userAccountManager.create(registrationForm.getName(), registrationForm.getPassword(),
 				Role.of("ROLE_CUSTOMER"));
 		userAccountManager.save(userAccount);
@@ -79,8 +85,10 @@ class ShopController {
 	}
 
 	@RequestMapping("/register")
-	public String register(ModelMap modelMap) {
-		modelMap.addAttribute("registrationForm", new RegistrationForm());
+	public String register(Model model) {
+		if (!model.containsAttribute("registrationForm")) {
+			model.addAttribute("registrationForm", new RegistrationForm());
+		}
 		return "register";
 	}
 }
