@@ -63,7 +63,7 @@ class ShopController {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "register";
+			return "redirect:/register";
 		}
 
 		// (｡◕‿◕｡)
