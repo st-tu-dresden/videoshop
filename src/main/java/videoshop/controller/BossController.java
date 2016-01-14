@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.salespointframework.order.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // Straight forward?
@@ -48,25 +48,25 @@ class BossController {
 	}
 
 	@RequestMapping("/customers")
-	public String customers(ModelMap modelMap) {
+	public String customers(Model model) {
 
-		modelMap.addAttribute("customerList", customerRepository.findAll());
+		model.addAttribute("customerList", customerRepository.findAll());
 
 		return "customers";
 	}
 
 	@RequestMapping("/orders")
-	public String orders(ModelMap modelMap) {
+	public String orders(Model model) {
 
-		modelMap.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
+		model.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
 
 		return "orders";
 	}
 
 	@RequestMapping("/stock")
-	public String stock(ModelMap modelMap) {
+	public String stock(Model model) {
 
-		modelMap.addAttribute("stock", inventory.findAll());
+		model.addAttribute("stock", inventory.findAll());
 
 		return "stock";
 	}

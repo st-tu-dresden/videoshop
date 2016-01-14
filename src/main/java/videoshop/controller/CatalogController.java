@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,10 +61,10 @@ class CatalogController {
 	}
 
 	@RequestMapping("/dvdCatalog")
-	public String dvdCatalog(ModelMap modelMap) {
+	public String dvdCatalog(Model model) {
 
-		modelMap.addAttribute("catalog", videoCatalog.findByType(DiscType.DVD));
-		modelMap.addAttribute("title", messageSourceAccessor.getMessage("catalog.dvd.title"));
+		model.addAttribute("catalog", videoCatalog.findByType(DiscType.DVD));
+		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.dvd.title"));
 
 		return "discCatalog";
 	}

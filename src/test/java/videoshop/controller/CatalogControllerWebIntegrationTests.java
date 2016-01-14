@@ -16,38 +16,32 @@
 package videoshop.controller;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import videoshop.AbstractIntegrationTests;
+import videoshop.AbstractWebIntegrationTests;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 
 /**
- * Integration tests interacting with the {@link CatalogController} directly.
+ * Integration test for the {@link CatalogController} on the web layer, i.e. simulating HTTP requests.
  * 
  * @author Oliver Gierke
  */
-public class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
+public class CatalogControllerWebIntegrationTests extends AbstractWebIntegrationTests {
 
 	@Autowired CatalogController controller;
 
 	/**
-	 * Integration test for an individual controller.
+	 * Sample integration test using fake HTTP requests to the system and using the expectations API to define
+	 * constraints.
 	 */
 	@Test
-	@SuppressWarnings("unchecked")
-	public void sampleControllerIntegrationTest() {
+	public void sampleMvcIntegrationTest() throws Exception {
 
-		Model model = new ExtendedModelMap();
-
-		String returnedView = controller.blurayCatalog(model);
-
-		assertThat(returnedView, is("discCatalog"));
-
-		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
-		assertThat(object, is(iterableWithSize(9)));
+		mvc.perform(get("/blurayCatalog")). //
+				andExpect(status().isOk()).//
+				andExpect(model().attribute("catalog", is(not(emptyIterable()))));
 	}
 }

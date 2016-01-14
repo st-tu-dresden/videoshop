@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import org.junit.Test;
-
 import videoshop.AbstractWebIntegrationTests;
+
+import org.junit.Test;
 
 /**
  * Integration tests for security setup.
@@ -32,6 +32,8 @@ import videoshop.AbstractWebIntegrationTests;
 public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 
 	/**
+	 * Trying to access a secured resource should result in a redirect to the login page.
+	 * 
 	 * @see #19
 	 */
 	@Test
@@ -43,6 +45,8 @@ public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 	}
 
 	/**
+	 * Trying to access the orders as boss should result in the page being rendered.
+	 * 
 	 * @see #35
 	 */
 	@Test

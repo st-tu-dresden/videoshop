@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -79,8 +79,8 @@ class ShopController {
 	}
 
 	@RequestMapping("/register")
-	public String register(ModelMap modelMap) {
-		modelMap.addAttribute("registrationForm", new RegistrationForm());
+	public String register(Model model) {
+		model.addAttribute("registrationForm", new RegistrationForm());
 		return "register";
 	}
 }
