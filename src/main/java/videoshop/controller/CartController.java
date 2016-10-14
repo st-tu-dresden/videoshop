@@ -120,8 +120,8 @@ class CartController {
 	 * Checks out the current state of the {@link Cart}. Using a method parameter of type {@code Optional<UserAccount>}
 	 * annotated with {@link LoggedIn} you can access the {@link UserAccount} of the currently logged in user.
 	 * 
-	 * @param session must not be {@literal null}.
-	 * @param userAccount must not be {@literal null}.
+	 * @param cart will never be {@literal null}.
+	 * @param userAccount will never be {@literal null}.
 	 * @return
 	 */
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)

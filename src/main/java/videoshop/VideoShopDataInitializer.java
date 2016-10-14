@@ -140,13 +140,9 @@ public class VideoShopDataInitializer implements DataInitializer {
 		final Role customerRole = Role.of("ROLE_CUSTOMER");
 
 		UserAccount ua1 = userAccountManager.create("hans", "123", customerRole);
-		userAccountManager.save(ua1);
 		UserAccount ua2 = userAccountManager.create("dextermorgan", "123", customerRole);
-		userAccountManager.save(ua2);
 		UserAccount ua3 = userAccountManager.create("earlhickey", "123", customerRole);
-		userAccountManager.save(ua3);
 		UserAccount ua4 = userAccountManager.create("mclovinfogell", "123", customerRole);
-		userAccountManager.save(ua4);
 
 		Customer c1 = new Customer(ua1, "wurst");
 		Customer c2 = new Customer(ua2, "Miami-Dade County");
