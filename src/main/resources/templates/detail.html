@@ -25,7 +25,7 @@
 				<p>Genre:</p><p th:text="${disc.genre}">Äktschn</p><br />
 				<p>Vorrat:</p><p th:text="${quantity}">10 Stück</p><br /> 
 				<form method="post" action="/cart" th:if="${orderable}">
-					<input type="hidden" name="pid" value="0" th:value="${disc.identifier}" /> 
+					<input type="hidden" name="pid" value="0" th:value="${disc.id}" /> 
 					<label for="number">Anzahl</label>
 					<input id="number" type="number" name="number" min="1" max="5" step="1" value="1" /><br />
 					<input	type="submit" value="Zum Warenkorb hinzufügen" />
@@ -45,7 +45,7 @@
 				<form method="post" action="/comment">
 					<fieldset>
 						<legend>Kommentar hinzufügen</legend>
-						<input type="hidden" name="pid" value="0" th:value="${disc.identifier}" />
+						<input type="hidden" name="pid" value="0" th:value="${disc.id}" />
 						<textarea name="comment" cols="40" rows="5"></textarea><br />
 						<label for="rating">Bewertung</label>
 						<input id="rating" type="text" name="rating" value="5" /> 

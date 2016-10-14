@@ -18,7 +18,7 @@
 		<div class="content">
 			<div class="catalog" th:remove="all-but-first">
 
-				<a th:each="disc : ${catalog}" th:href="@{'/detail/' + ${disc.identifier}}" href="detail.html">
+				<a th:each="disc : ${catalog}" th:href="@{'/detail/' + ${disc.id}}" href="detail.html">
 					<div class="disc">  
 						<h4 th:text="${disc.name}">Last Action Hero</h4>
 						<img th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}" class="thumbnail" src="../resources/img/cover/lac.jpg" alt="" />

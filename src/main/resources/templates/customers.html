@@ -24,7 +24,7 @@
 				</thead>
 				<tbody th:remove="all-but-first">
 						<tr th:each=" customer : ${customerList}">
-							<td th:text="${customer.userAccount.identifier}">Power Paul</td>
+							<td th:text="${customer.userAccount.id}">Power Paul</td>
 							<td th:text="${customer.address}">Wasaplatz 10</td>
 						</tr>
 																			

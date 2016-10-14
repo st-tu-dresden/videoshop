@@ -84,7 +84,7 @@ class CatalogController {
 	@RequestMapping("/detail/{pid}")
 	public String detail(@PathVariable("pid") Disc disc, Model model) {
 
-		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getIdentifier());
+		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getId());
 		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
 
 		model.addAttribute("disc", disc);
@@ -104,6 +104,6 @@ class CatalogController {
 		disc.addComment(new Comment(comment, rating, businessTime.getTime()));
 		videoCatalog.save(disc);
 
-		return "redirect:detail/" + disc.getIdentifier();
+		return "redirect:detail/" + disc.getId();
 	}
 }
