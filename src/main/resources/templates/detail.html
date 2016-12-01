@@ -21,7 +21,7 @@
 		
 			<div class="detailDescription">
 				<h2 th:text="${disc.name}">Last Action Hero</h2>
-				<p>Preis:</p><p th:text="${disc.price}">9.99€</p><br />
+				<p>Preis:</p><p th:text="${{disc.price}}">9.99€</p><br />
 				<p>Genre:</p><p th:text="${disc.genre}">Äktschn</p><br />
 				<p>Vorrat:</p><p th:text="${quantity}">10 Stück</p><br /> 
 				<form method="post" action="/cart" th:if="${orderable}">

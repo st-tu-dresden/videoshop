@@ -84,7 +84,7 @@ public class VideoShopDataInitializer implements DataInitializer {
 			return;
 		}
 
-		videoCatalog.save(new Disc("Last Action Hero", "lac", Money.of(9.99, EURO), "Äktschn/Comedy", DiscType.DVD));
+		videoCatalog.save(new Disc("Last Action Hero", "lac", Money.of(100, EURO), "Äktschn/Comedy", DiscType.DVD));
 		videoCatalog.save(new Disc("Back to the Future", "bttf", Money.of(9.99, EURO), "Sci-Fi", DiscType.DVD));
 		videoCatalog.save(new Disc("Fido", "fido", Money.of(9.99, EURO), "Comedy/Drama/Horror", DiscType.DVD));
 		videoCatalog.save(new Disc("Super Fuzz", "sf", Money.of(9.99, EURO), "Action/Sci-Fi/Comedy", DiscType.DVD));

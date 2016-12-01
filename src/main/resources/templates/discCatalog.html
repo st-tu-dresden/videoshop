@@ -22,7 +22,7 @@
 					<div class="disc">  
 						<h4 th:text="${disc.name}">Last Action Hero</h4>
 						<img th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}" class="thumbnail" src="../resources/img/cover/lac.jpg" alt="" />
-						<p th:text="${disc.price}" class="price">9.99 €</p>
+						<p th:text="${{disc.price}}" class="price">9.99 €</p>
 					</div>
 				</a>			
 			
