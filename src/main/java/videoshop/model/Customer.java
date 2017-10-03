@@ -37,7 +37,8 @@ public class Customer {
 	// (｡◕‿◕｡)
 	// Jedem Customer ist genau ein UserAccount zugeordnet, um später über den UserAccount an den Customer zu kommen,
 	// speichern wir den hier
-	@OneToOne private UserAccount userAccount;
+	@OneToOne //
+	private UserAccount userAccount;
 
 	@SuppressWarnings("unused")
 	private Customer() {}
