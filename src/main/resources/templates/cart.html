@@ -1,64 +1,80 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
-		<title th:text="#{cart.title}">Warenkorb</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{cart.title}">Warenkorb</title>
+</head>
 <body>
-	<div class="all">
-		<header>
-			<h1 th:text="#{cart.title}">Warenkorb</h1>
-		</header>
-		<nav th:include="navigation :: navigation"></nav>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{cart.title}">Warenkorb</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
 
-		<div class="content">
-			<div th:unless="${cart.empty}">
-				<table>
-					<caption th:text="#{cart.title}">Warenkorb</caption>
-					<thead>
-						<tr>
-							<th th:text="#{cart.movieTitle}">Titel</th>
-							<th th:text="#{cart.count}">Anzahl</th>
-							<th th:text="#{cart.price}">Preis</th>
-						</tr>
-					</thead>
-					<tbody th:remove="all-but-first">
+    <div th:unless="${cart.empty}">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th th:text="#{cart.movieTitle}">Titel</th>
+                <th th:text="#{cart.count}">Anzahl</th>
+                <th th:text="#{cart.price}">Preis</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
 
-						<tr th:each="item : ${cart} ">
-							<td th:text="${item.productName}">Last Action Hero</td>
-							<td th:text="${item.quantity}">10</td>
-							<td th:text="${{item.price}}">10 Euro</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>10</td>
-							<td>10 Euro</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>10</td>
-							<td>10 Euro</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>10</td>
-							<td>10 Euro</td>
-						</tr>
+            <tr th:each="item : ${cart} ">
+                <td th:text="${item.productName}">Last Action Hero</td>
+                <td th:text="${item.quantity}">10</td>
+                <td th:text="${{item.price}}">10 Euro</td>
+            </tr>
+            <tr>
+                <td>Last Action Hero</td>
+                <td>10</td>
+                <td>10 Euro</td>
+            </tr>
+            <tr>
+                <td>Last Action Hero</td>
+                <td>10</td>
+                <td>10 Euro</td>
+            </tr>
+            <tr>
+                <td>Last Action Hero</td>
+                <td>10</td>
+                <td>10 Euro</td>
+            </tr>
+            </tbody>
+        </table>
 
-					</tbody>
-				</table>
-				<p th:text="#{cart.total} + ': ' + ${{cart.price}}">Summe: 100 Euro</p>
-				<div class="salespoint" sec:authorize="hasRole('ROLE_CUSTOMER')">
-					<form method="post" action="checkout">
-						<input type="submit" th:value="#{cart.buy}" value="Kaufen" />
-					</form>
-				</div>
-			</div>
+        <div class="ui two column centered grid">
+            <div class="four column centered row">
+                <div class="column">
+                    <div class="ui horizontal statistic">
+                        <div class="label" th:text="#{cart.total}">Summe</div>
+                        <div class="value"><span th:text="${{cart.price}}">1337</span></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <form sec:authorize="hasRole('ROLE_CUSTOMER')" class="ui form" method="post" th:action="@{/checkout}">
+                        <button type="submit" class="ui button" th:text="#{cart.buy}">Kaufen</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			<p th:if="${cart.empty}" th:text="#{cart.empty}">Leer</p>
-		</div>
-	</div>
+    <h2 th:if="${cart.empty}" th:text="#{cart.empty}">Leer</h2>
+</div>
+
 </body>
 </html>

@@ -1,59 +1,86 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
-		<title th:text="${disc.name}">Last Action Hero</title>
-	</head>
-<body>
-	<div class="all">
-		<header>
-			<h1 th:text="${disc.name}">Last Action Hero</h1>
-		</header>
-		<nav th:include="navigation :: navigation" ></nav>
-		
-		
-		<div class="content">
-			<div class="detailImg">
-				<img th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}" src="../resources/img/cover/lac.jpg" alt="" />
-			</div>
-		
-			<div class="detailDescription">
-				<h2 th:text="${disc.name}">Last Action Hero</h2>
-				<p>Preis:</p><p th:text="${{disc.price}}">9.99€</p><br />
-				<p>Genre:</p><p th:text="${disc.genre}">Äktschn</p><br />
-				<p>Vorrat:</p><p th:text="${quantity}">10 Stück</p><br /> 
-				<form method="post" action="/cart" th:if="${orderable}">
-					<input type="hidden" name="pid" value="0" th:value="${disc.id}" /> 
-					<label for="number">Anzahl</label>
-					<input id="number" type="number" name="number" min="1" max="5" step="1" value="1" /><br />
-					<input	type="submit" value="Zum Warenkorb hinzufügen" />
-				</form>
-			</div>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
-			<p>Was andere Kunden über diesen Film sagen</p>	<br />
-			
-			<div class="detailComments" th:remove="all-but-first" >
-				<article class="comment" th:each="comment : ${disc.comments}" th:text="${comment}">Erster !!!1111elf</article>
-				<article class="comment">Deine Mutter </article>
-			</div>
-			
-			<br />
-			
-			<div class="salespoint">
-				<form method="post" action="/comment">
-					<fieldset>
-						<legend>Kommentar hinzufügen</legend>
-						<input type="hidden" name="pid" value="0" th:value="${disc.id}" />
-						<textarea name="comment" cols="40" rows="5"></textarea><br />
-						<label for="rating">Bewertung</label>
-						<input id="rating" type="text" name="rating" value="5" /> 
-						<input type="submit" value="Senden" />
-					</fieldset>
-				</form>
-			</div>
-		</div>
-	</div>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="${disc.name}">Last Action Hero</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="${disc.name}">Last Action Hero</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+
+    <div class="ui items">
+        <div class="item">
+            <div class="image">
+                <img th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}"
+                     src="../static/resources/img/cover/lac.jpg"/>
+            </div>
+            <div class="content">
+                <a class="header" th:text="${disc.name}">Last Action Hero</a>
+                <div class="meta">
+                    <span th:text="${disc.genre}">Action</span>
+                    <span th:text="${{disc.price}}">9.99 €</span>
+                </div>
+                <div class="description">
+                    <p>Vorrat:</p>
+                    <p th:text="${quantity}">10</p><br/>
+                    <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
+                        <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
+                        <div class="field">
+                            <label for="number">Anzahl</label>
+                            <input id="number" type="number" name="number" min="1" max="5" step="1" value="1"/><br/>
+                        </div>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="add to cart icon"></i> Hinzufügen
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui comments">
+        <h3 class="ui dividing header">Kommentare</h3>
+
+        <div class="comment" th:each="comment : ${disc.comments}">
+            <div class="content">
+                <div class="metadata">
+                    <div class="rating">
+                        <i class="star icon"></i>
+                        <span th:text="${comment.rating}">5</span>
+                    </div>
+                </div>
+                <div class="text" th:text="${comment.text}">Guter Film vong Inhalt her</div>
+            </div>
+        </div>
+
+        <form class="ui reply form" role="form" th:action="@{/comment}" method="post">
+            <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
+            <div class="field">
+                <textarea id="comment" name="comment" cols="40" rows="5"></textarea><br/>
+            </div>
+            <div class="field">
+                <label for="rating">Bewertung</label>
+                <input id="rating" type="text" name="rating" value="5"/> <br/>
+            </div>
+            <button type="submit" class="ui labeled icon button">
+                <i class="icon edit"></i> Kommentieren
+            </button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
