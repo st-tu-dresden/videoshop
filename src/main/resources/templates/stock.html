@@ -2,54 +2,48 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
-	<title th:text="#{stock.title}">Bestand</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{stock.title}">Bestand</title>
 </head>
 <body>
-	<div class="all">
-		<header>
-			<h1 th:text="#{stock.title}">Bestand</h1>
-		</header>
-		<nav th:include="navigation :: navigation" ></nav>
-		
-		<div class="content">
-			<table>
-				<caption th:text="#{stock.title}">Bestand</caption>
-				<thead>
-					<tr>
-						<th th:text="#{shoppingBasket.movieTitle}">Titel</th>
-						<th th:text="#{shoppingBasket.count}">Anzahl</th>
-					</tr>
-				</thead>
-				<tbody th:remove="all-but-first">
-						<tr th:each=" item : ${stock}">
-							<td th:text="${item.product.name}">Last Action Hero</td>
-							<td th:text="${item.quantity}">9000</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>9000</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>9000</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>9000</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>9000</td>
-						</tr>
-						<tr>
-							<td>Last Action Hero</td>
-							<td>9000</td>
-						</tr>																								
-				</tbody>
-			</table>
-		</div>
-	</div>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{stock.title}">Bestand</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{cart.movieTitle}">Titel</th>
+            <th th:text="#{cart.count}">Anzahl</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr th:each=" item : ${stock}">
+            <td th:text="${item.product.name}">Last Action Hero</td>
+            <td th:text="${item.quantity}">9000</td>
+        </tr>
+        <tr>
+            <td>Last Action Hero</td>
+            <td>9000</td>
+        </tr>
+        <tr>
+            <td>Last Action Hero</td>
+            <td>9000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

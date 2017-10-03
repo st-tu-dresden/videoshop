@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
-		<title th:text="#{home.title}">Videoshop</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{home.title}">Videoshop</title>
+</head>
 <body>
-	<div class="all">
-		<header>
-			<h1 th:text="#{home.title}">Videoshop</h1>
-		</header>
-		<nav th:include="navigation :: navigation">
-			<ul>
-				<li><a href="register.html">Registrierung</a></li>
-				<li><a href="orders.html">Bestellungen</a></li>
-				<li><a href="stock.html">Lager</a></li>
-				<li><a href="catalog.html">Dvd Katalog</a></li>
-				<li><a href="catalog.html">Blu-ray Katalog</a></li>
-				<li><a href="basket.html">Warenkorb</a></li>
-				<li class="loginlogout"><a href="login">Login</a></li>
-				<li class="loginlogout"><a href="logout">Logout</a></li>
-			</ul>
-		</nav>
-		
-		<div class="content">
-			<h1>Login page</h1>
-	        <p th:if="${loginError}">Wrong user or password</p>
-	        <form th:action="@{/login}" method="post">
-	            <label for="username">Username</label>:
-	            <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-	            <label for="password">Password</label>:
-	            <input type="password" id="password" name="password" /> <br />
-	            <input type="submit" value="Log in" />
-	        </form>
-		</div>
-	</div>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{home.title}">Videoshop</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+
+    <form class="ui form" role="form" th:action="@{/login}" method="post">
+
+        <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/> <br/>
+        </div>
+
+        <button type="submit" class="ui button">Log in</button>
+    </form>
+</div>
 </body>
 </html>

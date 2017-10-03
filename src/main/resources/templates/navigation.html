@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+</head>
 <body>
-	<nav th:fragment="navigation">
+<nav th:fragment="navigation">
+    <div class="ui menu">
 
-		<ul>
-			<li sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"><a th:href="@{/register}" href="register.html" th:text="#{nav.register}">Registrierung</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/orders}" href="orders.html" th:text="#{nav.orders}">Bestellungen</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/stock}" href="stock.html" th:text="#{nav.stock}">Lager</a></li>
-			<li sec:authorize="hasRole('ROLE_BOSS')"><a th:href="@{/customers}" href="customers.html" th:text="#{nav.customers}">Kundenliste</a></li>
+        <a class="item" href="register.html" th:href="@{/register}"
+           sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"
+           th:text="#{nav.register}">Registrierung</a>
 
-			<li><a th:href="@{/dvdCatalog}" href="catalog.html" th:text="#{nav.dvdCatalog}">Dvd Catalog</a></li>
-			<li><a th:href="@{/blurayCatalog}" href="catalog.html" th:text="#{nav.blurayCatalog}">Blu-ray Catalog</a></li>
-			<li><a th:href="@{/cart}" href="cart.html" th:text="#{nav.cart}">Warenkorb</a></li>
+        <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('ROLE_BOSS')"
+           th:text="#{nav.orders}">Bestellungen</a>
 
-			<li sec:authorize="!isAuthenticated()" class="loginlogout"><a th:href="@{/login}" th:text="#{nav.login}">Login</a></li>
+        <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('ROLE_BOSS')"
+           th:text="#{nav.stock}">Lager</a>
 
-			<li sec:authorize="isAuthenticated()" class="loginlogout">
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Logout" th:value="#{nav.logout}" />
-				</form>
-			</li>
-			
-		</ul>
-	</nav>
+
+        <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('ROLE_BOSS')"
+           th:text="#{nav.customers}">Kundenliste</a>
+
+        <a class="item" href="catalog.html" th:href="@{/dvdCatalog}" th:text="#{nav.dvdCatalog}">Dvd Catalog</a>
+        <a class="item" href="catalog.html" th:href="@{/blurayCatalog}" th:text="#{nav.blurayCatalog}">Blu-ray
+            Catalog</a>
+        <a class="item" href="cart.html" th:href="@{/cart}" th:text="#{nav.cart}">Warenkorb</a>
+
+        <div class="right menu">
+            <a class="item" th:href="@{/login}" sec:authorize="!isAuthenticated()" th:text="#{nav.login}">Login</a>
+            <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" class="ui button" th:text="#{nav.logout}">Logout</button>
+            </form>
+        </div>
+    </div>
+    <br/>
+</nav>
 </body>
 </html>
