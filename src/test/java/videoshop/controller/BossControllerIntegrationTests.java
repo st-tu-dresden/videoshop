@@ -15,8 +15,7 @@
  */
 package videoshop.controller;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 
@@ -53,6 +52,6 @@ public class BossControllerIntegrationTests extends AbstractIntegrationTests {
 
 		controller.customers(model);
 
-		assertThat(model.get("customerList"), is(notNullValue()));
+		assertThat(model.get("customerList")).isNotNull();
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package videoshop.model;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 import videoshop.model.Disc.DiscType;
@@ -38,7 +37,7 @@ public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 	public void findsAllBluRays() {
 
 		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
-		assertThat(result, is(iterableWithSize(9)));
+		assertThat(result).hasSize(9);
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 	public void discsDontHaveAnyCategoriesAssigned() {
 
 		for (Disc disc : catalog.findByType(DiscType.BLURAY)) {
-			assertThat(disc.getCategories(), is(emptyIterable()));
+			assertThat(disc.getCategories()).isEmpty();
 		}
 	}
 }

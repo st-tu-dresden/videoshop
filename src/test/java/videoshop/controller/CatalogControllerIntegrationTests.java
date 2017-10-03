@@ -15,8 +15,7 @@
  */
 package videoshop.controller;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 
@@ -45,9 +44,10 @@ public class CatalogControllerIntegrationTests extends AbstractIntegrationTests 
 
 		String returnedView = controller.blurayCatalog(model);
 
-		assertThat(returnedView, is("discCatalog"));
+		assertThat(returnedView).isEqualTo("discCatalog");
 
 		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
-		assertThat(object, is(iterableWithSize(9)));
+
+		assertThat(object).hasSize(9);
 	}
 }
