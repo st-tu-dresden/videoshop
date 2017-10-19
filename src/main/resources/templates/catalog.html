@@ -25,11 +25,11 @@
     <div class="ui link cards" th:remove="all-but-first">
         <div class="ui card" th:each="disc : ${catalog}">
             <div class="content">
-                <a class="header" th:href="@{'/detail/' + ${disc.id}}" th:text="${disc.name}">Last Action Hero</a>
+                <a class="header" th:href="@{/disc/{id}(id=${disc.id})}" th:text="${disc.name}">Last Action Hero</a>
             </div>
             <div class="image">
-                <a th:href="@{'/detail/' + ${disc.id}}">
-                    <img class="thumbnail" th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}"
+                <a th:href="@{/disc/{id}(id=${disc.id})}">
+                    <img class="thumbnail" th:src="@{/resources/img/cover/{image}.jpg(image=${disc.image})}"
                          src="../static/resources/img/cover/lac.jpg"/>
                 </a>
             </div>

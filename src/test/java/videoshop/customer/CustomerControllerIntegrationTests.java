@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.controller;
+package videoshop.customer;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -26,13 +26,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.ui.ExtendedModelMap;
 
 /**
- * Integration tests for {@link BossController} that interact with the controller directly.
+ * Integration tests for {@link InventoryController} that interact with the controller directly.
  * 
  * @author Oliver Gierke
  */
-public class BossControllerIntegrationTests extends AbstractIntegrationTests {
+public class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
 
-	@Autowired BossController controller;
+	@Autowired CustomerController controller;
 
 	/**
 	 * Does not use any authentication and should raise a security exception.

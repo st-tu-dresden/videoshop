@@ -31,8 +31,8 @@
         <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('ROLE_BOSS')"
            th:text="#{nav.customers}">Kundenliste</a>
 
-        <a class="item" href="catalog.html" th:href="@{/dvdCatalog}" th:text="#{nav.dvdCatalog}">Dvd Catalog</a>
-        <a class="item" href="catalog.html" th:href="@{/blurayCatalog}" th:text="#{nav.blurayCatalog}">Blu-ray
+        <a class="item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>
+        <a class="item" href="catalog.html" th:href="@{/blurays}" th:text="#{nav.blurayCatalog}">Blu-ray
             Catalog</a>
         <a class="item" href="cart.html" th:href="@{/cart}" th:text="#{nav.cart}">Warenkorb</a>
 

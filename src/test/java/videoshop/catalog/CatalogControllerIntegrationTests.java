@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2016 the original author or authors.
+ * Copyright 2013-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.controller;
+package videoshop.catalog;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -44,7 +44,7 @@ public class CatalogControllerIntegrationTests extends AbstractIntegrationTests 
 
 		String returnedView = controller.blurayCatalog(model);
 
-		assertThat(returnedView).isEqualTo("discCatalog");
+		assertThat(returnedView).isEqualTo("catalog");
 
 		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
 

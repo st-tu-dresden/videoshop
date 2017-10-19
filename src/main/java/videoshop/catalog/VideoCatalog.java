@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.model;
+package videoshop.catalog;
 
-import videoshop.model.Disc.DiscType;
+import videoshop.catalog.Disc.DiscType;
 
 import org.salespointframework.catalog.Catalog;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.
@@ -26,11 +28,25 @@ import org.salespointframework.catalog.Catalog;
  */
 public interface VideoCatalog extends Catalog<Disc> {
 
+	static final Sort DEFAULT_SORT = new Sort(Direction.DESC, "productIdentifier");
+
 	/**
-	 * Returns all {@link Disc}s by type.
+	 * Returns all {@link Disc}s by type ordered by the given {@link Sort}.
 	 * 
 	 * @param type must not be {@literal null}.
+	 * @param sort must not be {@literal null}.
 	 * @return
 	 */
-	Iterable<Disc> findByType(DiscType type);
+	Iterable<Disc> findByType(DiscType type, Sort sort);
+
+	/**
+	 * Returns all {@link Disc}s by type ordered their identifier.
+	 * 
+	 * @param type must not be {@literal null}.
+	 * @param sort must not be {@literal null}.
+	 * @return
+	 */
+	default Iterable<Disc> findByType(DiscType type) {
+		return findByType(type, DEFAULT_SORT);
+	}
 }

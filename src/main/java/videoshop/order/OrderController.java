@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.controller;
+package videoshop.order;
 
-import videoshop.model.Disc;
+import videoshop.catalog.Disc;
 
 import java.util.Optional;
 
@@ -24,23 +24,24 @@ import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManager;
+import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * A Spring MVC controller to manage the {@link Cart}. {@link Cart} instances are held in the session as they're
- * specific to a certain user. That's also why the entire controller is secured by a {@code hasRole(…)} clause.
+ * specific to a certain user. That's also why the entire controller is secured by a {@code PreAuthorize} clause.
  *
  * @author Paul Henke
  * @author Oliver Gierke
@@ -48,17 +49,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @PreAuthorize("isAuthenticated()")
 @SessionAttributes("cart")
-class CartController {
+class OrderController {
 
 	private final OrderManager<Order> orderManager;
 
 	/**
-	 * Creates a new {@link CartController} with the given {@link OrderManager}.
+	 * Creates a new {@link OrderController} with the given {@link OrderManager}.
 	 * 
 	 * @param orderManager must not be {@literal null}.
 	 */
-	@Autowired
-	public CartController(OrderManager<Order> orderManager) {
+	OrderController(OrderManager<Order> orderManager) {
 
 		Assert.notNull(orderManager, "OrderManager must not be null!");
 		this.orderManager = orderManager;
@@ -71,7 +71,7 @@ class CartController {
 	 * @return a new {@link Cart} instance.
 	 */
 	@ModelAttribute("cart")
-	public Cart initializeCart() {
+	Cart initializeCart() {
 		return new Cart();
 	}
 
@@ -87,32 +87,31 @@ class CartController {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "/cart", method = RequestMethod.POST)
-	public String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+	@PostMapping("/cart")
+	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 
 		// (｡◕‿◕｡)
-		// Das Inputfeld im View ist eigentlich begrenz, allerdings sollte man immer Clientseitig validieren
+		// Das Inputfeld im View ist eigentlich begrenzt, allerdings sollte man immer auch serverseitig validieren
 		int amount = number <= 0 || number > 5 ? 1 : number;
 
 		// (｡◕‿◕｡)
-		// Eine OrderLine besteht aus einem Produkt und einer Quantity, diese kann auch direkt in eine Order eingefügt
-		// werden
+		// Wir fügen dem Warenkorb die Disc in entsprechender Anzahl hinzu.
 		cart.addOrUpdateItem(disc, Quantity.of(amount));
 
 		// (｡◕‿◕｡)
-		// Je nachdem ob disc eine Dvd oder eine Bluray ist, leiten wir auf die richtige Seite weiter
+		// Je nachdem ob disc eine DVD oder eine Bluray ist, leiten wir auf die richtige Seite weiter
 
 		switch (disc.getType()) {
 			case DVD:
-				return "redirect:dvdCatalog";
+				return "redirect:dvds";
 			case BLURAY:
 			default:
-				return "redirect:blurayCatalog";
+				return "redirect:blurays";
 		}
 	}
 
-	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public String basket() {
+	@GetMapping("/cart")
+	String basket() {
 		return "cart";
 	}
 
@@ -124,13 +123,13 @@ class CartController {
 	 * @param userAccount will never be {@literal null}.
 	 * @return
 	 */
-	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
+	@PostMapping("/checkout")
+	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
 		return userAccount.map(account -> {
 
 			// (｡◕‿◕｡)
-			// Mit commit wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
+			// Mit completeOrder(…) wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
 			Order order = new Order(account, Cash.CASH);
 
@@ -143,5 +142,14 @@ class CartController {
 
 			return "redirect:/";
 		}).orElse("redirect:/cart");
+	}
+
+	@GetMapping("/orders")
+	@PreAuthorize("hasRole('ROLE_BOSS')")
+	String orders(Model model) {
+
+		model.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
+
+		return "orders";
 	}
 }

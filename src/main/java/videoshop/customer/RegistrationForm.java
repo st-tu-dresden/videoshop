@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.model.validation;
+package videoshop.customer;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -27,38 +27,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 // http://docs.oracle.com/javaee/6/tutorial/doc/gircz.html
 // http://docs.jboss.org/hibernate/validator/4.2/reference/en-US/html/
 
-public class RegistrationForm {
+interface RegistrationForm {
 
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")//
-	private String name;
+	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}") //
+	String getName();
 
-	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")//
-	private String password;
+	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}") //
+	String getPassword();
 
-	@NotEmpty(message = "{RegistrationForm.address.NotEmpty}")//
-	private String address;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	@NotEmpty(message = "{RegistrationForm.address.NotEmpty}") //
+	String getAddress();
 }

@@ -25,7 +25,7 @@
     <div class="ui items">
         <div class="item">
             <div class="image">
-                <img th:src="@{'/resources/img/cover/' + ${disc.image} + '.jpg'}"
+                <img th:src="@{/resources/img/cover/{name}.jpg(name=${disc.image})}"
                      src="../static/resources/img/cover/lac.jpg"/>
             </div>
             <div class="content">
@@ -67,14 +67,13 @@
             </div>
         </div>
 
-        <form class="ui reply form" role="form" th:action="@{/comment}" method="post">
-            <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
+        <form class="ui reply form" role="form" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
             <div class="field">
                 <textarea id="comment" name="comment" cols="40" rows="5"></textarea><br/>
             </div>
             <div class="field">
                 <label for="rating">Bewertung</label>
-                <input id="rating" type="text" name="rating" value="5"/> <br/>
+                <input id="rating" name="rating" type="number" value="5" />
             </div>
             <button type="submit" class="ui labeled icon button">
                 <i class="icon edit"></i> Kommentieren

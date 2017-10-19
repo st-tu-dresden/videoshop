@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2016 the original author or authors.
+ * Copyright 2013-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.controller;
+package videoshop.catalog;
 
-import videoshop.model.Comment;
-import videoshop.model.Disc;
-import videoshop.model.Disc.DiscType;
-import videoshop.model.VideoCatalog;
+import videoshop.catalog.Disc.DiscType;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 class CatalogController {
 
 	private static final Quantity NONE = Quantity.of(0);
 
-	private final VideoCatalog videoCatalog;
+	private final VideoCatalog catalog;
 	private final Inventory<InventoryItem> inventory;
 	private final BusinessTime businessTime;
 
@@ -50,39 +50,38 @@ class CatalogController {
 	// nutzen wir den MessageSourceAccessor um an die messsages.properties Werte zu kommen
 	private final MessageSourceAccessor messageSourceAccessor;
 
-	@Autowired
-	public CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime,
+	CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime,
 			MessageSource messageSource) {
 
-		this.videoCatalog = videoCatalog;
+		this.catalog = videoCatalog;
 		this.inventory = inventory;
 		this.businessTime = businessTime;
 		this.messageSourceAccessor = new MessageSourceAccessor(messageSource);
 	}
 
-	@RequestMapping("/dvdCatalog")
-	public String dvdCatalog(Model model) {
+	@GetMapping("/dvds")
+	String dvdCatalog(Model model) {
 
-		model.addAttribute("catalog", videoCatalog.findByType(DiscType.DVD));
+		model.addAttribute("catalog", catalog.findByType(DiscType.DVD));
 		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.dvd.title"));
 
-		return "discCatalog";
+		return "catalog";
 	}
 
-	@RequestMapping("/blurayCatalog")
-	public String blurayCatalog(Model model) {
+	@GetMapping("/blurays")
+	String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", videoCatalog.findByType(DiscType.BLURAY));
+		model.addAttribute("catalog", catalog.findByType(DiscType.BLURAY));
 		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.bluray.title"));
 
-		return "discCatalog";
+		return "catalog";
 	}
 
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
-	@RequestMapping("/detail/{pid}")
-	public String detail(@PathVariable("pid") Disc disc, Model model) {
+	@GetMapping("/disc/{disc}")
+	String detail(@PathVariable Disc disc, Model model) {
 
 		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getId());
 		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
@@ -97,13 +96,30 @@ class CatalogController {
 	// (｡◕‿◕｡)
 	// Der Katalog bzw die Datenbank "weiß" nicht, dass die Disc mit einem Kommentar versehen wurde,
 	// deswegen wird die update-Methode aufgerufen
-	@RequestMapping(value = "/comment", method = RequestMethod.POST)
-	public String comment(@RequestParam("pid") Disc disc, @RequestParam("comment") String comment,
-			@RequestParam("rating") int rating) {
+	@PostMapping("/disc/{disc}/comments")
+	public String comment(@PathVariable Disc disc, @Valid CommentAndRating payload) {
 
-		disc.addComment(new Comment(comment, rating, businessTime.getTime()));
-		videoCatalog.save(disc);
+		disc.addComment(payload.toComment(businessTime.getTime()));
+		catalog.save(disc);
 
-		return "redirect:detail/" + disc.getId();
+		return "redirect:/disc/" + disc.getId();
+	}
+
+	/**
+	 * Describes the payload to be expected to add a comment.
+	 *
+	 * @author Oliver Gierke
+	 */
+	interface CommentAndRating {
+
+		@NotEmpty
+		String getComment();
+
+		@Range(min = 1, max = 5)
+		int getRating();
+
+		default Comment toComment(LocalDateTime time) {
+			return new Comment(getComment(), getRating(), time);
+		}
 	}
 }
