@@ -28,8 +28,6 @@ import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
-import org.springframework.context.MessageSource;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,25 +43,18 @@ class CatalogController {
 	private final Inventory<InventoryItem> inventory;
 	private final BusinessTime businessTime;
 
-	// (｡◕‿◕｡)
-	// Da wir nur ein Catalog.html-Template nutzen, aber dennoch den richtigen Titel auf der Seite haben wollen,
-	// nutzen wir den MessageSourceAccessor um an die messsages.properties Werte zu kommen
-	private final MessageSourceAccessor messageSourceAccessor;
-
-	CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime,
-			MessageSource messageSource) {
+	CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime) {
 
 		this.catalog = videoCatalog;
 		this.inventory = inventory;
 		this.businessTime = businessTime;
-		this.messageSourceAccessor = new MessageSourceAccessor(messageSource);
 	}
 
 	@GetMapping("/dvds")
 	String dvdCatalog(Model model) {
 
 		model.addAttribute("catalog", catalog.findByType(DiscType.DVD));
-		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.dvd.title"));
+		model.addAttribute("title", "catalog.dvd.title");
 
 		return "catalog";
 	}
@@ -72,7 +63,7 @@ class CatalogController {
 	String blurayCatalog(Model model) {
 
 		model.addAttribute("catalog", catalog.findByType(DiscType.BLURAY));
-		model.addAttribute("title", messageSourceAccessor.getMessage("catalog.bluray.title"));
+		model.addAttribute("title", "catalog.bluray.title");
 
 		return "catalog";
 	}

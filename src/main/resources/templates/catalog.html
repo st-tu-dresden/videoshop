@@ -13,12 +13,12 @@
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"
           href="../static/resources/css/style.css" type="text/css"/>
 
-    <title th:text="${title}">Katalog</title>
+    <title th:text="#{${title}}">Katalog</title>
 </head>
 <body>
 <div class="ui container">
     <header>
-        <h1 th:text="${title}">Katalog</h1>
+        <h1 th:text="#{${title}}">Katalog</h1>
     </header>
     <nav th:include="navigation :: navigation"></nav>
 
