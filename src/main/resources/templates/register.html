@@ -24,7 +24,7 @@
 
     <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
 
-        <h3 class="ui dividing header">Nutzerdaten</h3>
+        <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
 
         <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
             <p>Einige Angaben sind nicht korrekt.</p>
