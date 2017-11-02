@@ -25,16 +25,16 @@
     <form class="ui form" role="form" th:action="@{/login}" method="post">
 
         <div class="field">
-            <label for="username">Username</label>
+            <label th:text="#{login.username}" for="username">Username</label>
             <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
         </div>
 
         <div class="field">
-            <label for="password">Password</label>
+            <label th:text="#{login.password}" for="password">Password</label>
             <input type="password" id="password" name="password"/> <br/>
         </div>
 
-        <button type="submit" class="ui button">Log in</button>
+        <button type="submit" th:text="#{login.login}" class="ui button">Log in</button>
     </form>
 </div>
 </body>

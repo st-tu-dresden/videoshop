@@ -44,7 +44,7 @@
                             <input id="number" type="number" name="number" min="1" max="5" step="1" value="1"/><br/>
                         </div>
                         <button type="submit" class="ui labeled icon button">
-                            <i class="add to cart icon"></i> Hinzufügen
+                            <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
                         </button>
                     </form>
                 </div>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="ui comments">
-        <h3 class="ui dividing header">Kommentare</h3>
+        <h3 class="ui dividing header" th:text="#{detail.comment.comments}">Kommentare</h3>
 
         <div class="comment" th:each="comment : ${disc.comments}">
             <div class="content">
@@ -72,11 +72,11 @@
                 <textarea id="comment" name="comment" cols="40" rows="5"></textarea><br/>
             </div>
             <div class="field">
-                <label for="rating">Bewertung</label>
+                <label th:text="#{detail.comment.rating}" for="rating">Bewertung</label>
                 <input id="rating" name="rating" type="number" value="5" />
             </div>
             <button type="submit" class="ui labeled icon button">
-                <i class="icon edit"></i> Kommentieren
+                <i class="icon edit"></i><span th:text="#{detail.comment.addComment}"> Kommentieren</span>
             </button>
         </form>
     </div>
