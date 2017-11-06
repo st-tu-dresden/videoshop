@@ -23,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -44,7 +43,7 @@ class CustomerController {
 	// Siehe außerdem videoshop.model.validation.RegistrationForm
 	// Lektüre: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
 	@PostMapping("/register")
-	String registerNew(@ModelAttribute @Valid RegistrationForm form, Errors result) {
+	String registerNew(@Valid RegistrationForm form, Errors result) {
 
 		if (result.hasErrors()) {
 			return "register";
