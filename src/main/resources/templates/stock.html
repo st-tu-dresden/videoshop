@@ -32,7 +32,7 @@
         <tbody th:remove="all-but-first">
         <tr th:each=" item : ${stock}">
             <td th:text="${item.product.name}">Last Action Hero</td>
-            <td th:text="${item.quantity}">9000</td>
+            <td th:text="${{item.quantity}}">9000</td>
         </tr>
         <tr>
             <td>Last Action Hero</td>
