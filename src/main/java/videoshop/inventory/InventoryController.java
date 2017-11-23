@@ -17,6 +17,7 @@ package videoshop.inventory;
 
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,14 @@ class InventoryController {
 		this.inventory = inventory;
 	}
 
+	/**
+	 * Displays all {@link InventoryItem}s in the system
+	 * 
+	 * @param model will never be {@literal null}.
+	 * @return
+	 */
 	@GetMapping("/stock")
+	@PreAuthorize("hasRole('ROLE_BOSS')")
 	String stock(Model model) {
 
 		model.addAttribute("stock", inventory.findAll());
