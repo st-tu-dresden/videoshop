@@ -22,7 +22,7 @@
      <div class="jumbotron">
         <h1 th:text="#{${title}}">Katalog</h1>
     </div>
-    <nav th:include="navigation :: navigation"></nav>
+    <nav class="navbar navbar-expand-sm bg-light" th:include="navigation :: navigation"></nav>
 
     <div class="ui link cards" th:remove="all-but-first">
         <div class="ui card" th:each="disc : ${catalog}">

@@ -8,42 +8,56 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"
           href="../static/resources/css/style.css" type="text/css"/>
+    <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
 </head>
 <body>
-<nav th:fragment="navigation">
-    <div class="ui menu">
+<nav class="navbar navbar-expand-sm navbar-light bg-light" th:fragment="navigation">
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link item" href="register.html" th:href="@{/register}"
+                sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"
+                th:text="#{nav.register}">Registrierung</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('ROLE_BOSS')"
+                th:text="#{nav.orders}">Bestellungen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('ROLE_BOSS')"
+                th:text="#{nav.stock}">Lager</a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('ROLE_BOSS')"
+                th:text="#{nav.customers}">Kundenliste</a>
 
-        <a class="item" href="register.html" th:href="@{/register}"
-           sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"
-           th:text="#{nav.register}">Registrierung</a>
-
-        <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('ROLE_BOSS')"
-           th:text="#{nav.orders}">Bestellungen</a>
-
-        <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('ROLE_BOSS')"
-           th:text="#{nav.stock}">Lager</a>
-
-
-        <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('ROLE_BOSS')"
-           th:text="#{nav.customers}">Kundenliste</a>
-
-        <a class="item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>
-        <a class="item" href="catalog.html" th:href="@{/blurays}" th:text="#{nav.blurayCatalog}">Blu-ray
-            Catalog</a>
-        <a class="item" href="cart.html" th:href="@{/cart}" th:text="#{nav.cart}">Warenkorb</a>
-
-        <div class="right menu">
+        </li>
+        <li class="nav-item">
+            <a class="nav-link item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link item" href="catalog.html" th:href="@{/blurays}" th:text="#{nav.blurayCatalog}">Blu-ray
+                Catalog</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link item" href="cart.html" th:href="@{/cart}" th:text="#{nav.cart}">Warenkorb</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-bav ml-auto">
+        <li class="nav-item">
             <a class="item" th:href="@{/login}" sec:authorize="!isAuthenticated()" th:text="#{nav.login}">Login</a>
+        </li>
+        <li class="nav-item">
             <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 <button type="submit" class="ui button" th:text="#{nav.logout}">Logout</button>
             </form>
-        </div>
-    </div>
-    <br/>
+        </li>
+    </ul>
 </nav>
 </body>
 </html>

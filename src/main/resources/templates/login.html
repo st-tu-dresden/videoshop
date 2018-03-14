@@ -22,7 +22,7 @@
      <div class="jumbotron">
         <h1 th:text="#{home.title}">Videoshop</h1>
     </div>
-    <nav th:include="navigation :: navigation"></nav>
+    <nav class="navbar navbar-expand-sm bg-light" th:include="navigation :: navigation"></nav>
 
     <form class="ui form" role="form" th:action="@{/login}" method="post">
 

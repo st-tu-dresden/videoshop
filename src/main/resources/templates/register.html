@@ -22,7 +22,7 @@
      <div class="jumbotron">
         <h1 th:text="#{register.title}">Registrierung</h1>
     </div>
-    <nav th:include="navigation :: navigation"></nav>
+    <nav class="navbar navbar-expand-sm bg-light" th:include="navigation :: navigation"></nav>
 
     <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
 

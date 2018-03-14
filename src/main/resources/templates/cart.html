@@ -22,7 +22,7 @@
      <div class="jumbotron">
         <h1 th:text="#{cart.title}">Warenkorb</h1>
     </div>
-    <nav th:include="navigation :: navigation"></nav>
+    <nav class="navbar navbar-expand-sm bg-light" th:include="navigation :: navigation"></nav>
 
     <div th:unless="${cart.empty}">
         <table class="ui celled table">
