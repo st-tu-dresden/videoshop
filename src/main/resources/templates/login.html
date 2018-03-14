@@ -8,6 +8,8 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"
@@ -17,9 +19,9 @@
 </head>
 <body>
 <div class="ui container">
-    <header>
+     <div class="jumbotron">
         <h1 th:text="#{home.title}">Videoshop</h1>
-    </header>
+    </div>
     <nav th:include="navigation :: navigation"></nav>
 
     <form class="ui form" role="form" th:action="@{/login}" method="post">
