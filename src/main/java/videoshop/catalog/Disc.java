@@ -32,8 +32,6 @@ import org.salespointframework.catalog.Product;
 @Entity
 public class Disc extends Product {
 
-	private static final long serialVersionUID = 3602164805477720501L;
-
 	public static enum DiscType {
 		BLURAY, DVD;
 	}

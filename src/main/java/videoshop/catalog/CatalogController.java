@@ -22,7 +22,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;

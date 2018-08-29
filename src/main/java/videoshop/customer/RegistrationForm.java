@@ -15,7 +15,7 @@
  */
 package videoshop.customer;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 // (｡◕‿◕｡)
 // Manuelle Validierung ist mühsam, Spring bietet hierfür auch Support.
