@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -30,23 +30,25 @@ import org.springframework.ui.ExtendedModelMap;
  * 
  * @author Oliver Gierke
  */
-public class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
+class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
 
 	@Autowired CustomerController controller;
 
 	/**
 	 * Does not use any authentication and should raise a security exception.
 	 */
-	@Test(expected = AuthenticationException.class)
-	public void rejectsUnauthenticatedAccessToController() {
-		controller.customers(new ExtendedModelMap());
+	@Test
+	void rejectsUnauthenticatedAccessToController() {
+
+		assertThatExceptionOfType(AuthenticationException.class) //
+				.isThrownBy(() -> controller.customers(new ExtendedModelMap()));
 	}
 
 	/**
 	 * Uses {@link WithMockUser} to simulate access by a user with boss role.
 	 */
 	@WithMockUser(authorities = "BOSS")
-	public void allowsAuthenticatedAccessToController() {
+	void allowsAuthenticatedAccessToController() {
 
 		ExtendedModelMap model = new ExtendedModelMap();
 

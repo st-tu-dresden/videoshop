@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ import org.springframework.ui.Model;
  * 
  * @author Oliver Gierke
  */
-public class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
+class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 
 	@Autowired CatalogController controller;
 

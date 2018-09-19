@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import videoshop.AbstractWebIntegrationTests;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 
 /**
@@ -31,10 +31,10 @@ import org.springframework.http.HttpHeaders;
  * @author Oliver Gierke
  * @soundtrack Dave Matthews Band - The Stone (DMB Live 25)
  */
-public class InventoryControllerIntegrationTests extends AbstractWebIntegrationTests {
+class InventoryControllerIntegrationTests extends AbstractWebIntegrationTests {
 
 	@Test // #75
-	public void preventsPublicAccessForStockOverview() throws Exception {
+	void preventsPublicAccessForStockOverview() throws Exception {
 
 		mvc.perform(get("/stock")) //
 				.andExpect(status().isFound()) //
@@ -42,7 +42,7 @@ public class InventoryControllerIntegrationTests extends AbstractWebIntegrationT
 	}
 
 	@Test // #75
-	public void stockIsAccessibleForAdmin() throws Exception {
+	void stockIsAccessibleForAdmin() throws Exception {
 
 		mvc.perform(get("/stock").with(user("boss").roles("BOSS"))) //
 				.andExpect(status().isOk())//

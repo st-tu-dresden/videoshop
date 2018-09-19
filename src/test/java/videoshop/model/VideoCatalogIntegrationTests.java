@@ -19,10 +19,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import videoshop.AbstractIntegrationTests;
 import videoshop.catalog.Disc;
-import videoshop.catalog.VideoCatalog;
 import videoshop.catalog.Disc.DiscType;
+import videoshop.catalog.VideoCatalog;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -31,12 +31,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Oliver Gierke
  * @author Andreas Zaschka
  */
-public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
+class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 
 	@Autowired VideoCatalog catalog;
 
 	@Test
-	public void findsAllBluRays() {
+	void findsAllBluRays() {
 
 		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
 		assertThat(result).hasSize(9);
@@ -46,7 +46,7 @@ public class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 	 * @see #50
 	 */
 	@Test
-	public void discsDontHaveAnyCategoriesAssigned() {
+	void discsDontHaveAnyCategoriesAssigned() {
 
 		for (Disc disc : catalog.findByType(DiscType.BLURAY)) {
 			assertThat(disc.getCategories()).isEmpty();

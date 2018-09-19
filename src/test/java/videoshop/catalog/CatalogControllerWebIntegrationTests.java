@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import videoshop.AbstractWebIntegrationTests;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * @author Oliver Gierke
  */
-public class CatalogControllerWebIntegrationTests extends AbstractWebIntegrationTests {
+class CatalogControllerWebIntegrationTests extends AbstractWebIntegrationTests {
 
 	@Autowired CatalogController controller;
 
@@ -38,7 +38,7 @@ public class CatalogControllerWebIntegrationTests extends AbstractWebIntegration
 	 * constraints.
 	 */
 	@Test
-	public void sampleMvcIntegrationTest() throws Exception {
+	void sampleMvcIntegrationTest() throws Exception {
 
 		mvc.perform(get("/blurays")). //
 				andExpect(status().isOk()).//

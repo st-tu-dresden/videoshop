@@ -15,9 +15,9 @@
  */
 package videoshop;
 
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Oliver Gierke
  * @author Andreas Zaschka
  */
-@RunWith(SpringRunner.class)
+@TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
 @Transactional
 public abstract class AbstractIntegrationTests {}

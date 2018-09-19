@@ -22,14 +22,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import videoshop.AbstractWebIntegrationTests;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Integration tests for security setup.
  * 
  * @author Oliver Gierke
  */
-public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
+class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 
 	/**
 	 * Trying to access a secured resource should result in a redirect to the login page.
@@ -37,7 +37,7 @@ public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 	 * @see #19
 	 */
 	@Test
-	public void redirectsToLoginPageForSecuredResource() throws Exception {
+	void redirectsToLoginPageForSecuredResource() throws Exception {
 
 		mvc.perform(get("/orders")).//
 				andExpect(status().isFound()).//
@@ -50,7 +50,7 @@ public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 	 * @see #35
 	 */
 	@Test
-	public void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
+	void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
 
 		mvc.perform(get("/orders").with(user("boss").roles("BOSS"))).//
 				andExpect(status().isOk()).//
