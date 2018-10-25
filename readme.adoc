@@ -19,6 +19,8 @@ $ mvn spring-boot:run
 
 After that point your browser to `http://localhost:8080`.
 
+Note the standard admin user is named `boss` and has the password `123`.
+
 ## Prerequisites
 
 ### Java 8
