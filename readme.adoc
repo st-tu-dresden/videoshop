@@ -84,6 +84,8 @@ On the final page, leave the suggested project name as is and hit btn:[Finish].
 Now you have to wait a bit while IntelliJ and Maven work on importing the project, which includes downloading all required dependencies from the internet.
 All IDE activities are displayed in the status bar.
 
+Please also see the link:readme.intellij+devtools.adoc[instructions for using Spring Boot DevTools together with IntelliJ].
+
 
 ## Technology stack
 

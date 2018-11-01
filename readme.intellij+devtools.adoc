@@ -1,0 +1,45 @@
+= Spring Boot DevTools for IntelliJ IDEA Users
+:experimental:
+
+## Intro
+
+This document explains how IntelliJ IDEA users (Community and Ultimate Edition alike) can make use of the Live Reload features that are enabled by default in all Salespoint projects.
+Live Reload is made possible by https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html[Spring Boot DevTools].
+
+In contrast to Eclipse, IntelliJ IDEA has abandoned menu:File[Save], and does not build projects automatically.
+This leads to the impression that Spring Boot DevTools are not working (which is *not* the case):
+
+> As DevTools monitors classpath resources, the only way to trigger a restart is to update the classpath. The way in which you cause the classpath to be updated depends on the IDE that you are using. In Eclipse, saving a modified file causes the classpath to be updated and triggers a restart. In IntelliJ IDEA, building the project (Build -> Build Project) has the same effect.
+
+In the following, three solutions are presented on how to fix the issue.
+
+NOTE: Do *NOT* use the first and second solution together! ‼️
+
+
+### First Solution: Enable "Automake"
+
+This one https://stackoverflow.com/a/50198253[is actually a hack]. But once set up, it will mimic Eclipse's behavior quite well:
+
+1. Open menu:Preferences[Build, Execution, Deployment > Compiler] and check btn:[Build project automatically].
+2. Open the IntelliJ registry via *Find Action* (kbd:[Ctrl + Shift + A] / kbd:[Cmd + Shift + A] on macOS) and set `compiler.automake.allow.when.app.running` to `true` to allow auto-building even when the application is running.
+
+Now, whenever you change a source, template or property file, IntelliJ will automatically rebuild the project.
+Following that, Spring Boot DevTools will pick up the changes, which can be verified by looking at the console output.
+
+
+### Second Solution: Use "Update Actions" (Ultimate Edition only)
+
+The Ultimate Edition https://www.jetbrains.com/help/idea/spring-boot.html#configure-application-update-policies-with-devtools[offers an *Update Application* feature for Spring Boot apps].
+An already running application named `AppName` can be updated via menu:Run[Update 'AppName' application] or a keyboard shortcut (e.g., kbd:[Cmd + F10] on macOS).
+However, you need to define what happens during an update (the default is to do nothing):
+
+1. Open menu:Run[Edit Configurations...] and select the application class which you want to configure (or create a new one).
+2. Select an appropriate *On 'Update' action*. I recommend to select *Update classes and resources*.
+
+Now, whenever you change a source, template or property file, you need to use menu:Run[Update 'AppName' application] and IntelliJ will rebuild the project.
+Following that, Spring Boot DevTools will pick up the changes, which can be verified by looking at the console output.
+
+
+### Third Solution: Use Eclipse STS
+
+The simplest and most straightforward way, which requires no custom configuration at all, is to use https://spring.io/tools[Eclipse STS]! 🙂
