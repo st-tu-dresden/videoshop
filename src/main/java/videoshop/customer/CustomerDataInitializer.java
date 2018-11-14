@@ -38,8 +38,11 @@ class CustomerDataInitializer implements DataInitializer {
 	private final CustomerRepository customerRepository;
 
 	/**
-	 * @param userAccountManager
-	 * @param customerRepository
+	 * Creates a new {@link CustomerDataInitializer} with the given
+	 * {@link UserAccountManager} and {@link CustomerRepository}.
+	 * 
+	 * @param userAccountManager must not be {@literal null}.
+	 * @param customerRepository must not be {@literal null}.
 	 */
 	CustomerDataInitializer(UserAccountManager userAccountManager, CustomerRepository customerRepository) {
 
