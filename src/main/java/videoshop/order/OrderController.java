@@ -77,15 +77,14 @@ class OrderController {
 
 	/**
 	 * Adds a {@link Disc} to the {@link Cart}. Note how the type of the parameter taking the request parameter
-	 * {@code pid} is {@link Disc}. For all domain types extening {@link AbstractEntity} (directly or indirectly) a tiny
+	 * {@code pid} is {@link Disc}. For all domain types extending {@link AbstractEntity} (directly or indirectly) a tiny
 	 * Salespoint extension will directly load the object instance from the database. If the identifier provided is
 	 * invalid (invalid format or no {@link Product} with the id found), {@literal null} will be handed into the method.
 	 * 
-	 * @param disc
-	 * @param number
-	 * @param session
-	 * @param modelMap
-	 * @return
+	 * @param disc the disc that should be added to the cart (may be {@literal null}).
+	 * @param number number of discs that should be added to the cart.
+	 * @param cart must not be {@literal null}.
+	 * @return the view name.
 	 */
 	@PostMapping("/cart")
 	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
@@ -121,7 +120,7 @@ class OrderController {
 	 * 
 	 * @param cart will never be {@literal null}.
 	 * @param userAccount will never be {@literal null}.
-	 * @return
+	 * @return the view name.
 	 */
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {

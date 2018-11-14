@@ -37,7 +37,7 @@ class InventoryController {
 	 * Displays all {@link InventoryItem}s in the system
 	 * 
 	 * @param model will never be {@literal null}.
-	 * @return
+	 * @return the view name.
 	 */
 	@GetMapping("/stock")
 	@PreAuthorize("hasRole('ROLE_BOSS')")

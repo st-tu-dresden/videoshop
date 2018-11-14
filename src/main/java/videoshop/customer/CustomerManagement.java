@@ -34,7 +34,10 @@ public class CustomerManagement {
 	private final UserAccountManager userAccounts;
 
 	/**
-	 * @param customers must not be {@literal null}.
+	 * Creates a new {@link CustomerManagement} with the given
+	 * {@link CustomerRepository} and {@link UserAccountManager}.
+	 * 
+	 * @param customers    must not be {@literal null}.
 	 * @param userAccounts must not be {@literal null}.
 	 */
 	CustomerManagement(CustomerRepository customers, UserAccountManager userAccounts) {
@@ -50,7 +53,7 @@ public class CustomerManagement {
 	 * Creates a new {@link Customer} using the information given in the {@link RegistrationForm}.
 	 * 
 	 * @param form must not be {@literal null}.
-	 * @return
+	 * @return the new {@link Customer} instance.
 	 */
 	public Customer createCustomer(RegistrationForm form) {
 
@@ -64,7 +67,7 @@ public class CustomerManagement {
 	/**
 	 * Returns all {@link Customer}s currently available in the system.
 	 * 
-	 * @return
+	 * @return all {@link Customer} entities.
 	 */
 	public Streamable<Customer> findAll() {
 		return Streamable.of(customers.findAll());

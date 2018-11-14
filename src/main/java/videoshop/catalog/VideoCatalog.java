@@ -35,16 +35,15 @@ public interface VideoCatalog extends Catalog<Disc> {
 	 * 
 	 * @param type must not be {@literal null}.
 	 * @param sort must not be {@literal null}.
-	 * @return
+	 * @return the discs of the given type, never {@literal null}.
 	 */
 	Iterable<Disc> findByType(DiscType type, Sort sort);
 
 	/**
-	 * Returns all {@link Disc}s by type ordered their identifier.
+	 * Returns all {@link Disc}s by type ordered by their identifier.
 	 * 
 	 * @param type must not be {@literal null}.
-	 * @param sort must not be {@literal null}.
-	 * @return
+	 * @return the discs of the given type, never {@literal null}.
 	 */
 	default Iterable<Disc> findByType(DiscType type) {
 		return findByType(type, DEFAULT_SORT);
