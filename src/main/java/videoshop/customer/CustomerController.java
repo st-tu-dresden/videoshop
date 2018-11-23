@@ -21,8 +21,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -43,7 +45,7 @@ class CustomerController {
 	// Siehe außerdem videoshop.model.validation.RegistrationForm
 	// Lektüre: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
 	@PostMapping("/register")
-	String registerNew(@Valid RegistrationForm form, Errors result) {
+	String registerNew(@Valid @ModelAttribute("form") RegistrationForm form, BindingResult bindingResult, Errors result) {
 
 		if (result.hasErrors()) {
 			return "register";
