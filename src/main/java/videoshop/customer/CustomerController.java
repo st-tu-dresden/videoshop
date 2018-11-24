@@ -45,7 +45,7 @@ class CustomerController {
 	// Siehe außerdem videoshop.model.validation.RegistrationForm
 	// Lektüre: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html
 	@PostMapping("/register")
-	String registerNew(@Valid @ModelAttribute("form") RegistrationForm form, BindingResult bindingResult, Errors result) {
+	String registerNew(@Valid @ModelAttribute("form") RegistrationForm form, Errors result) {
 
 		if (result.hasErrors()) {
 			return "register";
