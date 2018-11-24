@@ -32,7 +32,7 @@
 
         <div class="field">
             <label for="name">Name</label>
-            <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" /><br/>
+            <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
             <div class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                 <p>Der Name darf nicht leer sein.</p>
             </div>
@@ -41,14 +41,14 @@
         <div class="field">
             <label th:text="#{register.password}" for="password">Passwort</label>
             <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="text"
-                   /><br/>
+                   required="required"/><br/>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
                 nicht leer sein.</p>
         </div>
         <div class="field">
             <label th:text="#{register.address}" for="address">Straße</label>
             <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
-                   /><br/>
+                   required="required"/><br/>
             <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Die Adresse darf
                 nicht leer sein.</p>
         </div>
