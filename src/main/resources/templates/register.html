@@ -26,7 +26,7 @@
 
         <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
 
-        <div class="ui negative message" th:if="${#fields.hasErrors('all')}">
+        <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
             <p>Einige Angaben sind nicht korrekt.</p>
         </div>
 
