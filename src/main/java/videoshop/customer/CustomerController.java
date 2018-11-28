@@ -58,7 +58,7 @@ class CustomerController {
 
 	@GetMapping("/register")
 	String register(Model model, RegistrationForm form) {
-		model.addAttribute("form", form);
+		model.addAttribute("registrationForm", form);
 		return "register";
 	}
 
