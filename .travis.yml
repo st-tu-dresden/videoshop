@@ -5,6 +5,8 @@ jdk:
 
 sudo: false
 
+install: mvn dependency:list -Dsort -U
+
 cache:
   directories:
     - $HOME/.m2
