@@ -29,10 +29,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * @author Oliver Gierke
  */
-@ModuleTest( //
-		extraIncludes = { "org.salespointframework.core", "org.salespointframework.useraccount" }, //
-		mode = BootstrapMode.DIRECT_DEPENDENCIES //
-)
+@ModuleTest(mode = BootstrapMode.DIRECT_DEPENDENCIES)
 class CatalogModuleTests {
 
 	@Autowired VideoCatalog catalog;
