@@ -17,11 +17,12 @@ package videoshop;
 
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
-import org.salespointframework.SalespointWebConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 /**
  * The central application class to configure the Spring container and run the application.
@@ -38,7 +39,7 @@ public class VideoShop {
 	}
 
 	@Configuration
-	static class VideoShopWebConfiguration extends SalespointWebConfiguration {
+	static class VideoShopWebConfiguration implements WebMvcConfigurer {
 
 		/**
 		 * We configure {@code /login} to be directly routed to the {@code login} template without any controller
