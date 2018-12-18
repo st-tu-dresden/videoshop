@@ -63,7 +63,7 @@ class CustomerController {
 	}
 
 	@GetMapping("/customers")
-	@PreAuthorize("hasRole('ROLE_BOSS')")
+	@PreAuthorize("hasRole('BOSS')")
 	String customers(Model model) {
 
 		model.addAttribute("customerList", customerManagement.findAll());
