@@ -1,5 +1,5 @@
 /*
-q * Copyright 2017 the original author or authors.
+q * Copyright 2017-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@ q * Copyright 2017 the original author or authors.
  */
 package videoshop.customer;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,23 +78,23 @@ class CustomerDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default users and customers.");
 
-		UnencryptedPassword password = UnencryptedPassword.of("123");
+		var password = UnencryptedPassword.of("123");
 
-		UserAccount bossAccount = userAccountManager.create("boss", password, Role.of("ROLE_BOSS"));
+		var bossAccount = userAccountManager.create("boss", password, Role.of("ROLE_BOSS"));
 		userAccountManager.save(bossAccount);
 
-		Role customerRole = Role.of("ROLE_CUSTOMER");
+		var customerRole = Role.of("ROLE_CUSTOMER");
 
-		UserAccount ua1 = userAccountManager.create("hans", password, customerRole);
-		UserAccount ua2 = userAccountManager.create("dextermorgan", password, customerRole);
-		UserAccount ua3 = userAccountManager.create("earlhickey", password, customerRole);
-		UserAccount ua4 = userAccountManager.create("mclovinfogell", password, customerRole);
+		var ua1 = userAccountManager.create("hans", password, customerRole);
+		var ua2 = userAccountManager.create("dextermorgan", password, customerRole);
+		var ua3 = userAccountManager.create("earlhickey", password, customerRole);
+		var ua4 = userAccountManager.create("mclovinfogell", password, customerRole);
 
-		Customer c1 = new Customer(ua1, "wurst");
-		Customer c2 = new Customer(ua2, "Miami-Dade County");
-		Customer c3 = new Customer(ua3, "Camden County - Motel");
-		Customer c4 = new Customer(ua4, "Los Angeles");
+		var c1 = new Customer(ua1, "wurst");
+		var c2 = new Customer(ua2, "Miami-Dade County");
+		var c3 = new Customer(ua3, "Camden County - Motel");
+		var c4 = new Customer(ua4, "Los Angeles");
 
-		customerRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
+		customerRepository.saveAll(List.of(c1, c2, c3, c4));
 	}
 }

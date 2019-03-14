@@ -7,7 +7,7 @@ Purpose of this sample project is to make students familiar with basic technolog
 
 ## Quickstart
 
-NOTE: The Quickstart requires Java 8 and a recent Git (2.20 or newer preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
+NOTE: The Quickstart requires Java 11 and a recent Git (2.20 or newer preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
 Also, note that you have to run `mvnw.cmd` instead of `./mvnw` if you run Windows by accident.
 
 [source, shell]
@@ -24,16 +24,16 @@ Note that the standard admin user is named `boss` and has the password `123`.
 
 ## Prerequisites
 
-### Java 8
+### Java 11
 
-https://adoptopenjdk.net/?variant=openjdk8[Download] the binaries, install. Make sure the console shows something like this:
+https://adoptopenjdk.net/?variant=openjdk11&jvmVariant=hotspot[Download] the binaries, install. Make sure the console shows something like this:
 
 [source, bash]
 ----
 $ java -version
-openjdk version "1.8.0_222"
-OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_222-b10)
-OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.222-b10, mixed mode)
+openjdk version "11.0.2" 2019-01-15
+OpenJDK Runtime Environment 18.9 (build 11.0.2+9)
+OpenJDK 64-Bit Server VM 18.9 (build 11.0.2+9, mixed mode)
 ----
 
 ### Git
@@ -84,7 +84,7 @@ Rapid application development framework based on Spring (see below).
 - https://spring.io/guides[Getting started guides]
 - https://projects.spring.io/spring-boot[Project home]
 
-### Spring 4
+### Spring 5
 
 The de-facto standard Java application framework.
 
@@ -93,7 +93,7 @@ The de-facto standard Java application framework.
 
 ### Spring Data JPA
 
-Spring module to easily build data acess layers using JPA 2.1 (Java Persistence API).
+Spring module to easily build data access layers using JPA 2.1 (Java Persistence API).
 
 - https://spring.io/guides?filter=jpa[Getting started guides]
 - https://projects.spring.io/spring-data-jpa[Project home]

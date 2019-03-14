@@ -17,7 +17,6 @@ package videoshop.customer;
 
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -63,8 +62,8 @@ public class CustomerManagement {
 
 		Assert.notNull(form, "Registration form must not be null!");
 
-		UnencryptedPassword password = UnencryptedPassword.of(form.getPassword());
-		UserAccount userAccount = userAccounts.create(form.getName(), password, CUSTOMER_ROLE);
+		var password = UnencryptedPassword.of(form.getPassword());
+		var userAccount = userAccounts.create(form.getName(), password, CUSTOMER_ROLE);
 
 		return customers.save(new Customer(userAccount, form.getAddress()));
 	}

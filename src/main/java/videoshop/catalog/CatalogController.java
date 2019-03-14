@@ -18,11 +18,10 @@ package videoshop.catalog;
 import videoshop.catalog.Disc.DiscType;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.validation.Valid;
-
 import javax.validation.constraints.NotEmpty;
+
 import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
@@ -74,8 +73,9 @@ class CatalogController {
 	@GetMapping("/disc/{disc}")
 	String detail(@PathVariable Disc disc, Model model) {
 
-		Optional<InventoryItem> item = inventory.findByProductIdentifier(disc.getId());
-		Quantity quantity = item.map(InventoryItem::getQuantity).orElse(NONE);
+		var quantity = inventory.findByProductIdentifier(disc.getId()) //
+				.map(InventoryItem::getQuantity) //
+				.orElse(NONE);
 
 		model.addAttribute("disc", disc);
 		model.addAttribute("quantity", quantity);

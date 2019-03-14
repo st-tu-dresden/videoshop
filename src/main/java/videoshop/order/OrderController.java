@@ -55,7 +55,7 @@ class OrderController {
 
 	/**
 	 * Creates a new {@link OrderController} with the given {@link OrderManager}.
-	 * 
+	 *
 	 * @param orderManager must not be {@literal null}.
 	 */
 	OrderController(OrderManager<Order> orderManager) {
@@ -67,7 +67,7 @@ class OrderController {
 	/**
 	 * Creates a new {@link Cart} instance to be stored in the session (see the class-level {@link SessionAttributes}
 	 * annotation).
-	 * 
+	 *
 	 * @return a new {@link Cart} instance.
 	 */
 	@ModelAttribute("cart")
@@ -80,7 +80,7 @@ class OrderController {
 	 * {@code pid} is {@link Disc}. For all domain types extending {@link AbstractEntity} (directly or indirectly) a tiny
 	 * Salespoint extension will directly load the object instance from the database. If the identifier provided is
 	 * invalid (invalid format or no {@link Product} with the id found), {@literal null} will be handed into the method.
-	 * 
+	 *
 	 * @param disc the disc that should be added to the cart (may be {@literal null}).
 	 * @param number number of discs that should be added to the cart.
 	 * @param cart must not be {@literal null}.
@@ -117,7 +117,7 @@ class OrderController {
 	/**
 	 * Checks out the current state of the {@link Cart}. Using a method parameter of type {@code Optional<UserAccount>}
 	 * annotated with {@link LoggedIn} you can access the {@link UserAccount} of the currently logged in user.
-	 * 
+	 *
 	 * @param cart will never be {@literal null}.
 	 * @param userAccount will never be {@literal null}.
 	 * @return the view name.
@@ -130,7 +130,7 @@ class OrderController {
 			// (｡◕‿◕｡)
 			// Mit completeOrder(…) wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
-			Order order = new Order(account, Cash.CASH);
+			var order = new Order(account, Cash.CASH);
 
 			cart.addItemsTo(order);
 
