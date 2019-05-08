@@ -21,26 +21,30 @@ import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
  * Initalizes {@link Customer}s.
- * 
+ *
  * @author Oliver Gierke
  */
 @Component
 @Order(10)
 class CustomerDataInitializer implements DataInitializer {
 
+	private static final Logger LOG = LoggerFactory.getLogger(CustomerDataInitializer.class);
+
 	private final UserAccountManager userAccountManager;
 	private final CustomerRepository customerRepository;
 
 	/**
-	 * Creates a new {@link CustomerDataInitializer} with the given
-	 * {@link UserAccountManager} and {@link CustomerRepository}.
-	 * 
+	 * Creates a new {@link CustomerDataInitializer} with the given {@link UserAccountManager} and
+	 * {@link CustomerRepository}.
+	 *
 	 * @param userAccountManager must not be {@literal null}.
 	 * @param customerRepository must not be {@literal null}.
 	 */
@@ -53,7 +57,7 @@ class CustomerDataInitializer implements DataInitializer {
 		this.customerRepository = customerRepository;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.salespointframework.core.DataInitializer#initialize()
 	 */
@@ -71,6 +75,8 @@ class CustomerDataInitializer implements DataInitializer {
 		if (userAccountManager.findByUsername("boss").isPresent()) {
 			return;
 		}
+
+		LOG.info("Creating default users and customers.");
 
 		UserAccount bossAccount = userAccountManager.create("boss", "123", Role.of("ROLE_BOSS"));
 		userAccountManager.save(bossAccount);

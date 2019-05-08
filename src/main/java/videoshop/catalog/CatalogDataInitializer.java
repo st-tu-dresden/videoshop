@@ -21,31 +21,35 @@ import videoshop.catalog.Disc.DiscType;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
- * 
+ *
  * @author Paul Henke
  * @author Oliver Gierke
  * @see DataInitializer
  */
 @Component
 @Order(20)
-class CatalogInitializer implements DataInitializer {
+class CatalogDataInitializer implements DataInitializer {
+
+	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
 
 	private final VideoCatalog videoCatalog;
 
-	CatalogInitializer(VideoCatalog videoCatalog) {
+	CatalogDataInitializer(VideoCatalog videoCatalog) {
 
 		Assert.notNull(videoCatalog, "VideoCatalog must not be null!");
 
 		this.videoCatalog = videoCatalog;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.salespointframework.core.DataInitializer#initialize()
 	 */
@@ -55,6 +59,8 @@ class CatalogInitializer implements DataInitializer {
 		if (videoCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
+
+		LOG.info("Creating default catalog entries.");
 
 		videoCatalog.save(new Disc("Last Action Hero", "lac", Money.of(100, EURO), "Äktschn/Comedy", DiscType.DVD));
 		videoCatalog.save(new Disc("Back to the Future", "bttf", Money.of(9.99, EURO), "Sci-Fi", DiscType.DVD));
