@@ -19,20 +19,19 @@ import videoshop.catalog.Disc.DiscType;
 
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.
- * 
+ *
  * @author Oliver Gierke
  */
 public interface VideoCatalog extends Catalog<Disc> {
 
-	static final Sort DEFAULT_SORT = new Sort(Direction.DESC, "productIdentifier");
+	static final Sort DEFAULT_SORT = Sort.by("productIdentifier").descending();
 
 	/**
 	 * Returns all {@link Disc}s by type ordered by the given {@link Sort}.
-	 * 
+	 *
 	 * @param type must not be {@literal null}.
 	 * @param sort must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
@@ -41,7 +40,7 @@ public interface VideoCatalog extends Catalog<Disc> {
 
 	/**
 	 * Returns all {@link Disc}s by type ordered by their identifier.
-	 * 
+	 *
 	 * @param type must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
