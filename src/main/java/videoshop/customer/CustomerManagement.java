@@ -30,6 +30,8 @@ import org.springframework.util.Assert;
 @Transactional
 public class CustomerManagement {
 
+	public static Role CUSTOMER_ROLE = Role.of("CUSTOMER");
+
 	private final CustomerRepository customers;
 	private final UserAccountManager userAccounts;
 
@@ -59,7 +61,7 @@ public class CustomerManagement {
 
 		Assert.notNull(form, "Registration form must not be null!");
 
-		UserAccount userAccount = userAccounts.create(form.getName(), form.getPassword(), Role.of("ROLE_CUSTOMER"));
+		UserAccount userAccount = userAccounts.create(form.getName(), form.getPassword(), CUSTOMER_ROLE);
 
 		return customers.save(new Customer(userAccount, form.getAddress()));
 	}
