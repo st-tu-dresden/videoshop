@@ -40,7 +40,7 @@
 
         <div class="field">
             <label th:text="#{register.password}" for="password">Passwort</label>
-            <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="text"
+            <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
                    required="required"/><br/>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
                 nicht leer sein.</p>
