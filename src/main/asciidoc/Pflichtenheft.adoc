@@ -1,4 +1,12 @@
 
+[options="header"]
+[cols="1, 3, 3"]
+|===
+|Version | Processing Date   | Author 
+|1.0	| October 9th, 2017 | Marc Kandler
+|2.0	| June 21st, 2019 | Daniel Schoenicke 
+|===
+
 :project_name: Videoshop
 = Pflichtenheft __{project_name}__
 :author: Marc Kandler
@@ -719,12 +727,8 @@ _Additionally, you should provide explanations for the demands, as to avoid any 
 |===
 |Quality Demand           | 1 | 2 | 3 | 4 | 5
 |Maintainability          |   |   |   | x |
-|Extensibility            |   |   |   |   | x
 |Usability                |   |   | x |   |
-|Scalability              | x |   |   |   |
-|Reliability              |   |   | x |   |
 |Security                 |   |   |   | x |
-|Performance              |   | x |   |   |
 |===
 
 _Note: It might be necessary to provide a description of the above quality demands, as they are mostly ambiguous or the meaning is unclear._
