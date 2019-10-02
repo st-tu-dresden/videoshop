@@ -20,6 +20,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
+import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 
@@ -53,7 +54,9 @@ class CustomerManagementUnitTests {
 		// Then
 		// … a user account creation has been triggered with the proper data and role
 		verify(userAccountManager, times(1)) //
-				.create(eq(form.getName()), eq(form.getPassword()), eq(CustomerManagement.CUSTOMER_ROLE));
+				.create(eq(form.getName()), //
+						eq(UnencryptedPassword.of(form.getPassword())), //
+						eq(CustomerManagement.CUSTOMER_ROLE));
 
 		// … the customer has a user account attached
 		assertThat(customer.getUserAccount()).isNotNull();

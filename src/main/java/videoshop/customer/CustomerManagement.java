@@ -15,6 +15,7 @@
  */
 package videoshop.customer;
 
+import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -62,7 +63,8 @@ public class CustomerManagement {
 
 		Assert.notNull(form, "Registration form must not be null!");
 
-		UserAccount userAccount = userAccounts.create(form.getName(), form.getPassword(), CUSTOMER_ROLE);
+		UnencryptedPassword password = UnencryptedPassword.of(form.getPassword());
+		UserAccount userAccount = userAccounts.create(form.getName(), password, CUSTOMER_ROLE);
 
 		return customers.save(new Customer(userAccount, form.getAddress()));
 	}

@@ -18,6 +18,7 @@ package videoshop.customer;
 import java.util.Arrays;
 
 import org.salespointframework.core.DataInitializer;
+import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -78,15 +79,17 @@ class CustomerDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default users and customers.");
 
-		UserAccount bossAccount = userAccountManager.create("boss", "123", Role.of("ROLE_BOSS"));
+		UnencryptedPassword password = UnencryptedPassword.of("123");
+
+		UserAccount bossAccount = userAccountManager.create("boss", password, Role.of("ROLE_BOSS"));
 		userAccountManager.save(bossAccount);
 
 		Role customerRole = Role.of("ROLE_CUSTOMER");
 
-		UserAccount ua1 = userAccountManager.create("hans", "123", customerRole);
-		UserAccount ua2 = userAccountManager.create("dextermorgan", "123", customerRole);
-		UserAccount ua3 = userAccountManager.create("earlhickey", "123", customerRole);
-		UserAccount ua4 = userAccountManager.create("mclovinfogell", "123", customerRole);
+		UserAccount ua1 = userAccountManager.create("hans", password, customerRole);
+		UserAccount ua2 = userAccountManager.create("dextermorgan", password, customerRole);
+		UserAccount ua3 = userAccountManager.create("earlhickey", password, customerRole);
+		UserAccount ua4 = userAccountManager.create("mclovinfogell", password, customerRole);
 
 		Customer c1 = new Customer(ua1, "wurst");
 		Customer c2 = new Customer(ua2, "Miami-Dade County");
