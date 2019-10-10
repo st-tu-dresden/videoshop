@@ -38,10 +38,24 @@
 	<repositories>
 
 		<repository>
+			<id>spring-libs-milestone</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</repository>
+
+		<repository>
 			<id>salespointframework</id>
 			<url>https://www.st.inf.tu-dresden.de/SalesPoint/repository</url>
 		</repository>
 
 	</repositories>
+
+	<pluginRepositories>
+
+		<pluginRepository>
+			<id>spring-libs-milestone</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</pluginRepository>
+
+	</pluginRepositories>
 
 </project>
