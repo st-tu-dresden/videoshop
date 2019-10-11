@@ -7,7 +7,7 @@ Purpose of this sample project is to make students familiar with basic technolog
 
 ## Quickstart
 
-NOTE: The Quickstart requires Java 8 and a recent Git (2.0.x preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
+NOTE: The Quickstart requires Java 8 and a recent Git (2.20 or newer preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
 Also, note that you have to run `mvnw.cmd` instead of `./mvnw` if you run Windows by accident.
 
 [source, shell]
@@ -26,14 +26,14 @@ Note that the standard admin user is named `boss` and has the password `123`.
 
 ### Java 8
 
-http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[Download] the binaries, install. Make sure the console shows something like this:
+https://adoptopenjdk.net/?variant=openjdk8[Download] the binaries, install. Make sure the console shows something like this:
 
 [source, bash]
 ----
 $ java -version
-java version "1.8.0_181"
-Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_222-b10)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.222-b10, mixed mode)
 ----
 
 ### Git
@@ -43,14 +43,14 @@ http://git-scm.com/download[Download] the binaries, run the installer. Verify th
 [source, bash]
 ----
 $ git --version
-git version 2.19.1
+git version 2.23.0
 ----
 
 ## IDE Setup
 
 ### Eclipse
 
-Grab the latest https://spring.io/tools/sts/all[STS] (Spring Tool Suite or plain Eclipse Luna should work as well), run installer or unzip and run it.
+Grab the latest https://spring.io/tools[Spring Tool Suite] (plain Eclipse should work as well), run installer or unzip and run it.
 
 Select menu:File[Import], select menu:Maven[Existing Maven Projects], select the folder you checked the project out into and hit btn:[Finish]. This will import the project into your workspace.
 
@@ -103,4 +103,4 @@ Spring module to easily build data acess layers using JPA 2.1 (Java Persistence 
 Library to build HTML web views using natural templating.
 
 - https://spring.io/guides/gs/serving-web-content[Getting started guide]
-- https://www.thymeleaf.org/doc/usingthymeleaf.html[Tutorial]
+- https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html[Tutorial]
