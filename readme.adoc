@@ -7,19 +7,20 @@ Purpose of this sample project is to make students familiar with basic technolog
 
 ## Quickstart
 
-NOTE: The Quickstart requires Java 8, Maven 3 and a recent Git (2.0.x preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>
+NOTE: The Quickstart requires Java 8 and a recent Git (2.0.x preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
+Also, note that you have to run `mvnw.cmd` instead of `./mvnw` if you run Windows by accident.
 
 [source, shell]
 ----
 $ git clone https://github.com/st-tu-dresden/videoshop
 $ cd videoshop
-$ mvn clean package
-$ mvn spring-boot:run
+$ ./mvnw clean package
+$ ./mvnw spring-boot:run
 ----
 
 After that point your browser to `http://localhost:8080`.
 
-Note the standard admin user is named `boss` and has the password `123`.
+Note that the standard admin user is named `boss` and has the password `123`.
 
 ## Prerequisites
 
@@ -33,20 +34,6 @@ $ java -version
 java version "1.8.0_181"
 Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
-----
-
-### Maven 3.x
-
-http://maven.apache.org/download.cgi[Download] the binaries, unzip to an arbitrary location and make sure the `bin` folder of the unzipped result is in your path:
-
-[source, bash]
-----
-$ mvn --version
-Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T20:33:14+02:00)
-Maven home: /usr/local/Cellar/maven/3.5.4/libexec
-Java version: 1.8.0_181, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre
-Default locale: de_DE, platform encoding: UTF-8
-OS name: "mac os x", version: "10.13.6", arch: "x86_64", family: "mac"
 ----
 
 ### Git
