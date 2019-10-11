@@ -5,11 +5,11 @@ jdk:
 
 sudo: false
 
-install: mvn dependency:list -Dsort -B -U -V
+install: ./mvnw dependency:list -Dsort -B -U -V
 
 script:
-  - mvn verify -Pci -B -U
-  - mvn verify -Pjqa -B -U
+  - ./mvnw verify -Pci -B -U
+  - ./mvnw verify -Pjqa -B -U
 
 cache:
   directories:
