@@ -8,9 +8,9 @@
 	<parent>
 		<groupId>de.tudresden.inf.st.lab</groupId>
 		<artifactId>st-lab-parent</artifactId>
-		<version>2.2.0.BUILD-SNAPSHOT</version>
+		<version>2.2.0.RELEASE</version>
 	</parent>
-	
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
