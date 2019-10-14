@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2017 the original author or authors.
+ * Copyright 2013-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package videoshop.inventory;
 import videoshop.catalog.VideoCatalog;
 
 import org.salespointframework.core.DataInitializer;
-import org.salespointframework.inventory.Inventory;
-import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
- * 
+ *
  * @author Paul Henke
  * @author Oliver Gierke
  * @see DataInitializer
@@ -36,10 +36,10 @@ import org.springframework.util.Assert;
 @Order(20)
 class InventoryInitializer implements DataInitializer {
 
-	private final Inventory<InventoryItem> inventory;
+	private final UniqueInventory<UniqueInventoryItem> inventory;
 	private final VideoCatalog videoCatalog;
 
-	InventoryInitializer(Inventory<InventoryItem> inventory, VideoCatalog videoCatalog) {
+	InventoryInitializer(UniqueInventory<UniqueInventoryItem> inventory, VideoCatalog videoCatalog) {
 
 		Assert.notNull(inventory, "Inventory must not be null!");
 		Assert.notNull(videoCatalog, "VideoCatalog must not be null!");
@@ -48,7 +48,7 @@ class InventoryInitializer implements DataInitializer {
 		this.videoCatalog = videoCatalog;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.salespointframework.core.DataInitializer#initialize()
 	 */
@@ -63,7 +63,7 @@ class InventoryInitializer implements DataInitializer {
 
 			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
 			inventory.findByProduct(disc) //
-					.orElseGet(() -> inventory.save(new InventoryItem(disc, Quantity.of(10))));
+					.orElseGet(() -> inventory.save(new UniqueInventoryItem(disc, Quantity.of(10))));
 		});
 	}
 }

@@ -23,8 +23,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Range;
-import org.salespointframework.inventory.Inventory;
 import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
@@ -39,10 +40,11 @@ class CatalogController {
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final VideoCatalog catalog;
-	private final Inventory<InventoryItem> inventory;
+	private final UniqueInventory<UniqueInventoryItem> inventory;
 	private final BusinessTime businessTime;
 
-	CatalogController(VideoCatalog videoCatalog, Inventory<InventoryItem> inventory, BusinessTime businessTime) {
+	CatalogController(VideoCatalog videoCatalog, UniqueInventory<UniqueInventoryItem> inventory,
+			BusinessTime businessTime) {
 
 		this.catalog = videoCatalog;
 		this.inventory = inventory;
