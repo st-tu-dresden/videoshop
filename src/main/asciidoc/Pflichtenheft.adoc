@@ -228,7 +228,7 @@ _Typical CRUD (create, read, update, delete) use cases can be condensed into one
 _Note: We did not provide a sequence diagram for every use case._
 
 See: +
-https://www.sophist.de/fileadmin/SOPHIST/UML/uml2-4_linknummern/12-1_Schablone_fuer_%20Use-Case-Beschreibung.pdf
+https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf
 
 [cols="1h, 3"]
 [[UC0010]]
@@ -493,7 +493,7 @@ _Ideally, it contains a set of inputs for the functionality in question, the int
 _Note: Functional requirements are used to depict what exactly has to be implemented (from the developer's point of view)._
 _As use cases are mostly relatively close to the domain and mostly non-technical (can even be written by a non-techie client), it is necessary to specify and organize the information provided by the client._
 
-See (German): https://www.sophist.de/fileadmin/SOPHIST/Puplikationen/Broschueren/SOPHIST_Broschuere_MASTeR.pdf
+See (German): https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/Wissen_for_free/MASTeR_Broschuere_3-Auflage_interaktiv.pdf
 
 [options="header", cols="2h, 1, 3, 12"]
 |===
