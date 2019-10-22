@@ -18,17 +18,17 @@
     <div class="ui menu">
 
         <a class="item" href="register.html" th:href="@{/register}"
-           sec:authorize="!hasAnyRole('ROLE_BOSS','ROLE_CUSTOMER')"
+           sec:authorize="!hasAnyRole('BOSS','CUSTOMER')"
            th:text="#{nav.register}">Registrierung</a>
 
-        <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('ROLE_BOSS')"
+        <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('BOSS')"
            th:text="#{nav.orders}">Bestellungen</a>
 
-        <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('ROLE_BOSS')"
+        <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('BOSS')"
            th:text="#{nav.stock}">Lager</a>
 
 
-        <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('ROLE_BOSS')"
+        <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('BOSS')"
            th:text="#{nav.customers}">Kundenliste</a>
 
         <a class="item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>

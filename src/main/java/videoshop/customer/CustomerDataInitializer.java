@@ -28,7 +28,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
- * Initalizes {@link Customer}s.
+ * Initializes default user accounts and customers. The following are created:
+ * <ul>
+ * <li>An admin user named "boss".</li>
+ * <li>The customers "hans", "dextermorgan", "earlhickey", "mclovinfogell" backed by user accounts with the same
+ * name.</li>
+ * </ul>
  *
  * @author Oliver Gierke
  */
@@ -39,22 +44,22 @@ class CustomerDataInitializer implements DataInitializer {
 	private static final Logger LOG = LoggerFactory.getLogger(CustomerDataInitializer.class);
 
 	private final UserAccountManager userAccountManager;
-	private final CustomerRepository customerRepository;
+	private final CustomerManagement customerManagement;
 
 	/**
 	 * Creates a new {@link CustomerDataInitializer} with the given {@link UserAccountManager} and
 	 * {@link CustomerRepository}.
 	 *
 	 * @param userAccountManager must not be {@literal null}.
-	 * @param customerRepository must not be {@literal null}.
+	 * @param customerManagement must not be {@literal null}.
 	 */
-	CustomerDataInitializer(UserAccountManager userAccountManager, CustomerRepository customerRepository) {
+	CustomerDataInitializer(UserAccountManager userAccountManager, CustomerManagement customerManagement) {
 
-		Assert.notNull(customerRepository, "CustomerRepository must not be null!");
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
+		Assert.notNull(customerManagement, "CustomerRepository must not be null!");
 
 		this.userAccountManager = userAccountManager;
-		this.customerRepository = customerRepository;
+		this.customerManagement = customerManagement;
 	}
 
 	/*
@@ -64,13 +69,6 @@ class CustomerDataInitializer implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		// (｡◕‿◕｡)
-		// UserAccounts bestehen aus einem Identifier und eine Password, diese werden auch für ein Login gebraucht
-		// Zusätzlich kann ein UserAccount noch Rollen bekommen, diese können in den Controllern und im View dazu genutzt
-		// werden
-		// um bestimmte Bereiche nicht zugänglich zu machen, das "ROLE_"-Prefix ist eine Konvention welche für Spring
-		// Security nötig ist.
-
 		// Skip creation if database was already populated
 		if (userAccountManager.findByUsername("boss").isPresent()) {
 			return;
@@ -78,23 +76,15 @@ class CustomerDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default users and customers.");
 
-		var password = UnencryptedPassword.of("123");
+		userAccountManager.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
 
-		var bossAccount = userAccountManager.create("boss", password, Role.of("ROLE_BOSS"));
-		userAccountManager.save(bossAccount);
+		var password = "123";
 
-		var customerRole = Role.of("ROLE_CUSTOMER");
-
-		var ua1 = userAccountManager.create("hans", password, customerRole);
-		var ua2 = userAccountManager.create("dextermorgan", password, customerRole);
-		var ua3 = userAccountManager.create("earlhickey", password, customerRole);
-		var ua4 = userAccountManager.create("mclovinfogell", password, customerRole);
-
-		var c1 = new Customer(ua1, "wurst");
-		var c2 = new Customer(ua2, "Miami-Dade County");
-		var c3 = new Customer(ua3, "Camden County - Motel");
-		var c4 = new Customer(ua4, "Los Angeles");
-
-		customerRepository.saveAll(List.of(c1, c2, c3, c4));
+		List.of(//
+				new RegistrationForm("hans", password, "wurst"),
+				new RegistrationForm("dextermorgan", password, "Miami-Dade County"),
+				new RegistrationForm("earlhickey", password, "Camden County - Motel"),
+				new RegistrationForm("mclovinfogell", password, "Los Angeles")//
+		).forEach(customerManagement::createCustomer);
 	}
 }

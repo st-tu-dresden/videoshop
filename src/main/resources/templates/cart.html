@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="column">
-                    <form sec:authorize="hasRole('ROLE_CUSTOMER')" class="ui form" method="post" th:action="@{/checkout}">
+                    <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/checkout}">
                         <button type="submit" class="ui button" th:text="#{cart.buy}">Kaufen</button>
                     </form>
                 </div>
