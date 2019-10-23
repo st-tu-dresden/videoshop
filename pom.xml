@@ -9,11 +9,13 @@
 		<groupId>de.tudresden.inf.st.lab</groupId>
 		<artifactId>st-lab-parent</artifactId>
 		<version>2.2.0.RELEASE</version>
+		<relativePath />
 	</parent>
 
 	<properties>
 		<java.version>11</java.version>
 		<salespoint.version>7.2.1.RELEASE</salespoint.version>
+		<moduliths.version>1.0.0.RC3</moduliths.version>
 	</properties>
 
 	<dependencies>
@@ -44,7 +46,7 @@
 
 		<repository>
 			<id>spring-libs-milestone</id>
-			<url>https://repo.spring.io/libs-snapshot</url>
+			<url>https://repo.spring.io/libs-milestone</url>
 		</repository>
 
 		<repository>
@@ -58,7 +60,7 @@
 
 		<pluginRepository>
 			<id>spring-libs-milestone</id>
-			<url>https://repo.spring.io/libs-snapshot</url>
+			<url>https://repo.spring.io/libs-milestone</url>
 		</pluginRepository>
 
 	</pluginRepositories>
