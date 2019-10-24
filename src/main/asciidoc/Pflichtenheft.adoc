@@ -214,7 +214,7 @@ Abstract actors (i.e. an actor which groups other actors, written in _italic_) a
 === Use-Case Diagram
 
 [[use_case_diagram]]
-image::.\images\Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%, title= "Use case diagram of {project_name}", align=center]
+image::./images/Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%, title= "Use case diagram of {project_name}", align=center]
 
 === Use-Case Descriptions
 
@@ -296,7 +296,7 @@ The Catalog must provide the possibility to distinguish between different types 
 |===
 
 [[sequence_diagram_view_catalog]]
-image::.\images\Sequence_Diagrams\View_Catalog.png[Sequence diagram: View Catalog, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Catalog", align=center]
+image::./images/Sequence_Diagrams/View_Catalog.png[Sequence diagram: View Catalog, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Catalog", align=center]
 
 [[UC0110]]
 [cols="1h, 3"]
@@ -315,7 +315,7 @@ image::.\images\Sequence_Diagrams\View_Catalog.png[Sequence diagram: View Catalo
 |===
 
 [[sequence_diagram_view_catalog]]
-image::.\images\Sequence_Diagrams\View_Product_Details.png[Sequence diagram: View Product Details, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Product Details", align=center]
+image::./images/Sequence_Diagrams/View_Product_Details.png[Sequence diagram: View Product Details, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Product Details", align=center]
 
 [cols="1h,3"]
 [[UC0120]]
@@ -337,7 +337,7 @@ image::.\images\Sequence_Diagrams\View_Product_Details.png[Sequence diagram: Vie
 |===
 
 [[sequence_diagram_comment_product]]
-image::.\images\Sequence_Diagrams\Comment_Product.png[Sequence diagram: Comment on Product, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Comment on Product", align=center]
+image::./images/Sequence_Diagrams/Comment_Product.png[Sequence diagram: Comment on Product, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Comment on Product", align=center]
 
 [cols="1h,3"]
 [[UC0121]]
@@ -376,7 +376,7 @@ _We decided to model it this way to show an example of the "include" in a use ca
 |===
 
 [[sequence_diagram_Add_Product_to_Cart]]
-image::.\images\Sequence_Diagrams\Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Add Product to Cart", align=center]
+image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Add Product to Cart", align=center]
 
 [cols="1h,3"]
 [[UC0210]]
@@ -418,7 +418,7 @@ image::.\images\Sequence_Diagrams\Add_Product_to_Cart.png[Sequence diagram: Add 
 |===
 
 [[sequence_diagram_Buy_Products_in_Cart]]
-image::.\images\Sequence_Diagrams\Buy_Products_in_Cart.png[<Image removed for educational purposes. Such a complex use case does definitely need to be shown in detail with a sequence diagram.>, 100%, 100%, pdfwidth=100%, title= "<Image removed for educational purposes.>", align=center]
+image::./images/Sequence_Diagrams/Buy_Products_in_Cart.png[<Image removed for educational purposes. Such a complex use case does definitely need to be shown in detail with a sequence diagram.>, 100%, 100%, pdfwidth=100%, title= "<Image removed for educational purposes.>", align=center]
 
 [cols="1h,3"]
 [[UC0300]]
@@ -453,7 +453,7 @@ image::.\images\Sequence_Diagrams\Buy_Products_in_Cart.png[<Image removed for ed
 |===
 
 [[sequence_diagram_View_Orders]]
-image::.\images\Sequence_Diagrams\View_Orders.png[Sequence diagram: View Orders, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Orders", align=center]
+image::./images/Sequence_Diagrams/View_Orders.png[Sequence diagram: View Orders, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Orders", align=center]
 
 
 [cols="1h,3"]
@@ -767,37 +767,37 @@ _It it not necessary to include every single desired page in the prototype, just
 _Note: It is pretty astonishing how close the prototype in this example already is to the final design, isn't it? ;)_
 
 [[home_image]]
-image::.\images\gui\home.PNG[Landing page, 100%, 100%, pdfwidth=100%, title= "Landing page of {project_name}", align=center]
+image::./images/gui/home.PNG[Landing page, 100%, 100%, pdfwidth=100%, title= "Landing page of {project_name}", align=center]
 
 [[register_image]]
-image::.\images\gui\register.PNG[Registration page, 100%, 100%, pdfwidth=100%, title= "Registration page of {project_name}", align=center]
+image::./images/gui/register.PNG[Registration page, 100%, 100%, pdfwidth=100%, title= "Registration page of {project_name}", align=center]
 
 [[dvdcatalog_image]]
-image::.\images\gui\dvdcatalog.PNG[DVD catalog, 100%, 100%, pdfwidth=100%, title= "DVD catalog of {project_name}", align=center]
+image::./images/gui/dvdcatalog.PNG[DVD catalog, 100%, 100%, pdfwidth=100%, title= "DVD catalog of {project_name}", align=center]
 
 [[bluraycatalog_image]]
-image::.\images\gui\bluraycatalog.PNG[Blu Ray catalog, 100%, 100%, pdfwidth=100%, title= "Blu Ray catalog of {project_name}", align=center]
+image::./images/gui/bluraycatalog.PNG[Blu Ray catalog, 100%, 100%, pdfwidth=100%, title= "Blu Ray catalog of {project_name}", align=center]
 
 [[detail_image]]
-image::.\images\gui\detail.PNG[Product detail page, 100%, 100%, pdfwidth=100%, title= "Product detail page of {project_name}", align=center]
+image::./images/gui/detail.PNG[Product detail page, 100%, 100%, pdfwidth=100%, title= "Product detail page of {project_name}", align=center]
 
 [[authenticated_home_hans_image]]
-image::.\images\gui\authenticated_home_hans.PNG[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
+image::./images/gui/authenticated_home_hans.PNG[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
 
 [[cart_image]]
-image::.\images\gui\cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
+image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
 
 [[authenticated_home_boss_image]]
-image::.\images\gui\authenticated_home_boss.PNG[Landing page for an authenticated boss, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated boss of {project_name}", align=center]
+image::./images/gui/authenticated_home_boss.PNG[Landing page for an authenticated boss, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated boss of {project_name}", align=center]
 
 [[order_list_image]]
-image::.\images\gui\order_list.PNG[Order list, 100%, 100%, pdfwidth=100%, title= "Overview page of all completed orders of {project_name}", align=center]
+image::./images/gui/order_list.PNG[Order list, 100%, 100%, pdfwidth=100%, title= "Overview page of all completed orders of {project_name}", align=center]
 
 [[inventory_stock_list_image]]
-image::.\images\gui\inventory_stock_list.PNG[Inventory overview page, 100%, 100%, pdfwidth=100%, title= "Inventory overview page of {project_name}", align=center]
+image::./images/gui/inventory_stock_list.PNG[Inventory overview page, 100%, 100%, pdfwidth=100%, title= "Inventory overview page of {project_name}", align=center]
 
 [[customer_list_image]]
-image::.\images\gui\customer_list.PNG[Customer list page, 100%, 100%, pdfwidth=100%, title= "Customer overview page of {project_name}", align=center]
+image::./images/gui/customer_list.PNG[Customer list page, 100%, 100%, pdfwidth=100%, title= "Customer overview page of {project_name}", align=center]
 
 == Data Model
 
@@ -808,7 +808,7 @@ _Note: This domain model is relatively close to the actual implementation and th
 _You can be more abstract with your diagram and focus more on actual concepts of the domain you are supposed to model._
 
 [[AKD]]
-image::.\images\Class_diagram_(analysis).png[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
+image::./images/Class_diagram_(analysis).png[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
 
 === Classes and Enumerations
 The following table gives an overview of the classes/enumerations used in the domain model.
