@@ -191,11 +191,11 @@ _Note: The blue boxes display a HTML-Template. The white boxes within the templa
 * catalog.CatalogInitializer
 * customer.CustomerDataInitializer
 * inventory.InventoryInitializer
-|Salespoint.Inventory |org.salespointframework.inventory.Inventory a|
+|Salespoint.UniqueInventory |org.salespointframework.inventory.UniqueInventory a|
 * catalog.CatalogController
 * inventory.InventoryController
 * inventory.InventoryInitializer
-|Salespoint.InventoryItem |org.salespointframework.inventory.InventoryItem |inventory.InventoryInitializer
+|Salespoint.UniqueInventoryItem |org.salespointframework.inventory.UniqueInventoryItem |inventory.InventoryInitializer
 |Salespoint.Order |org.salespointframework.order.Order |order.OrderController
 |Salespoint.OrderManager |org.salespointframework.order.OrderManager |order.OrderController
 |Salespoint.OrderStatus |org.salespointframework.order.OrderStatus|order.OrderController
@@ -313,8 +313,8 @@ _Note: The following table shows the Forward- and Backward Traceability from the
 |ChargeLine             |Salespoint.ChargeLine (part of Salespoint Implementation) | Simple Reuse
 |Comment                |catalog.Comment |
 |Dvd                    |catalog.Disc, catalog.DiscType |
-|Inventory              |Salespoint.Inventory | Simple Reuse
-|InventoryItem          |Salespoint.InventoryItem | Simple Reuse
+|Inventory              |Salespoint.UniqueInventory | Simple Reuse
+|InventoryItem          |Salespoint.UniqueInventoryItem | Simple Reuse
 |Order                  |Salespoint.Order | Simple Reuse
 |OrderLine              |Salespoint.Orderline (part of Salespoint Implementation) | Simple Reuse
 |OrderManager           |Salespoint.OrderManager<Order> | Simple Reuse
