@@ -2,9 +2,9 @@
 [options="header"]
 [cols="1, 3, 3"]
 |===
-|Version | Processing Date   | Author 
+|Version | Processing Date   | Author
 |1.0	| October 9th, 2017 | Marc Kandler
-|2.0	| June 21st, 2019 | Daniel Schoenicke 
+|2.0	| June 21st, 2019 | Daniel Schoenicke
 |===
 
 :project_name: Videoshop
@@ -173,16 +173,14 @@ access our system or are accessed by it (not the case here).
 
 
 [[context_diagram]]
-image::.\images\Context_model.png[Image removed for educational purposes. You have to provide a context diagram in your project though!, 80%, 80%, pdfwidth=80%, title= "<Image removed for educational purposes.>", align=center]
+image:diagrams/images/videoshop_context.svg[context diagram]
 
 === Top-level architecture
-Top-Level view of the system. +
-_Note: We depicted the controllers of the videoshop as packages of the top level architecture._
-_This was only done because the videoshop does not offer a package structure, which we could have used._
-_The controllers were what was clostest to what the TLA is supposed to show._
+
+Top-Level view of the system.
 
 [[TLA]]
-image::.\images\Top-Level-Architecture.png[Image removed for educational purposes. You have to provide a top-level architecture in your project though!, 100%, 100%, pdfwidth=100%, title= "<Image removed for educational purposes.>", align=center]
+image:diagrams/images/videoshop_top_level.svg[top-level architecture]
 
 == Use-Cases
 
