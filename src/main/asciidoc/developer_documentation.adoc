@@ -97,7 +97,7 @@ A list of necessary software to run and use the application.
 
 The following (or newer) Java version is necessary to run the application:
 
-* Java 8.1
+* Java 11
 
 The following (or newer) browser versions are necessary to use the application:
 
