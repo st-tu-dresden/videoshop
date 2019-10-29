@@ -293,25 +293,42 @@ image:diagrams/images/order.svg[class design diagram - order]
 |===
 
 === Traceability between Analysis- and Design Model
-_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage is defined in the *Usage*-Column._
+_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage of this external class is defined in the *Usage*-Column,
+using one of the following options:_
+
+* Inherictance/Interface-Implementation
+* Class Attribute
+* Method Parameter
 
 [options="header"]
 |===
 |Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model) |Usage
-|BluRay                 |catalog.Disc, catalog.DiscType |
-|Cart                   |Salespoint.Cart | Simple Reuse
-|CartItem               |Salespoint.CartItem (part of Salespoint Implementation) | Simple Reuse
-|ChargeLine             |Salespoint.ChargeLine (part of Salespoint Implementation) | Simple Reuse
+|BluRay                 a|
+						* catalog.Disc
+						* catalog.DiscType |
+|Cart                   |Salespoint.Cart | Method Parameter 
+|CartItem               |Salespoint.CartItem (via Salespoint.Cart) | Method Parameter (via Salespoint.Cart)
+|ChargeLine             |Salespoint.ChargeLine (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
 |Comment                |catalog.Comment |
-|Dvd                    |catalog.Disc, catalog.DiscType |
-|Inventory              |Salespoint.UniqueInventory | Simple Reuse
-|InventoryItem          |Salespoint.UniqueInventoryItem | Simple Reuse
-|Order                  |Salespoint.Order | Simple Reuse
-|OrderLine              |Salespoint.Orderline (part of Salespoint Implementation) | Simple Reuse
-|OrderManager           |Salespoint.OrderManager<Order> | Simple Reuse
-|OrderStatus            |Salespoint.OrderStatus | Simple Reuse
-|ROLE/Role              |Salespoint.Role | Simple Reuse
-|User                   |Salespoint.UserAccount, customer.Customer | Simple Reuse
+|Dvd                    a|
+						* catalog.Disc
+						* catalog.DiscType |
+|Inventory              |Salespoint.UniqueInventory a|
+						* Class Attribute
+						* Method Parameter
+|InventoryItem          |Salespoint.UniqueInventoryItem | Method Parameter
+|Order                  |Salespoint.Order | Method Parameter
+|OrderLine              |Salespoint.Orderline (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
+|OrderManager           |Salespoint.OrderManager<Order> a|
+						* Class Attribute
+						* Method Parameter
+|OrderStatus            |Salespoint.OrderStatus | Method Parameter
+|ROLE/Role              |Salespoint.Role | Method Parameter
+|User                   a|
+						* Salespoint.UserAccount 
+						* customer.Customer a|
+						* Class Attribute
+						* Method Parameter
 |Videoshop              |videoshop.Videoshop |
 |===
 
