@@ -2,7 +2,7 @@
 [cols="1, 3, 3"]
 |===
 |Version | Processing Date   | Author 
-|1.0	| September 26th, 2019 | Daniel Schoenicke 
+|1.0	| October 29th, 2019 | Daniel Schoenicke 
 |===
 
 :project_name: Videoshop
@@ -71,7 +71,6 @@ Degree to which a product or system protects information and data so that person
 
 The following table shows what quality demands have to be fulfilled to which extent.
 The first column lists the quality demands, while in the following columns an "x" is used to mark the priority.
-The assigned priority has to be considered in the formulation of the concrete non-functional requirements.
 
 1 = Not Important ..
 5 = Very Important
@@ -179,60 +178,52 @@ image:diagrams/images/dialogue_map.svg[dialogue map]
 
 _Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
 
-==== Use of external frameworks
-[options="header", cols="1,3,2"]
+=== Use of external frameworks
+[options="header"]
 |===
-|External Class |Path of external class |Used by (applications' class)
-|Salespoint.BusinessTime |org.salespointframework.time.BusinessTime |catalog.CatalogController
-|Salespoint.Cart |org.salespointframework.order.Cart| order.OrderController
-|Salespoint.Cash |org.salespointframework.payment.Cash |order.OrderController
-|Salespoint.Catalog |org.salespointframework.catalog.Catalog |catalog.VideoCatalog
-|Salespoint.DataInitializer |org.salespointframework.core.DataInitializer a|
+|External package |Used by (applications' class)
+|salespointframework.catalog a|
+* catalog.Disc
+* catalog.VideoCatalog
+* order.OrderController 
+|salespointframework.core a|
 * catalog.CatalogInitializer
 * customer.CustomerDataInitializer
 * inventory.InventoryInitializer
-|Salespoint.UniqueInventory |org.salespointframework.inventory.UniqueInventory a|
+|salespointframework.inventory a|
 * catalog.CatalogController
 * inventory.InventoryController
 * inventory.InventoryInitializer
-|Salespoint.UniqueInventoryItem |org.salespointframework.inventory.UniqueInventoryItem |inventory.InventoryInitializer
-|Salespoint.Order |org.salespointframework.order.Order |order.OrderController
-|Salespoint.OrderManager |org.salespointframework.order.OrderManager |order.OrderController
-|Salespoint.OrderStatus |org.salespointframework.order.OrderStatus|order.OrderController
-|Salespoint.Product |org.salespointframework.catalog.Product a|
-* catalog.Disc
-* order.OrderController
-|Salespoint.Quantity |org.salespointframework.quantity.Quantity a|
+|salespointframework.order | order.OrderController
+|salespointframework.payment | order.OrderController
+|salespointframework.quantity a|
 * catalog.CatalogController
 * inventory.InventoryInitializer
 * order.OrderController
-|Salespoint.Role |org.salespointframework.useraccount.Role a|
-* customer.CustomerDataInitializer
-* customer.CustomerManagement
-|Salespoint.SalespointSecurityConfiguration |org.salespointframework.SalespointSecurityConfiguration |videoshop.WebSecurityConfiguration
-|Salespoint.UserAccount |org.salespointframework.useraccount.UserAccount a|
+|salespointframework.SalespointSecurityConfiguration |videoshop.WebSecurityConfiguration
+|salespointframework.time | catalog.CatalogController
+|salespointframework.useraccount a|
 * customer.Customer
-* order.OrderController
-|Salespoint.UserAccountManager |org.salespointframework.useraccount.UserAccountManager a|
 * customer.CustomerDataInitializer
 * customer.CustomerManagement
-|Spring.Assert |org.springframework.util.Assert a|
-* customer.CustomerController
-* customer.CustomerDataInitializer
 * order.OrderController
-|Spring.CrudRepository |org.springframework.data.repository.CrudRepository |customer.CustomerRepository
-|Spring.Errors |org.springframework.validation.Errors |customer.CustomerController
-|Spring.HttpSecurity |org.springframework.security.config.annotation.web.builders.HttpSecurity| videoshop.WebSecurityConfiguration
-|Spring.Model |org.springframework.ui.Model a|
+|springframework.boot |videoshop.VideoShop
+|springframework.data a|
+* catalog.VideoCatalog
+* customer.CustomerManagement
+* customer.CustomerRepository
+|springframework.security | videoshop.WebSecurityConfiguration
+|springframework.ui a|
 * catalog.CatalogController
 * customer.CustomerController
 * inventory.InventoryController
 * order.OrderController
-|Spring.Sort |org.springframework.data.domain.Sort |catalog.VideoCatalog
-|Spring.SpringApplication |org.springframework.boot.SpringApplication |videoshop.VideoShop
-|Spring.Streamable |org.springframework.data.util.Streamable |customer.CustomerManagement
-|Spring.ViewControllerRegistry |org.springframework.web.servlet.config.annotation.ViewControllerRegistry |videoshop.VideoShopWebConfiguration
-|Spring.WebMvcConfigurer |org.springframework.web.servlet.config.annotation.WebMvcConfigurer |videoshop.VideoShopWebConfiguration
+|springframework.util a|
+* customer.CustomerController
+* customer.CustomerDataInitializer
+* order.OrderController
+|springframework.validation |customer.CustomerController
+|springframework.web |videoshop.VideoShopWebConfiguration
 |===
 
 == Building block view
@@ -326,6 +317,8 @@ _Note: The following table shows the Forward- and Backward Traceability from the
 
 == Runtime view
 
+_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
+
 === Catalog
 image:diagrams/images/seq_catalog.svg[sequence diagram - catalog]
 
@@ -341,10 +334,11 @@ image:diagrams/images/seq_order.svg[sequence diagram - order]
 == Technical debt
 
 === Quality Gates
-_Note: In this section, all failed Quality Gates are listed. These ratings go from *A* (best) to *E* (worst)._
+_Note: In this section, all failed Quality Gates are listed. These ratings go from *A* (best) to *E* (worst).
+This chapter should only be written at the end of your project._
 [options="header"] 
 |===
-|Quality Gate | Actual value | Goal
+|Quality Gate | Actual Value | Goal
 |Reliability | C | A
 |Coverage | 0.0% | 50.0%
 |===
