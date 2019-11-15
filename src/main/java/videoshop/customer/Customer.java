@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2017 the original author or authors.
+ * Copyright 2013-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import javax.persistence.OneToOne;
 import org.salespointframework.useraccount.UserAccount;
 
 // (｡◕‿◕｡)
-// Salespoint bietet nur eine UserAccount Verwaltung, für weitere Attribute sollte eine extra Klasse geschriebenw werden 
-// Unser Kunde hat noch eine Adresse, das bietet der UserAccount nicht
-// Um den Customer in die Datenbank zu bekommen, schreiben wir ein CustomerRepository 
+// Salespoint bietet nur eine UserAccount Verwaltung, für weitere Attribute sollte eine extra
+// Klasse geschrieben werden. Unser Kunde hat noch eine Adresse, das bietet der UserAccount nicht.
+// Um den Customer in die Datenbank zu bekommen, schreiben wir ein CustomerRepository.
 
 @Entity
 public class Customer {
@@ -35,8 +35,8 @@ public class Customer {
 	private String address;
 
 	// (｡◕‿◕｡)
-	// Jedem Customer ist genau ein UserAccount zugeordnet, um später über den UserAccount an den Customer zu kommen,
-	// speichern wir den hier
+	// Jedem Customer ist genau ein UserAccount zugeordnet, um später über den UserAccount an den
+	// Customer zu kommen, speichern wir den hier
 	@OneToOne //
 	private UserAccount userAccount;
 
