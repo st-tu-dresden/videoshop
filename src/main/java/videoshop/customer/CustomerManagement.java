@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 the original author or authors.
+ * Copyright 2017-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
 @Transactional
 public class CustomerManagement {
 
-	public static Role CUSTOMER_ROLE = Role.of("CUSTOMER");
+	public static final Role CUSTOMER_ROLE = Role.of("CUSTOMER");
 
 	private final CustomerRepository customers;
 	private final UserAccountManager userAccounts;
