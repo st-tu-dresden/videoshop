@@ -1,0 +1,10 @@
+ports:
+  - port: 8080
+    onOpen: open-preview
+tasks:
+  - init: ./mvnw spring-boot:run
+
+vscode:
+  extensions:
+    - Pivotal.vscode-spring-boot@1.23.0:1iLvjTfznJrV611qRUeOHg==
+    - vscjava.vscode-java-test@0.24.2:K9XH858+UGOKjfN3qRW15Q==
