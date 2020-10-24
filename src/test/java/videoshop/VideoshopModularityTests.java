@@ -15,11 +15,6 @@
  */
 package videoshop;
 
-import de.olivergierke.modulith.docs.Documenter;
-import de.olivergierke.modulith.docs.Documenter.Options;
-import de.olivergierke.moduliths.model.Module;
-import de.olivergierke.moduliths.model.Modules;
-
 import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -27,6 +22,10 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.moduliths.docs.Documenter;
+import org.moduliths.docs.Documenter.Options;
+import org.moduliths.model.Module;
+import org.moduliths.model.Modules;
 import org.springframework.util.StringUtils;
 
 /**

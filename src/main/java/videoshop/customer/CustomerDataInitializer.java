@@ -20,7 +20,7 @@ import java.util.List;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -43,22 +43,22 @@ class CustomerDataInitializer implements DataInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CustomerDataInitializer.class);
 
-	private final UserAccountManager userAccountManager;
+	private final UserAccountManagement userAccountManagement;
 	private final CustomerManagement customerManagement;
 
 	/**
-	 * Creates a new {@link CustomerDataInitializer} with the given {@link UserAccountManager} and
+	 * Creates a new {@link CustomerDataInitializer} with the given {@link UserAccountManagement} and
 	 * {@link CustomerRepository}.
 	 *
 	 * @param userAccountManager must not be {@literal null}.
 	 * @param customerManagement must not be {@literal null}.
 	 */
-	CustomerDataInitializer(UserAccountManager userAccountManager, CustomerManagement customerManagement) {
+	CustomerDataInitializer(UserAccountManagement userAccountManagement, CustomerManagement customerManagement) {
 
-		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
+		Assert.notNull(userAccountManagement, "UserAccountManagement must not be null!");
 		Assert.notNull(customerManagement, "CustomerRepository must not be null!");
 
-		this.userAccountManager = userAccountManager;
+		this.userAccountManagement = userAccountManagement;
 		this.customerManagement = customerManagement;
 	}
 
@@ -70,13 +70,13 @@ class CustomerDataInitializer implements DataInitializer {
 	public void initialize() {
 
 		// Skip creation if database was already populated
-		if (userAccountManager.findByUsername("boss").isPresent()) {
+		if (userAccountManagement.findByUsername("boss").isPresent()) {
 			return;
 		}
 
 		LOG.info("Creating default users and customers.");
 
-		userAccountManager.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
+		userAccountManagement.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
 
 		var password = "123";
 

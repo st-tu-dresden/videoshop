@@ -9,17 +9,21 @@
 	<parent>
 		<groupId>de.tudresden.inf.st.lab</groupId>
 		<artifactId>st-lab-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
+		<version>2.3.0.BUILD-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<properties>
 		<java.version>11</java.version>
-		<salespoint.version>7.2.1.RELEASE</salespoint.version>
-		<moduliths.version>1.0.0.RC3</moduliths.version>
+		<salespoint.version>7.3.0-SNAPSHOT</salespoint.version>
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -46,8 +50,8 @@
 	<repositories>
 
 		<repository>
-			<id>spring-libs-milestone</id>
-			<url>https://repo.spring.io/libs-milestone</url>
+			<id>spring-libs-release</id>
+			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 
 		<repository>

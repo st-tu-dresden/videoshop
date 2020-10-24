@@ -17,10 +17,9 @@ package videoshop.catalog;
 
 import static org.assertj.core.api.Assertions.*;
 
-import de.olivergierke.moduliths.test.ModuleTest;
-import de.olivergierke.moduliths.test.ModuleTest.BootstrapMode;
-
 import org.junit.jupiter.api.Test;
+import org.moduliths.test.ModuleTest;
+import org.moduliths.test.ModuleTest.BootstrapMode;
 import org.salespointframework.accountancy.Accountancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;

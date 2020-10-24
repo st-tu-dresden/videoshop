@@ -23,7 +23,7 @@ import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
-import org.salespointframework.order.OrderManager;
+import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
@@ -51,17 +51,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("cart")
 class OrderController {
 
-	private final OrderManager<Order> orderManager;
+	private final OrderManagement<Order> orderManagement;
 
 	/**
-	 * Creates a new {@link OrderController} with the given {@link OrderManager}.
+	 * Creates a new {@link OrderController} with the given {@link OrderManagement}.
 	 *
 	 * @param orderManager must not be {@literal null}.
 	 */
-	OrderController(OrderManager<Order> orderManager) {
+	OrderController(OrderManagement<Order> orderManagement) {
 
-		Assert.notNull(orderManager, "OrderManager must not be null!");
-		this.orderManager = orderManager;
+		Assert.notNull(orderManagement, "OrderManagement must not be null!");
+		this.orderManagement = orderManagement;
 	}
 
 	/**
@@ -134,8 +134,8 @@ class OrderController {
 
 			cart.addItemsTo(order);
 
-			orderManager.payOrder(order);
-			orderManager.completeOrder(order);
+			orderManagement.payOrder(order);
+			orderManagement.completeOrder(order);
 
 			cart.clear();
 
@@ -147,7 +147,7 @@ class OrderController {
 	@PreAuthorize("hasRole('BOSS')")
 	String orders(Model model) {
 
-		model.addAttribute("ordersCompleted", orderManager.findBy(OrderStatus.COMPLETED));
+		model.addAttribute("ordersCompleted", orderManagement.findBy(OrderStatus.COMPLETED));
 
 		return "orders";
 	}

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.UserAccountManagement;
 
 /**
  * Unit tests for {@link CustomerManagement}.
@@ -40,8 +40,9 @@ class CustomerManagementUnitTests {
 		when(repository.save(any())).then(i -> i.getArgument(0));
 
 		// … a UserAccountManager
-		UserAccountManager userAccountManager = mock(UserAccountManager.class);
-		when(userAccountManager.create(any(), any(), any())).thenReturn(new UserAccount());
+		UserAccountManagement userAccountManager = mock(UserAccountManagement.class);
+		UserAccount userAccount = mock(UserAccount.class);
+		when(userAccountManager.create(any(), any(), any())).thenReturn(userAccount);
 
 		// … and the CustomerManagement using both of them,
 		CustomerManagement customerManagement = new CustomerManagement(repository, userAccountManager);
