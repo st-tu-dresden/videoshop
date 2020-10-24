@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2019 the original author or authors.
+ * Copyright 2013-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import javax.persistence.OneToMany;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
-//(｡◕‿◕｡)
+// (｡◕‿◕｡)
 // Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
 // Diese erbt von Product um die Catalog-Klasse aus Salespoint nutzen zu können.
 // Ein Primärschlüssel ist nicht notwendig, da dieser schon in Product definiert ist, alle anderen
@@ -49,7 +49,7 @@ public class Disc extends Product {
 	@OneToMany(cascade = CascadeType.ALL) //
 	private List<Comment> comments = new ArrayList<>();
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "deprecation" })
 	private Disc() {}
 
 	public Disc(String name, String image, Money price, String genre, DiscType type) {

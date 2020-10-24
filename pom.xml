@@ -15,7 +15,6 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<salespoint.version>7.3.0-SNAPSHOT</salespoint.version>
 	</properties>
 
 	<dependencies>
