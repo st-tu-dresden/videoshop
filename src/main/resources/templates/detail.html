@@ -69,11 +69,11 @@
 
         <form class="ui reply form" role="form" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
             <div class="field">
-                <textarea id="comment" name="comment" cols="40" rows="5"></textarea><br/>
+                <textarea id="comment" name="comment" cols="40" rows="5" required="required"></textarea><br/>
             </div>
             <div class="field">
                 <label th:text="#{detail.comment.rating}" for="rating">Bewertung</label>
-                <input id="rating" name="rating" type="number" value="5" />
+                <input id="rating" name="rating" type="number" value="5" required="required" />
             </div>
             <button type="submit" class="ui labeled icon button">
                 <i class="icon edit"></i><span th:text="#{detail.comment.addComment}"> Kommentieren</span>
