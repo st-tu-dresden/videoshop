@@ -50,7 +50,7 @@ class CustomerDataInitializer implements DataInitializer {
 	 * Creates a new {@link CustomerDataInitializer} with the given {@link UserAccountManagement} and
 	 * {@link CustomerRepository}.
 	 *
-	 * @param userAccountManager must not be {@literal null}.
+	 * @param userAccountManagement must not be {@literal null}.
 	 * @param customerManagement must not be {@literal null}.
 	 */
 	CustomerDataInitializer(UserAccountManagement userAccountManagement, CustomerManagement customerManagement) {

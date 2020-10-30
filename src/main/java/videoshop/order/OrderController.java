@@ -56,7 +56,7 @@ class OrderController {
 	/**
 	 * Creates a new {@link OrderController} with the given {@link OrderManagement}.
 	 *
-	 * @param orderManager must not be {@literal null}.
+	 * @param orderManagement must not be {@literal null}.
 	 */
 	OrderController(OrderManagement<Order> orderManagement) {
 
