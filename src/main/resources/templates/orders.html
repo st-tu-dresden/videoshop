@@ -35,7 +35,7 @@
         <tr th:each="order : ${ordersCompleted} ">
             <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
             <td th:text="${order.userAccount.id}"></td>
-            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${order.total}"></td>
         </tr>
         </tbody>
     </table>
