@@ -1,7 +1,7 @@
 = VideoShop - A Salespoint example project
 :experimental:
 
-image:https://travis-ci.org/st-tu-dresden/videoshop.svg?branch=master["Build Status", link="https://travis-ci.org/st-tu-dresden/videoshop"]
+image:https://github.com/st-tu-dresden/videoshop/workflows/Build%20Maven%20artifacts/badge.svg["Build Status", link="https://github.com/st-tu-dresden/videoshop/actions"]
 
 Purpose of this sample project is to make students familiar with basic technologies they're going to use during the Software Engineering Lab at Technical University of Dresden.
 
