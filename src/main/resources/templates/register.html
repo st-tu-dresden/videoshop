@@ -22,7 +22,7 @@
     </header>
     <nav th:include="navigation :: navigation"></nav>
 
-    <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
+    <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${registrationForm}">
 
         <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
 
