@@ -67,13 +67,17 @@
             </div>
         </div>
 
-        <form class="ui reply form" role="form" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
-            <div class="field">
-                <textarea id="comment" name="comment" cols="40" rows="5" required="required"></textarea><br/>
+        <form class="ui reply form" role="form" th:object="${commentAndRating}" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
+			<p class="ui negative message" th:if="${#fields.hasErrors('*')}">
+			  Einige Angaben sind nicht korrekt.
+			</p>
+            <div class="field" th:classappend="${#fields.hasErrors('comment')} ? 'error' : ''">
+                <label th:text="#{detail.comment.addComment}" for="comment">Kommentieren</label>
+                <textarea id="comment" name="comment" th:field="*{comment}" cols="40" rows="5" required="required"></textarea><br/>
             </div>
-            <div class="field">
+            <div class="field" th:classappend="${#fields.hasErrors('rating')} ? 'error' : ''">
                 <label th:text="#{detail.comment.rating}" for="rating">Bewertung</label>
-                <input id="rating" name="rating" type="number" value="5" required="required" min="1" max="5" />
+                <input id="rating" name="rating" type="number" th:field="*{rating}" value="5" required="required" min="1" max="5" />
             </div>
             <button type="submit" class="ui labeled icon button">
                 <i class="icon edit"></i><span th:text="#{detail.comment.addComment}"> Kommentieren</span>

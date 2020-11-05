@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2017 the original author or authors.
+ * Copyright 2013-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,7 +74,7 @@ class CatalogController {
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
 	@GetMapping("/disc/{disc}")
-	String detail(@PathVariable Disc disc, Model model) {
+	String detail(@PathVariable Disc disc, Model model, CommentAndRating form) {
 
 		var quantity = inventory.findByProductIdentifier(disc.getId()) //
 				.map(InventoryItem::getQuantity) //
@@ -86,13 +87,13 @@ class CatalogController {
 		return "detail";
 	}
 
-	// (｡◕‿◕｡)
-	// Der Katalog bzw die Datenbank "weiß" nicht, dass die Disc mit einem Kommentar versehen wurde,
-	// deswegen wird die update-Methode aufgerufen
 	@PostMapping("/disc/{disc}/comments")
-	public String comment(@PathVariable Disc disc, @Valid CommentAndRating payload) {
+	public String comment(@PathVariable Disc disc, @Valid CommentAndRating form, Errors errors) {
+		if (errors.hasErrors()) {
+			return "detail";
+		}
 
-		disc.addComment(payload.toComment(businessTime.getTime()));
+		disc.addComment(form.toComment(businessTime.getTime()));
 		catalog.save(disc);
 
 		return "redirect:/disc/" + disc.getId();
@@ -109,7 +110,7 @@ class CatalogController {
 		String getComment();
 
 		@Range(min = 1, max = 5)
-		int getRating();
+		Integer getRating();
 
 		default Comment toComment(LocalDateTime time) {
 			return new Comment(getComment(), getRating(), time);
