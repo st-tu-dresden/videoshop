@@ -21,7 +21,11 @@ import java.util.Optional;
 
 import org.salespointframework.catalog.Product;
 import org.salespointframework.core.AbstractEntity;
+import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
@@ -35,6 +39,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -52,16 +57,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 class OrderController {
 
 	private final OrderManagement<Order> orderManagement;
+	private final UniqueInventory<UniqueInventoryItem> inventory;
 
 	/**
 	 * Creates a new {@link OrderController} with the given {@link OrderManagement}.
 	 *
 	 * @param orderManagement must not be {@literal null}.
 	 */
-	OrderController(OrderManagement<Order> orderManagement) {
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
 		this.orderManagement = orderManagement;
+		this.inventory = inventory;
 	}
 
 	/**
@@ -131,15 +138,33 @@ class OrderController {
 			// Mit completeOrder(…) wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
 			var order = new Order(account, Cash.CASH);
+			
+			boolean acceptable = true;
+			
+			
+			
+			for (CartItem item: cart) {
+				Quantity amount = inventory.findByProductIdentifier(item.getProduct().getId()) //
+						.map(InventoryItem::getQuantity) //
+						.orElse(Quantity.of(0));
+						
+				if (item.getQuantity().isGreaterThan(amount)) {
+					acceptable = false;
+				}
+			}
 
-			cart.addItemsTo(order);
+			if (acceptable == true) {
+				cart.addItemsTo(order);
 
-			orderManagement.payOrder(order);
-			orderManagement.completeOrder(order);
+				orderManagement.payOrder(order);
+				orderManagement.completeOrder(order);
 
-			cart.clear();
+				cart.clear();
 
-			return "redirect:/";
+				return "redirect:/";
+			} else {
+				return "redirect:/cart";
+			}
 		}).orElse("redirect:/cart");
 	}
 
@@ -151,4 +176,29 @@ class OrderController {
 
 		return "orders";
 	}
+
+	@GetMapping("/increment/{productName}")
+	String increment(@ModelAttribute Cart cart, @PathVariable String productName) {
+		for (CartItem item : cart) {
+			if (item.getProductName().equals(productName)) {
+				cart.addOrUpdateItem(item.getProduct(), 1);
+			}
+		}
+		return "redirect:/cart";
+	}
+	
+	@GetMapping("/decrement/{productName}")
+	String decrement(@ModelAttribute Cart cart, @PathVariable String productName) {
+		for (CartItem item : cart) {
+			if (item.getProductName().equals(productName) && item.getQuantity().isGreaterThan(Quantity.of(0))) {
+				cart.addOrUpdateItem(item.getProduct(), -1);
+			}
+			
+			if (item.getQuantity().isEqualTo(Quantity.of(1))) {
+				cart.removeItem(item.getId());
+			}
+		}
+		return "redirect:/cart";
+	}
+	
 }
