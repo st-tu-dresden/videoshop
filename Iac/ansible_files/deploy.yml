@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+  - Docker
+  - Java

@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+### PRODUCTION #######################################
+  videoshop:
+    image: incepti0n/videoshop:latest
+    container_name: web
+    ports:
+        - 8080:8080
+    networks:
+      - default
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /home/inception/videoshop/nginx:/etc/nginx/conf.d
+    depends_on:
+      - videoshop
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge

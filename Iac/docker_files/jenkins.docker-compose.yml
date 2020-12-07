@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  jenkins:
+    image: incepti0n/jenkins_for_videoshop:latest
+    container_name: jenkins
+    restart: unless-stopped
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      #- /home/inception/Jenkins-Docker/Jenkins_Data/jenkins_home:/var/jenkins_home
+      - /home/inception/docker_files:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
+    networks:
+      - default
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /home/inception/nginx-conf/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - jenkins
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
