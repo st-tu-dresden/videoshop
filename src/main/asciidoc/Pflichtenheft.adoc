@@ -118,6 +118,7 @@ Any data shall be stored persistently in a database and be accessible through th
 Here is every group or individual (real or juristical) listed, which/who has an impact on the requirements of the system.
 In the below table, these stakeholders are listed, a priority is assigned (in case requirements should clash this allows for easier decisions)
 and their high-level goals are described.
+
 The assigned priorities range from 1 (lowest priority) to 5 (highest priority).
 
 [options="header", cols="2, ^1, 4, 4"]
@@ -173,14 +174,14 @@ access our system or are accessed by it (not the case here).
 
 
 [[context_diagram]]
-image:diagrams/images/videoshop_context.svg[context diagram]
+image:diagrams/images/videoshop_a_context.svg[context diagram]
 
 === Top-level architecture
 
 Top-Level view of the system.
 
 [[TLA]]
-image:diagrams/images/videoshop_top_level.svg[top-level architecture]
+image:diagrams/images/videoshop_a_top_level.svg[top-level architecture]
 
 == Use-Cases
 
