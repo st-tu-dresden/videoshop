@@ -47,7 +47,7 @@ The provided document is only to be used for educational purposes. Contributions
 [small]_Note: You do not necessarily have to use the same table structure or formatting we used. Regardless of the presentation of the information, you should aim to provide all necessary details._
 
 [small]_Note: You can also split the chapters into single files and merge them (include::<filename>.adoc[]) into a single file to allow for a better distributed workflow._ +
-[small]_Mint there is a problem with this approach. GitHub is currently not supporting the include statement and will not render the file on the GitHub website. Please consult with your tutor before using this feature._
+[small]_Please mind that there is a problem with this approach. GitHub is currently not supporting the include statement and will not render the file on the GitHub website. Please consult with your tutor before using this feature._
 
 
 == Task Definition
