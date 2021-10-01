@@ -103,8 +103,8 @@ The software is supposed to run on a server and be available through the interne
 
 The system shall be accessible and visually optimized for the following browsers:
 
-- Mozilla Firefox, version 55.0.3+
-- Google Chrome, version 61.0.3163+
+- Mozilla Firefox, version 92.0.1+
+- Google Chrome, version 94.0.4606+
 
 The primary users of the software are students (customers), who supposedly know typical website navigation schemas, as well as administrators (Boss),
 who do not necessarily have a technical background.
