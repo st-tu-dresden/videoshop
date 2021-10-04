@@ -219,10 +219,10 @@ image::./images/Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%
 This section describes the use cases shown in the use case diagram in detail.
 
 [small]_Note: It is not yet necessary to fully include all special cases and variants (scenarios) of the use case (e.g. what happens if the stock is not sufficient), but the general purpose of the system should become visible._
-[small]_Complex use cases can be shown in detail with a sequence diagram._
 [small]_Typical CRUD (create, read, update, delete) use cases can be condensed into one use case._
 
 [small]_Note: We did not provide a sequence diagram for every use case._
+[small]_In general, especially complex use cases should be shown in detail with a sequence diagram. Simple use cases should be described in the text only._
 
 [small]_Note:See the following Link for examples of use case descriptions:_ +
 [small]_https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf_
