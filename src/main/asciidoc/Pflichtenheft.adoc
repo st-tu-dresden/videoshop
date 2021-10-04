@@ -55,7 +55,7 @@ The provided document is only to be used for educational purposes. Contributions
 [small]_Note: This task aims to provide an example for the {project_name}._
 [small]_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
 [small]_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
-[small]_Wherever information about the domain is provided, we used_ _italic_ _to show the representation in the domain model._
+[small]_Wherever information about the domain is provided, we used_ [small]_italic_ [small]_to show the representation in the domain model._
 
 The times when people went to buy their movies physically in the store are mostly over.
 As we, the {company_name}, have always had our little secondary business of selling movies to students, this change affects us as well.
@@ -194,11 +194,7 @@ These use cases describe what functionality the system has to provide (mostly) f
 Actors are users of the system or neighboring systems who/which access it.
 The following table summarizes all actors of the system and provides a description of the actor.
 Abstract actors (i.e. an actor which groups other actors, written in _italic_) are used to generalize and group.
-// Dokumentieren Sie die Akteure in einer Tabelle.
-// Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz.
-// Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
 
-// See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 [cols="1,4"]
 [[registered_user]]
@@ -228,8 +224,8 @@ This section describes the use cases shown in the use case diagram in detail.
 
 [small]_Note: We did not provide a sequence diagram for every use case._
 
-See: +
-https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf
+[small]_Note:See the following Link for examples of use case descriptions:_ +
+[small]_https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf_
 
 [cols="1h, 3"]
 [[UC0010]]
@@ -494,7 +490,8 @@ The table contains:
 [small]_Note: Functional requirements are used to depict what exactly has to be implemented (from the developer's point of view)._
 [small]_As use cases are mostly relatively close to the domain and mostly non-technical (can even be written by a non-techie client), it is necessary to specify and organize the information provided by the client._
 
-See (German): https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/Wissen_for_free/MASTeR_Broschuere_3-Auflage_interaktiv.pdf
+[small]_See (German):_ +
+[small]_https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/Wissen_for_free/MASTeR_Broschuere_3-Auflage_interaktiv.pdf_
 
 [options="header", cols="2h, 1, 3, 12"]
 |===
