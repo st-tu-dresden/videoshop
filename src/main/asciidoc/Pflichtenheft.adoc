@@ -758,19 +758,28 @@ Passwords of Users shall only be stored as hash-values to prevent theft.
 
 The following pictures show what the GUI of the system could look like.
 
-[small]_Note: We obviously used the finished product in this SRS._
-[small]_However, the prototype is supposed to be just that. It should give the client an understanding of how the contractor intends to implement and design the solution._
+[small]_Note: The prototype is supposed to give the client an understanding of how the contractor intends to implement and design the solution._
 [small]_The more details you can already finalize, the better, but generally a more abstract design is sufficient at this point (depending on the client and project, even a dialog roadmap is sufficient)._
 [small]_A better structure than in this example can also be benefitial in case the GUI or the navigation is more complex._
 [small]_It it not necessary to include every single desired page in the prototype, just the crucial functionalities/pages, as discussed with the client._
 
-[small]_Note: It is pretty astonishing how close the prototype in this example already is to the final design, isn't it? ;)_
+[small]_Note: For a simple prototype, you can use sketching or wireframing. The first few prototype images are using a simple design to show the client the structure and the general feeling of the GUI._
 
 [[home_image]]
 image::./images/gui/home.PNG[Landing page, 100%, 100%, pdfwidth=100%, title= "Landing page of {project_name}", align=center]
 
 [[register_image]]
 image::./images/gui/register.PNG[Registration page, 100%, 100%, pdfwidth=100%, title= "Registration page of {project_name}", align=center]
+
+[[home_customer_image]]
+image::./images/gui/home_customer.png[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
+
+[[cart_image]]
+image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
+
+[small]_Note: If you want to reuse your prototype later in the project, you can also create an HTML Prototyp. This type of prototype is used in the following images. Please be aware that this type of prototype will initially take more time than simple sketching or wireframing._
+
+[small]_Note: It is pretty astonishing how close the prototype in this example already is to the final design, isn't it? ;)_
 
 [[dvdcatalog_image]]
 image::./images/gui/dvdcatalog.PNG[DVD catalog, 100%, 100%, pdfwidth=100%, title= "DVD catalog of {project_name}", align=center]
@@ -780,12 +789,6 @@ image::./images/gui/bluraycatalog.PNG[Blu Ray catalog, 100%, 100%, pdfwidth=100%
 
 [[detail_image]]
 image::./images/gui/detail.PNG[Product detail page, 100%, 100%, pdfwidth=100%, title= "Product detail page of {project_name}", align=center]
-
-[[authenticated_home_hans_image]]
-image::./images/gui/authenticated_home_hans.PNG[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
-
-[[cart_image]]
-image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
 
 [[authenticated_home_boss_image]]
 image::./images/gui/authenticated_home_boss.PNG[Landing page for an authenticated boss, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated boss of {project_name}", align=center]
