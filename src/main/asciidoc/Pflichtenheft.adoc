@@ -804,11 +804,10 @@ image::./images/gui/customer_list.PNG[Customer list page, 100%, 100%, pdfwidth=1
 === Class Diagram
 The (analysis) class diagram is supposed to give an overview of the domain in the context of the system, which shall be developed in the scope of this project.
 
-[small]_Note: This domain model is relatively close to the actual implementation and therefore partially contains implementation knowledge._
-[small]_You can be more abstract with your diagram and focus more on actual concepts of the domain you are supposed to model._
+[small]_Note: The domain model is supposed to explain the concepts and terms of the domain and their relationships. Please, try to avoid technical terms or implementation knowledge._
 
 [[AKD]]
-image::./images/Class_diagram_(analysis).png[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
+image::./diagrams/images/videoshop_domain.svg[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
 
 === Classes and Enumerations
 The following table gives an overview of the classes/enumerations used in the domain model.
@@ -822,28 +821,27 @@ Therefore, this section is a subset of the <<Glossary, glossary>> and shall be u
 [[classes_enumerations]]
 |===
 |Class/Enumeration      |Description
+|Videoshop              | {Videoshop_Description}
+|User                   |General representation of a real person.
+|Registered User                   |General representation of a real person, which has a representation in the system. This representation is only created if a user registers with the system, and only used if he or she authenticates.
+|Customer                  | A user that is registered as a customer of the videoshop.
+|Boss                  | A user that is registered as an administrator/boss of the videoshop.
+|VideoCatalog                 | A video catalog is a group of discs with a common feature.
+|Disc                 |General product of the Videoshop.
 |BluRay                 |A BluRay is a possible type of a disc, used to group discs in the catalog.
-|Cart                   |A Cart is a temporary storage for discs a customer intends to buy. If a customer decides to buy his selected discs, an order is created.
-|CartItem               |A CartItem is is an element of a Cart and used to represent which discs a customer intends to buy with which quantity. +
-[small]_Note: See "Note" of OrderLine_
-|ChargeLine             |A ChargeLine is used to handle the payment process. For each OrderLine, there is a ChargeLine. An order is fully paid, if all of its ChargeLines are processed.
+|DVD                    |A DVD is a possible type of a disc, used to group discs in the catalog.
 |Comment                |A Comment is a textual remark/opinion of a user regarding a disc and includes a rating (see amazon comments/ratings).
-|Dvd                    |A Dvd is a possible type of a disc, used to group discs in the catalog.
-|Inventory              |An Inventory represents its real-world counterpart and is used to store items like discs. Can be seen like a warehouse in this project.
-|InventoryItem          |Stored discs in an inventory are represented by InventoryItems. Compared to the real world, an InventoryItem would be a box of _n_ discs of the same name. +
-[small]_Note: See "Note" of OrderLine_
-|Order                  |An order is used to represent what a customer of the shop intends to buy from the shop, at which price and with which payment method. An Order can have a varying status to symbolize the current step at which the order is processed.
-|OrderLine              |An OrderLine represents one kind of disc the customer has ordered, as well as in which quantity. +
-[small]_Note: If an order would directly consist out of discs, we would run into the problem that there is no quantity attribute to quantitize the amount of one disc the customer has ordered._
-|OrderManager           |An OrderManager represents a class that has knowledge of all existing orders and may handle compound functionality like the payment of an order.
-|OrderStatus            |This status represents the current processing step of the order it belongs to. +
+|Image                |A image is a digital picture that visually represent a disc.
+|Cart                   |A Cart is a temporary storage for discs a customer intends to buy. If a customer decides to buy his selected discs, an order is created.
+|Item              | Represents the quantity of a disc in the cart.
+|Order                  |An order is used to represent what a customer of the shop intends to buy from the shop. An Order can have a varying status to symbolize the current step at which the order is processed.
+|Status            |This status represents the current processing step of the order it belongs to. +
 _OPEN_: The Order has been created by the system, but not yet processed. +
 _PAID_: The customer has paid his order, the disc quantity still has to be reduced in the inventory to finalize the order. +
-_COMPLETED_: The order was been paid and shipped to the customer. +
+_COMPLETE_: The order was been paid and shipped to the customer. +
 _CANCELLED_: Fallback to allow to mark failed orders or other problems.
-|ROLE/Role              |A Role is used to distinguish authenticated users with different rights in the system. According to the role, different functionality becomes available.
-|User                   |General representation of a real person, which has a representation in the system. This representation is only created if a user registers with the system, and only used if he or she authenticates.
-|Videoshop              | {Videoshop_Description}
+|Inventory              |An Inventory represents a storage for the videoshop. Can be seen like a warehouse in this project.
+|InventoryItem              | Represents the quantity of a disc in the inventory.
 |===
 
 == Acceptance Testing
@@ -981,22 +979,18 @@ Please also consult the list of <<actors, actors>>, the list of <<Stakeholders, 
 |Administrator          | Synonym for a Boss
 |BluRay                 | {domain_ref}
 |Cart                   | {domain_ref}
-|CartItem               | {domain_ref}
-|ChargeLine             | {domain_ref}
 |Client                 | {Client_Description}
 |Comment                | {domain_ref}
 |Contractor             | Company responsible for implementing the software
-|Dvd                    | {domain_ref}
+|DVD                    | {domain_ref}
 |Inventory              | {domain_ref}
 |InventoryItem          | {domain_ref}
 |Login                  | Successful authentication after entering the correct (i.e. existing) credentials of a user
 |Order                  | {domain_ref}
-|OrderLine              | {domain_ref}
-|OrderManager           | {domain_ref}
-|OrderStatus            | {domain_ref}
+|OrderStatus            | Synonym for Status, {domain_ref}
 |Product                | Abstraction of a disc. Every disc is a product.
 |Register/Registration  | Process of creating a new account in the system (i.e. a new user representation)
-|ROLE/Role              | {domain_ref}
+|ROLE/Role              | Role of a User (Customer or Boss), {domain_ref}
 |Stock                  | Amount of discs of one type that are available
 |System                 | General term for the software system that has to be implemented during this project.
 |User                   | {domain_ref}
