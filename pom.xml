@@ -14,11 +14,12 @@
 	</parent>
 
 	<properties>
+		<salespoint.version>7.3.1</salespoint.version>
 		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
