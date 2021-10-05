@@ -5,12 +5,13 @@
 |Version | Processing Date   | Author
 |1.0	| October 9th, 2017 | Marc Kandler
 |2.0	| June 21st, 2019 | Daniel Schoenicke
+|2.5	| October 5th, 2021 | Markus Hamann
 |===
 
 :project_name: Videoshop
 = Pflichtenheft __{project_name}__
 :author: Marc Kandler
-:revnumber: 0.1
+:revnumber: 2.5
 :revdate: {docdatetime}
 :revremark: Work in Progress
 :doctype: book
@@ -416,7 +417,7 @@ image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add 
 |Functional Requirements    | <<F0101>>, <<F0220>>, <<F0230>>, <<F0240>>, <<F0241>>, <<F0242>>, <<F0243>>
 |===
 
-[small]_Note: Such a complex use case does definitely need to be shown in detail with a sequence diagram. We opted out of showing more diagrams to reduce the size of this document._
+[small]_Note: Such a complex use case as UC0220 does definitely need to be shown in detail with a sequence diagram. We opted out of showing more diagrams to reduce the size of this document._
 
 [cols="1h,3"]
 [[UC0300]]
@@ -776,6 +777,7 @@ image::./images/gui/home_customer.png[Landing page for an authenticated customer
 
 [[cart_image]]
 image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
+
 
 [small]_Note: If you want to reuse your prototype later in the project, you can also create an HTML Prototyp. This type of prototype is used in the following images. Please be aware that this type of prototype will initially take more time than simple sketching or wireframing._
 
