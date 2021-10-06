@@ -296,7 +296,7 @@ The Catalog must provide the possibility to distinguish between different types 
 |===
 
 [[sequence_diagram_view_catalog]]
-image::./images/Sequence_Diagrams/View_Catalog.png[Sequence diagram: View Catalog, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Catalog", align=center]
+image::./images/Sequence_Diagrams/View_Catalog.png[Sequence diagram: View Catalog, 50%, 50%, pdfwidth=50%, title= "Sequence diagram: View Catalog", align=center]
 
 [[UC0110]]
 [cols="1h, 3"]
@@ -376,7 +376,7 @@ _We decided to model it this way to show an example of the "include" in a use ca
 |===
 
 [[sequence_diagram_Add_Product_to_Cart]]
-image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Add Product to Cart", align=center]
+image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 60%, 60%, pdfwidth=50%, title= "Sequence diagram: Add Product to Cart", align=center]
 
 [cols="1h,3"]
 [[UC0210]]
