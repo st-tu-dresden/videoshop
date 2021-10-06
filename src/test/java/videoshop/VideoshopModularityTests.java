@@ -51,22 +51,20 @@ class VideoshopModularityTests {
 	@Test // #120
 	void writeComponentDiagrams() throws IOException {
 
-		Options options = Options.defaults() //
+		var options = Options.defaults() //
 				.withColorSelector(this::getColorForModule) //
 				.withDefaultDisplayName(this::getModuleDisplayName) //
 				.withTargetOnly(isSalespointModule);
 
-		Documenter documenter = new Documenter(modules);
+		var documenter = new Documenter(modules);
 		documenter.writeModulesAsPlantUml(options);
-		documenter.writeModuleCanvases(null);
-
-		modules.stream().filter(isSalespointModule.negate()) //
-				.forEach(it -> documenter.writeModuleAsPlantUml(it, options));
+		documenter.writeModuleCanvases();
+		documenter.writeIndividualModulesAsPlantUml(options);
 	}
 
 	private Optional<String> getColorForModule(Module module) {
 
-		String packageName = module.getBasePackage().getName();
+		var packageName = module.getBasePackage().getName();
 
 		if (packageName.startsWith("org.salespoint")) {
 			return Optional.of("#ddddff");
