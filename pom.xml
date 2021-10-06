@@ -14,7 +14,6 @@
 	</parent>
 
 	<properties>
-		<salespoint.version>7.3.1</salespoint.version>
 		<java.version>11</java.version>
 	</properties>
 
