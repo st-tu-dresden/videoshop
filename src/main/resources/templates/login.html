@@ -1,41 +1,26 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+    <head>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <form class="ui form" role="form" th:action="@{/login}" method="post">
 
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+                <div class="field">
+                    <label th:text="#{login.username}" for="username">Username</label>
+                    <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+                </div>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+                <div class="field">
+                    <label th:text="#{login.password}" for="password">Password</label>
+                    <input type="password" id="password" name="password"/> <br/>
+                </div>
 
-    <title th:text="#{home.title}">Videoshop</title>
-</head>
-<body>
-<div class="ui container">
-    <header>
-        <h1 th:text="#{home.title}">Videoshop</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
-
-    <form class="ui form" role="form" th:action="@{/login}" method="post">
-
-        <div class="field">
-            <label th:text="#{login.username}" for="username">Username</label>
-            <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
-        </div>
-
-        <div class="field">
-            <label th:text="#{login.password}" for="password">Password</label>
-            <input type="password" id="password" name="password"/> <br/>
-        </div>
-
-        <button type="submit" th:text="#{login.login}" class="ui button">Log in</button>
-    </form>
-</div>
-</body>
+                <button type="submit" th:text="#{login.login}" class="ui button">Log in</button>
+            </form>
+        </section>
+    </body>
 </html>
