@@ -16,6 +16,7 @@
 package videoshop;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -36,7 +37,10 @@ import org.springframework.util.StringUtils;
 @TestInstance(Lifecycle.PER_CLASS)
 class VideoshopModularityTests {
 
-	Modules modules = Modules.of(VideoShop.class);
+	private static final Class<?> APPLICATION_CLASS = VideoShop.class;
+	private static final String BASE_PACKAGE = APPLICATION_CLASS.getSimpleName().toLowerCase(Locale.ENGLISH);
+
+	Modules modules = Modules.of(APPLICATION_CLASS);
 	Predicate<Module> isSalespointModule = it -> it.getBasePackage().getName().startsWith("org.salespoint");
 
 	@Test
@@ -47,25 +51,24 @@ class VideoshopModularityTests {
 	@Test // #120
 	void writeComponentDiagrams() throws IOException {
 
-		Options options = Options.defaults() //
+		var options = Options.defaults() //
 				.withColorSelector(this::getColorForModule) //
 				.withDefaultDisplayName(this::getModuleDisplayName) //
 				.withTargetOnly(isSalespointModule);
 
-		Documenter documenter = new Documenter(modules);
+		var documenter = new Documenter(modules);
 		documenter.writeModulesAsPlantUml(options);
-
-		modules.stream().filter(isSalespointModule.negate()) //
-				.forEach(it -> documenter.writeModuleAsPlantUml(it, options));
+		documenter.writeModuleCanvases();
+		documenter.writeIndividualModulesAsPlantUml(options);
 	}
 
 	private Optional<String> getColorForModule(Module module) {
 
-		String packageName = module.getBasePackage().getName();
+		var packageName = module.getBasePackage().getName();
 
 		if (packageName.startsWith("org.salespoint")) {
 			return Optional.of("#ddddff");
-		} else if (packageName.startsWith("videoshop")) {
+		} else if (packageName.startsWith(BASE_PACKAGE)) {
 			return Optional.of("#ddffdd");
 		} else {
 			return Optional.empty();
@@ -74,8 +77,8 @@ class VideoshopModularityTests {
 
 	private String getModuleDisplayName(Module module) {
 
-		return module.getBasePackage().getName().startsWith("videoshop") //
-				? "Videoshop :: ".concat(StringUtils.capitalize(module.getDisplayName())) //
+		return module.getBasePackage().getName().startsWith(BASE_PACKAGE) //
+				? String.format("%s :: %s", APPLICATION_CLASS.getSimpleName(), StringUtils.capitalize(module.getDisplayName())) //
 				: module.getDisplayName();
 	}
 }

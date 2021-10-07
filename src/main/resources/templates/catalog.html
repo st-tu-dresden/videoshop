@@ -1,44 +1,33 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-
-    <title th:text="#{${title}}">Katalog</title>
-</head>
-<body>
-<div class="ui container">
-    <header>
-        <h1 th:text="#{${title}}">Katalog</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
-
-    <div class="ui link cards" th:remove="all-but-first">
-        <div class="ui card" th:each="disc : ${catalog}">
-            <div class="content">
-                <a class="header" th:href="@{/disc/{id}(id=${disc.id})}" th:text="${disc.name}">Last Action Hero</a>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=#{${title}})}">
+    <head>
+    </head>
+    <body>
+        <header>
+            <h1 th:text="#{${title}}">Katalog</h1>
+        </header>
+        <nav th:include="navigation :: navigation"></nav>
+        <section layout:fragment="content">
+        <div class="ui link cards" th:remove="all-but-first">
+            <div class="ui card" th:each="disc : ${catalog}">
+                <div class="content">
+                    <a class="header" th:href="@{/disc/{id}(id=${disc.id})}" th:text="${disc.name}">Last Action Hero</a>
+                </div>
+                <div class="image">
+                    <a th:href="@{/disc/{id}(id=${disc.id})}">
+                        <img class="thumbnail" th:src="@{/resources/img/cover/{image}.jpg(image=${disc.image})}"
+                             src="../static/resources/img/cover/lac.jpg"/>
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="description" th:text="${{disc.price}}">9.99 €</div>
+                </div>
+                <div class="extra content" th:text="${disc.genre}"> Action</div>
             </div>
-            <div class="image">
-                <a th:href="@{/disc/{id}(id=${disc.id})}">
-                    <img class="thumbnail" th:src="@{/resources/img/cover/{image}.jpg(image=${disc.image})}"
-                         src="../static/resources/img/cover/lac.jpg"/>
-                </a>
-            </div>
-            <div class="content">
-                <div class="description" th:text="${{disc.price}}">9.99 €</div>
-            </div>
-            <div class="extra content" th:text="${disc.genre}"> Action</div>
         </div>
-    </div>
-</div>
-</body>
+        </section>
+    </body>
 </html>

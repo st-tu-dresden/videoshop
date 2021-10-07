@@ -26,36 +26,36 @@ Note that the standard admin user is named `boss` and has the password `123`.
 
 ### Java 11
 
-https://adoptopenjdk.net/?variant=openjdk11&jvmVariant=hotspot[Download] the binaries, install. Make sure the console shows something like this:
+https://adoptium.net/?variant=openjdk11&jvmVariant=hotspot[Download] the binaries, install. Make sure the console shows something like this:
 
 [source, bash]
 ----
 $ java -version
-openjdk version "11.0.4" 2019-07-16
-OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.4+11)
-OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.4+11, mixed mode)
+openjdk version "11.0.12" 2021-07-20
+OpenJDK Runtime Environment Temurin-11.0.12+7 (build 11.0.12+7)
+OpenJDK 64-Bit Server VM Temurin-11.0.12+7 (build 11.0.12+7, mixed mode)
 ----
 
-Make sure that Maven picks up the same JDK version:
+Make sure that the wrapped Maven picks up the same JDK version and that the following command shows similar output:
 
 [source, bash]
 ----
 $ ./mvnw --version
-Apache Maven 3.6.1 (d66c9c0b3152b2e69ee9bac180bb8fcc8e6af555; 2019-04-04T21:00:29+02:00)
-Maven home: /Users/JavaJoe/.m2/wrapper/dists/apache-maven-3.6.1-bin/38pn40mp89t5c94bjdbeod370m/apache-maven-3.6.1
-Java version: 11.0.4, vendor: AdoptOpenJDK, runtime: /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+Apache Maven 3.8.3 (ff8e977a158738155dc465c6a97ffaf31982d739)
+Maven home: /Users/JavaJoe/.m2/wrapper/dists/apache-maven-3.8.3-bin/5a6n1u8or3307vo2u2jgmkhm0t/apache-maven-3.8.3
+Java version: 11.0.12, vendor: Eclipse Adoptium, runtime: /Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
 Default locale: de_DE, platform encoding: UTF-8
-OS name: "mac os x", version: "10.14.6", arch: "x86_64", family: "mac"
+OS name: "mac os x", version: "11.6", arch: "x86_64", family: "mac"
 ----
 
 ### Git
 
-http://git-scm.com/download[Download] the binaries, run the installer. Verify the command line shows something like this after install:
+https://git-scm.com/download[Download] the binaries, run the installer. Verify the command line shows something like this after install:
 
 [source, bash]
 ----
 $ git --version
-git version 2.23.0
+git version 2.33.0
 ----
 
 ## IDE Setup
@@ -72,17 +72,12 @@ In the Console view you might wanna click the btn:[Open Console] button and sele
 
 Grab the latest https://www.jetbrains.com/idea/download/[IntelliJ IDEA IDE] (both Community Edition and Ultimate Edition will work), install it according to the instructions on their website and run it.
 
-From the Welcome Screen, select btn:[Import Project]. Otherwise, if you've already opened another project, you'll need to select menu:File[New > Project from existing sources].
-Now, navigate to the folder you checked the project out into, select the `pom.xml` file and hit btn:[Open].
-
-In the opened wizard, additionally select the checkboxes btn:[Import Maven projects automatically], as well as the btn:[Sources] and btn:[Documentation] checkboxes next to btn:[Automically download] and hit btn:[Next].
-On the next page, do not select any profile and hit btn:[Next]. Now, ensure the Maven project is selected for import and hit btn:[Next].
-On the following page, ensure you've selected a 1.8 or higher JDK and hit btn:[Next].
-On the final page, leave the suggested project name as is and hit btn:[Finish].
+From the Welcome Screen, select btn:[Open]. Otherwise, if you've already opened another project, you'll need to select menu:File[Open…].
+Now, navigate to the folder you checked the project out into (it should contain `pom.xml`), select it and hit btn:[Open].
+When asked whether to trust and open the Maven project, proceed with btn:[Trust Project].
 
 Now you have to wait a bit while IntelliJ and Maven work on importing the project, which includes downloading all required dependencies from the internet.
 All IDE activities are displayed in the status bar.
-
 
 ## Technology stack
 

@@ -1,49 +1,37 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+    </head>
+    <body>
+        <nav th:fragment="navigation">
+            <div class="ui menu">
+                <a class="item" href="register.html" th:href="@{/register}"
+                   sec:authorize="!hasAnyRole('BOSS','CUSTOMER')"
+                   th:text="#{nav.register}">Registrierung</a>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+                <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('BOSS')"
+                   th:text="#{nav.orders}">Bestellungen</a>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-</head>
-<body>
-<nav th:fragment="navigation">
-    <div class="ui menu">
+                <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('BOSS')"
+                   th:text="#{nav.stock}">Lager</a>
 
-        <a class="item" href="register.html" th:href="@{/register}"
-           sec:authorize="!hasAnyRole('BOSS','CUSTOMER')"
-           th:text="#{nav.register}">Registrierung</a>
+                <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('BOSS')"
+                   th:text="#{nav.customers}">Kundenliste</a>
 
-        <a class="item" href="orders.html" th:href="@{/orders}" sec:authorize="hasRole('BOSS')"
-           th:text="#{nav.orders}">Bestellungen</a>
+                <a class="item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>
+                <a class="item" href="catalog.html" th:href="@{/blurays}" th:text="#{nav.blurayCatalog}">Blu-ray
+                    Catalog</a>
+                <a class="item" href="cart.html" th:href="@{/cart}" th:text="${session.cart} == null or ${session.cart.isEmpty()} ? #{nav.cart} : #{nav.cart} + ' (' + ${session.cart.stream().count()} + ')'">Warenkorb</a>
 
-        <a class="item" href="stock.html" th:href="@{/stock}" sec:authorize="hasRole('BOSS')"
-           th:text="#{nav.stock}">Lager</a>
-
-
-        <a class="item" href="customers.html" th:href="@{/customers}" sec:authorize="hasRole('BOSS')"
-           th:text="#{nav.customers}">Kundenliste</a>
-
-        <a class="item" href="catalog.html" th:href="@{/dvds}" th:text="#{nav.dvdCatalog}">DVD Catalog</a>
-        <a class="item" href="catalog.html" th:href="@{/blurays}" th:text="#{nav.blurayCatalog}">Blu-ray
-            Catalog</a>
-        <a class="item" href="cart.html" th:href="@{/cart}" th:text="#{nav.cart}">Warenkorb</a>
-
-        <div class="right menu">
-            <a class="item" th:href="@{/login}" sec:authorize="!isAuthenticated()" th:text="#{nav.login}">Login</a>
-            <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <button type="submit" class="ui button" th:text="#{nav.logout}">Logout</button>
-            </form>
-        </div>
-    </div>
-    <br/>
-</nav>
-</body>
+                <div class="right menu">
+                    <a class="item" th:href="@{/login}" sec:authorize="!isAuthenticated()" th:text="#{nav.login}">Login</a>
+                    <form class="item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                        <button type="submit" class="ui button" th:text="#{nav.logout}">Logout</button>
+                    </form>
+                </div>
+            </div>
+            <br/>
+        </nav>
+    </body>
 </html>

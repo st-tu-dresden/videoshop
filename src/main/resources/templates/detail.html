@@ -1,89 +1,75 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-
-    <title th:text="${disc.name}">Last Action Hero</title>
-</head>
-<body>
-<div class="ui container">
-    <header>
-        <h1 th:text="${disc.name}">Last Action Hero</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
-
-    <div class="ui items">
-        <div class="item">
-            <div class="image">
-                <img th:src="@{/resources/img/cover/{name}.jpg(name=${disc.image})}"
-                     src="../static/resources/img/cover/lac.jpg"/>
-            </div>
-            <div class="content">
-                <a class="header" th:text="${disc.name}">Last Action Hero</a>
-                <div class="meta">
-                    <span th:text="${disc.genre}">Action</span>
-                    <span th:text="${{disc.price}}">9.99 €</span>
-                </div>
-                <div class="description">
-                    <p>Vorrat:</p>
-                    <p th:text="${quantity}">10</p><br/>
-                    <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
-                        <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
-                        <div class="field">
-                            <label for="number">Anzahl</label>
-                            <input id="number" type="number" name="number" min="1" max="5" step="1" value="1"/><br/>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=${disc.name})}">
+    <head>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="ui items">
+                <div class="item">
+                    <div class="image">
+                        <img th:src="@{/resources/img/cover/{name}.jpg(name=${disc.image})}"
+                             src="../static/resources/img/cover/lac.jpg"/>
+                    </div>
+                    <div class="content">
+                        <a class="header" th:text="${disc.name}">Last Action Hero</a>
+                        <div class="meta">
+                            <span th:text="${disc.genre}">Action</span>
+                            <span th:text="${{disc.price}}">9.99 €</span>
                         </div>
-                        <button type="submit" class="ui labeled icon button">
-                            <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="ui comments">
-        <h3 class="ui dividing header" th:text="#{detail.comment.comments}">Kommentare</h3>
-
-        <div class="comment" th:each="comment : ${disc.comments}">
-            <div class="content">
-                <div class="metadata">
-                    <div class="rating">
-                        <i class="star icon"></i>
-                        <span th:text="${comment.rating}">5</span>
+                        <div class="description">
+                            <p>Vorrat:</p>
+                            <p th:text="${quantity}">10</p><br/>
+                            <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
+                                <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
+                                <div class="field">
+                                    <label for="number">Anzahl</label>
+                                    <input id="number" type="number" name="number" min="1" max="5" step="1" value="1"/><br/>
+                                </div>
+                                <button type="submit" class="ui labeled icon button">
+                                    <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="text" th:text="${comment.text}">Guter Film vong Inhalt her</div>
             </div>
-        </div>
 
-        <form class="ui reply form" role="form" th:object="${commentAndRating}" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
-			<p class="ui negative message" th:if="${#fields.hasErrors('*')}">
-			  Einige Angaben sind nicht korrekt.
-			</p>
-            <div class="field" th:classappend="${#fields.hasErrors('comment')} ? 'error' : ''">
-                <label th:text="#{detail.comment.addComment}" for="comment">Kommentieren</label>
-                <textarea id="comment" name="comment" th:field="*{comment}" cols="40" rows="5" required="required"></textarea><br/>
+            <div class="ui comments">
+                <h3 class="ui dividing header" th:text="#{detail.comment.comments}">Kommentare</h3>
+
+                <div class="comment" th:each="comment : ${disc.comments}">
+                    <div class="content">
+                        <div class="metadata">
+                            <div class="rating">
+                                <i class="star icon"></i>
+                                <span th:text="${comment.rating}">5</span>
+                            </div>
+                        </div>
+                        <div class="text" th:text="${comment.text}">Guter Film vong Inhalt her</div>
+                    </div>
+                </div>
+
+                <form class="ui reply form" role="form" th:object="${commentAndRating}" th:action="@{/disc/{id}/comments(id=${disc.id})}" method="post">
+                    <p class="ui negative message" th:if="${#fields.hasErrors('*')}">
+                        Einige Angaben sind nicht korrekt.
+                    </p>
+                    <div class="field" th:classappend="${#fields.hasErrors('comment')} ? 'error' : ''">
+                        <label th:text="#{detail.comment.addComment}" for="comment">Kommentieren</label>
+                        <textarea id="comment" name="comment" th:field="*{comment}" cols="40" rows="5" required="required"></textarea><br/>
+                    </div>
+                    <div class="field" th:classappend="${#fields.hasErrors('rating')} ? 'error' : ''">
+                        <label th:text="#{detail.comment.rating}" for="rating">Bewertung</label>
+                        <input id="rating" name="rating" type="number" th:field="*{rating}" value="5" required="required" min="1" max="5" />
+                    </div>
+                    <button type="submit" class="ui labeled icon button">
+                        <i class="icon edit"></i><span th:text="#{detail.comment.addComment}"> Kommentieren</span>
+                    </button>
+                </form>
             </div>
-            <div class="field" th:classappend="${#fields.hasErrors('rating')} ? 'error' : ''">
-                <label th:text="#{detail.comment.rating}" for="rating">Bewertung</label>
-                <input id="rating" name="rating" type="number" th:field="*{rating}" value="5" required="required" min="1" max="5" />
-            </div>
-            <button type="submit" class="ui labeled icon button">
-                <i class="icon edit"></i><span th:text="#{detail.comment.addComment}"> Kommentieren</span>
-            </button>
-        </form>
-    </div>
-</div>
-</body>
+        </section>
+    </body>
 </html>

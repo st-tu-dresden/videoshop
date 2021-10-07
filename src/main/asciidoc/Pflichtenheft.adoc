@@ -5,12 +5,13 @@
 |Version | Processing Date   | Author
 |1.0	| October 9th, 2017 | Marc Kandler
 |2.0	| June 21st, 2019 | Daniel Schoenicke
+|2.5	| October 5th, 2021 | Markus Hamann
 |===
 
 :project_name: Videoshop
 = Pflichtenheft __{project_name}__
 :author: Marc Kandler
-:revnumber: 0.1
+:revnumber: 2.5
 :revdate: {docdatetime}
 :revremark: Work in Progress
 :doctype: book
@@ -36,25 +37,26 @@ this goal should be *verifiable*. It is going to be used and consulted throughou
 In conjunction with the above, it is desired to be simple to change and evolve, even though changes should be kept to a minimum after the stakeholders once agreed on the content.
 However, as requirements and circumstances constantly change during a project, adjustments are to be expected and have to be documented.
 
-We aim to provide an example of a SRS, which can be used as a reference during the course "Softwaretechnolgie - Projekt" at Technische Universität Dresden (TU Dresden).
+We aim to provide an example of a SRS, which can be used as a reference during the course "Softwaretechnologie-Projekt" at Technische Universität Dresden (TU Dresden).
 This SRS is not complete and in larger projects many more aspects can and should be considered.
 The provided document is only to be used for educational purposes. Contributions are welcome.
 
-_Note: We included several remarks in this document, just like the one you are reading right now, to provide you some additional information._
-_These remarks would obviously not be in a real SRS, but are used here for educational purposes._
-_Said remarks are labeled with the word "Note" and are written in italic._
+[small]_Note: We included several remarks in this document, just like the one you are reading right now, to provide you some additional information._
+[small]_These remarks would obviously not be in a real SRS, but are used here for educational purposes._
+[small]_Said remarks are labeled with the word "Note" and are written in italic._
 
-_Note: You do not necessarily have to use the same table structure or formatting we used. Regardless of the presentation of the information, you should aim to provide all necessary details._
+[small]_Note: You do not necessarily have to use the same table structure or formatting we used. Regardless of the presentation of the information, you should aim to provide all necessary details._
 
-_Note: You can also split the chapters into single files and merge them (include::<filename>.adoc[]) into a single file to allow for a better distributed workflow._
+[small]_Note: You can also split the chapters into single files and merge them (`include::<filename>.adoc[]`) into a single file to allow for a better distributed workflow._ +
+[small]_Please mind that there is a problem with this approach. GitHub is currently not supporting the `include` statement and will not render the file on the GitHub website. Please consult with your tutor before using this feature._
 
 
 == Task Definition
 
-_Note: This task aims to provide an example for the {project_name}._
-_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
-_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
-_Wherever information about the domain is provided, we used_ _italic_ _to show the representation in the domain model._
+[small]_Note: This task aims to provide an example for the {project_name}._
+[small]_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
+[small]_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
+[small]_Wherever information about the domain is provided, we used_ [small]_italic_ [small]_to show the representation in the domain model._
 
 The times when people went to buy their movies physically in the store are mostly over.
 As we, the {company_name}, have always had our little secondary business of selling movies to students, this change affects us as well.
@@ -103,8 +105,8 @@ The software is supposed to run on a server and be available through the interne
 
 The system shall be accessible and visually optimized for the following browsers:
 
-- Mozilla Firefox, version 55.0.3+
-- Google Chrome, version 61.0.3163+
+- Mozilla Firefox, version 92.0.1+
+- Google Chrome, version 94.0.4606+
 
 The primary users of the software are students (customers), who supposedly know typical website navigation schemas, as well as administrators (Boss),
 who do not necessarily have a technical background.
@@ -118,6 +120,7 @@ Any data shall be stored persistently in a database and be accessible through th
 Here is every group or individual (real or juristical) listed, which/who has an impact on the requirements of the system.
 In the below table, these stakeholders are listed, a priority is assigned (in case requirements should clash this allows for easier decisions)
 and their high-level goals are described.
+
 The assigned priorities range from 1 (lowest priority) to 5 (highest priority).
 
 [options="header", cols="2, ^1, 4, 4"]
@@ -173,14 +176,14 @@ access our system or are accessed by it (not the case here).
 
 
 [[context_diagram]]
-image:diagrams/images/videoshop_context.svg[context diagram]
+image:diagrams/images/videoshop_a_context.svg[context diagram]
 
 === Top-level architecture
 
 Top-Level view of the system.
 
 [[TLA]]
-image:diagrams/images/videoshop_top_level.svg[top-level architecture]
+image:diagrams/images/videoshop_a_top_level.svg[top-level architecture]
 
 == Use-Cases
 
@@ -192,11 +195,7 @@ These use cases describe what functionality the system has to provide (mostly) f
 Actors are users of the system or neighboring systems who/which access it.
 The following table summarizes all actors of the system and provides a description of the actor.
 Abstract actors (i.e. an actor which groups other actors, written in _italic_) are used to generalize and group.
-// Dokumentieren Sie die Akteure in einer Tabelle.
-// Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz.
-// Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
 
-// See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 [cols="1,4"]
 [[registered_user]]
@@ -219,14 +218,15 @@ image::./images/Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%
 === Use-Case Descriptions
 
 This section describes the use cases shown in the use case diagram in detail.
-_Note: It is not yet necessary to fully include all special cases and variants (scenarios) of the use case (e.g. what happens if the stock is not sufficient), but the general purpose of the system should become visible._
-_Complex use cases can be shown in detail with a sequence diagram._
-_Typical CRUD (create, read, update, delete) use cases can be condensed into one use case._
 
-_Note: We did not provide a sequence diagram for every use case._
+[small]_Note: It is not yet necessary to fully include all special cases and variants (scenarios) of the use case (e.g. what happens if the stock is not sufficient), but the general purpose of the system should become visible._
+[small]_Typical CRUD (create, read, update, delete) use cases can be condensed into one use case._
 
-See: +
-https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf
+[small]_Note: We did not provide a sequence diagram for every use case._
+[small]_In general, especially complex use cases should be shown in detail with a sequence diagram. Simple use cases should be described in the text only._
+
+[small]_Note: See the following Link for examples of use case descriptions:_ +
+[small]_https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/UML2_glasklar/4._Auflage/12-1_Schablone_fuer__Use-Case-Beschreibung.pdf_
 
 [cols="1h, 3"]
 [[UC0010]]
@@ -296,7 +296,7 @@ The Catalog must provide the possibility to distinguish between different types 
 |===
 
 [[sequence_diagram_view_catalog]]
-image::./images/Sequence_Diagrams/View_Catalog.png[Sequence diagram: View Catalog, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Catalog", align=center]
+image::./images/Sequence_Diagrams/View_Catalog.png[Sequence diagram: View Catalog, 50%, 50%, pdfwidth=50%, title= "Sequence diagram: View Catalog", align=center]
 
 [[UC0110]]
 [cols="1h, 3"]
@@ -376,7 +376,7 @@ _We decided to model it this way to show an example of the "include" in a use ca
 |===
 
 [[sequence_diagram_Add_Product_to_Cart]]
-image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Add Product to Cart", align=center]
+image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add Product to Cart, 60%, 60%, pdfwidth=50%, title= "Sequence diagram: Add Product to Cart", align=center]
 
 [cols="1h,3"]
 [[UC0210]]
@@ -417,8 +417,7 @@ image::./images/Sequence_Diagrams/Add_Product_to_Cart.png[Sequence diagram: Add 
 |Functional Requirements    | <<F0101>>, <<F0220>>, <<F0230>>, <<F0240>>, <<F0241>>, <<F0242>>, <<F0243>>
 |===
 
-[[sequence_diagram_Buy_Products_in_Cart]]
-image::./images/Sequence_Diagrams/Buy_Products_in_Cart.png[<Image removed for educational purposes. Such a complex use case does definitely need to be shown in detail with a sequence diagram.>, 100%, 100%, pdfwidth=100%, title= "<Image removed for educational purposes.>", align=center]
+[small]_Note: Such a complex use case as UC0220 does definitely need to be shown in detail with a sequence diagram. We opted out of showing more diagrams to reduce the size of this document._
 
 [cols="1h,3"]
 [[UC0300]]
@@ -452,8 +451,8 @@ image::./images/Sequence_Diagrams/Buy_Products_in_Cart.png[<Image removed for ed
 |Functional Requirements    | <<F0310>>
 |===
 
-[[sequence_diagram_View_Orders]]
-image::./images/Sequence_Diagrams/View_Orders.png[Sequence diagram: View Orders, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Orders", align=center]
+//[[sequence_diagram_View_Orders]]
+//image::./images/Sequence_Diagrams/View_Orders.png[Sequence diagram: View Orders, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: View Orders", align=center]
 
 
 [cols="1h,3"]
@@ -485,13 +484,14 @@ The table contains:
   - A short name of the requirement
   - The description of the requirement
 
-_Note: A functional requirement defines a function of the system, which shall be implemented to satisfy the customer needs (e.g. as shown through use cases)._
-_Ideally, it contains a set of inputs for the functionality in question, the intended behavior, and the result of it._
+[small]_Note: A functional requirement defines a function of the system, which shall be implemented to satisfy the customer needs (e.g. as shown through use cases)._
+[small]_Ideally, it contains a set of inputs for the functionality in question, the intended behavior, and the result of it._
 
-_Note: Functional requirements are used to depict what exactly has to be implemented (from the developer's point of view)._
-_As use cases are mostly relatively close to the domain and mostly non-technical (can even be written by a non-techie client), it is necessary to specify and organize the information provided by the client._
+[small]_Note: Functional requirements are used to depict what exactly has to be implemented (from the developer's point of view)._
+[small]_As use cases are mostly relatively close to the domain and mostly non-technical (can even be written by a non-techie client), it is necessary to specify and organize the information provided by the client._
 
-See (German): https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/Wissen_for_free/MASTeR_Broschuere_3-Auflage_interaktiv.pdf
+[small]_See (German):_ +
+[small]_https://www.sophist.de/fileadmin/user_upload/Bilder_zu_Seiten/Publikationen/Wissen_for_free/MASTeR_Broschuere_3-Auflage_interaktiv.pdf_
 
 [options="header", cols="2h, 1, 3, 12"]
 |===
@@ -590,8 +590,8 @@ A comment consists of:
 - A textual opinion regarding the disc
 - A numerical rating for the disc (low = bad rating, high = good rating)
 
-_Note: As we have explained in the respective use case, the comment functionality essentially includes the rating._
-_While the client might have described these functions as two potentially different use cases, further domain analysis has led to the conclusion, that we can combine them, as happened with this functional requirement_
+[small]_Note: As we have explained in the respective use case, the comment functionality essentially includes the rating._
+[small]_While the client might have described these functions as two potentially different use cases, further domain analysis has led to the conclusion, that we can combine them, as happened with this functional requirement_
 
 |[[F0200]]<<F0200>>
 |v0.1
@@ -705,7 +705,7 @@ The following information shall be shown for each product:
 This section is going to give an overview of non-functional (NF) requirements of the project {project_name}.
 These requirements describe how the system works and within which boundaries it is supposed to perform.
 
-_Note: We only picked two small examples of requirements to show which aspects could be considered in this chapter._
+[small]_Note: We only picked two small examples of requirements to show which aspects could be considered in this chapter._
 
 
 === Quality Demands
@@ -714,9 +714,9 @@ The following table shows what quality demands have to be fulfilled to which ext
 The first column lists the quality demands, while in the following columns an "x" is used to mark the priority.
 The assigned priority has to be considered in the formulation of the concrete non-functional requirements.
 
-_Note: This is only an abstract example which is derived from the current version of the Videoshop._
-_The priority may vary drastically depending on the project, and even many more aspects could be considered._
-_Additionally, you should provide explanations for the demands, as to avoid any misunderstandings._
+[small]_Note: This is only an abstract example which is derived from the current version of the Videoshop._
+[small]_The priority may vary drastically depending on the project, and even many more aspects could be considered._
+[small]_Additionally, you should provide explanations for the demands, as to avoid any misunderstandings._
 
 
 1 = Not Important ..
@@ -729,7 +729,7 @@ _Additionally, you should provide explanations for the demands, as to avoid any 
 |Security                 |   |   |   | x |
 |===
 
-_Note: It might be necessary to provide a description of the above quality demands, as they are mostly ambiguous or the meaning is unclear._
+[small]_Note: It might be necessary to provide a description of the above quality demands, as they are mostly ambiguous or the meaning is unclear._
 
 === Concrete NF Requirements
 :desired-uptime: 99,5%
@@ -758,19 +758,30 @@ Passwords of Users shall only be stored as hash-values to prevent theft.
 == GUI Prototype
 
 The following pictures show what the GUI of the system could look like.
-_Note: We obviously used the finished product in this SRS._
-_However, the prototype is supposed to be just that. It should give the client an understanding of how the contractor intends to implement and design the solution._
-_The more details you can already finalize, the better, but generally a more abstract design is sufficient at this point (depending on the client and project, even a dialog roadmap is sufficient)._
-_A better structure than in this example can also be benefitial in case the GUI or the navigation is more complex._
-_It it not necessary to include every single desired page in the prototype, just the crucial functionalities/pages, as discussed with the client._
 
-_Note: It is pretty astonishing how close the prototype in this example already is to the final design, isn't it? ;)_
+[small]_Note: The prototype is supposed to give the client an understanding of how the contractor intends to implement and design the solution._
+[small]_The more details you can already finalize, the better, but generally a more abstract design is sufficient at this point (depending on the client and project, even a dialog roadmap is sufficient)._
+[small]_A better structure than in this example can also be benefitial in case the GUI or the navigation is more complex._
+[small]_It it not necessary to include every single desired page in the prototype, just the crucial functionalities/pages, as discussed with the client._
+
+[small]_Note: For a simple prototype, you can use sketching or wireframing. The first few prototype images are using a simple design to show the client the structure and the general feeling of the GUI._
 
 [[home_image]]
 image::./images/gui/home.PNG[Landing page, 100%, 100%, pdfwidth=100%, title= "Landing page of {project_name}", align=center]
 
 [[register_image]]
 image::./images/gui/register.PNG[Registration page, 100%, 100%, pdfwidth=100%, title= "Registration page of {project_name}", align=center]
+
+[[home_customer_image]]
+image::./images/gui/home_customer.png[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
+
+[[cart_image]]
+image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
+
+
+[small]_Note: If you want to reuse your prototype later in the project, you can also create an HTML Prototyp. This type of prototype is used in the following images. Please be aware that this type of prototype will initially take more time than simple sketching or wireframing._
+
+[small]_Note: It is pretty astonishing how close the prototype in this example already is to the final design, isn't it? ;)_
 
 [[dvdcatalog_image]]
 image::./images/gui/dvdcatalog.PNG[DVD catalog, 100%, 100%, pdfwidth=100%, title= "DVD catalog of {project_name}", align=center]
@@ -780,12 +791,6 @@ image::./images/gui/bluraycatalog.PNG[Blu Ray catalog, 100%, 100%, pdfwidth=100%
 
 [[detail_image]]
 image::./images/gui/detail.PNG[Product detail page, 100%, 100%, pdfwidth=100%, title= "Product detail page of {project_name}", align=center]
-
-[[authenticated_home_hans_image]]
-image::./images/gui/authenticated_home_hans.PNG[Landing page for an authenticated customer, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated customer of {project_name}", align=center]
-
-[[cart_image]]
-image::./images/gui/cart.PNG[Cart page, 100%, 100%, pdfwidth=100%, title= "Cart overview page for a customer of {project_name}", align=center]
 
 [[authenticated_home_boss_image]]
 image::./images/gui/authenticated_home_boss.PNG[Landing page for an authenticated boss, 100%, 100%, pdfwidth=100%, title= "Landing page for an authenticated boss of {project_name}", align=center]
@@ -804,11 +809,10 @@ image::./images/gui/customer_list.PNG[Customer list page, 100%, 100%, pdfwidth=1
 === Class Diagram
 The (analysis) class diagram is supposed to give an overview of the domain in the context of the system, which shall be developed in the scope of this project.
 
-_Note: This domain model is relatively close to the actual implementation and therefore partially contains implementation knowledge._
-_You can be more abstract with your diagram and focus more on actual concepts of the domain you are supposed to model._
+[small]_Note: The domain model is supposed to explain the concepts and terms of the domain and their relationships. Please, try to avoid technical terms or implementation knowledge._
 
 [[AKD]]
-image::./images/Class_diagram_(analysis).png[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
+image::./diagrams/images/videoshop_domain.svg[Class diagram, 100%, 100%, pdfwidth=100%, title= "Domain model of {project_name}", align=center]
 
 === Classes and Enumerations
 The following table gives an overview of the classes/enumerations used in the domain model.
@@ -822,28 +826,27 @@ Therefore, this section is a subset of the <<Glossary, glossary>> and shall be u
 [[classes_enumerations]]
 |===
 |Class/Enumeration      |Description
+|Videoshop              | {Videoshop_Description}
+|User                   |General representation of a real person.
+|Registered User                   |General representation of a real person, which has a representation in the system. This representation is only created if a user registers with the system, and only used if he or she authenticates.
+|Customer                  | A user that is registered as a customer of the videoshop.
+|Boss                  | A user that is registered as an administrator/boss of the videoshop.
+|VideoCatalog                 | A video catalog is a group of discs with a common feature.
+|Disc                 |General product of the Videoshop.
 |BluRay                 |A BluRay is a possible type of a disc, used to group discs in the catalog.
-|Cart                   |A Cart is a temporary storage for discs a customer intends to buy. If a customer decides to buy his selected discs, an order is created.
-|CartItem               |A CartItem is is an element of a Cart and used to represent which discs a customer intends to buy with which quantity.
-_Note: See "Note" of OrderLine_
-|ChargeLine             |A ChargeLine is used to handle the payment process. For each OrderLine, there is a ChargeLine. An order is fully paid, if all of its ChargeLines are processed.
+|DVD                    |A DVD is a possible type of a disc, used to group discs in the catalog.
 |Comment                |A Comment is a textual remark/opinion of a user regarding a disc and includes a rating (see amazon comments/ratings).
-|Dvd                    |A Dvd is a possible type of a disc, used to group discs in the catalog.
-|Inventory              |An Inventory represents its real-world counterpart and is used to store items like discs. Can be seen like a warehouse in this project.
-|InventoryItem          |Stored discs in an inventory are represented by InventoryItems. Compared to the real world, an InventoryItem would be a box of _n_ discs of the same name.
-_Note: See "Note" of OrderLine_
-|Order                  |An order is used to represent what a customer of the shop intends to buy from the shop, at which price and with which payment method. An Order can have a varying status to symbolize the current step at which the order is processed.
-|OrderLine              |An OrderLine represents one kind of disc the customer has ordered, as well as in which quantity. +
-_Note: If an order would directly consist out of discs, we would run into the problem that there is no quantity attribute to quantitize the amount of one disc the customer has ordered._
-|OrderManager           |An OrderManager represents a class that has knowledge of all existing orders and may handle compound functionality like the payment of an order.
-|OrderStatus            |This status represents the current processing step of the order it belongs to. +
+|Image                |A image is a digital picture that visually represent a disc.
+|Cart                   |A Cart is a temporary storage for discs a customer intends to buy. If a customer decides to buy his selected discs, an order is created.
+|Item              | Represents the quantity of a disc in the cart.
+|Order                  |An order is used to represent what a customer of the shop intends to buy from the shop. An Order can have a varying status to symbolize the current step at which the order is processed.
+|Status            |This status represents the current processing step of the order it belongs to. +
 _OPEN_: The Order has been created by the system, but not yet processed. +
 _PAID_: The customer has paid his order, the disc quantity still has to be reduced in the inventory to finalize the order. +
-_COMPLETED_: The order was been paid and shipped to the customer. +
+_COMPLETE_: The order was been paid and shipped to the customer. +
 _CANCELLED_: Fallback to allow to mark failed orders or other problems.
-|ROLE/Role              |A Role is used to distinguish authenticated users with different rights in the system. According to the role, different functionality becomes available.
-|User                   |General representation of a real person, which has a representation in the system. This representation is only created if a user registers with the system, and only used if he or she authenticates.
-|Videoshop              | {Videoshop_Description}
+|Inventory              |An Inventory represents a storage for the videoshop. Can be seen like a warehouse in this project.
+|InventoryItem              | Represents the quantity of a disc in the inventory.
 |===
 
 == Acceptance Testing
@@ -851,12 +854,12 @@ _CANCELLED_: Fallback to allow to mark failed orders or other problems.
 Acceptance tests are used to determine, whether or not the delivered software system fulfills the requirements of the client during the actual usage.
 The following table shows which acceptance tests the software system does have to pass at the end of the project in order to satisfy the client and complete the contract (regarding the requirements).
 
-_Note: Acceptance tests can be derived from the use cases and the respective sequence diagrams, but also from other parts of the SRS._
-_Each sequence diagram represents one scenario of a use case (e.g. successful order completion)._
-_However, another scenario of the same use case (e.g. failed order because of insufficient stock) would require an own sequence diagram as well as at least an own acceptance test._
-_It is also highly necessary to design the test cases in a measurable manner to be able to determine if the acceptance test has passed or not._
+[small]_Note: Acceptance tests can be derived from the use cases and the respective sequence diagrams, but also from other parts of the SRS._
+[small]_Each sequence diagram represents one scenario of a use case (e.g. successful order completion)._
+[small]_However, another scenario of the same use case (e.g. failed order because of insufficient stock) would require an own sequence diagram as well as at least an own acceptance test._
+[small]_It is also highly necessary to design the test cases in a measurable manner to be able to determine if the acceptance test has passed or not.._
 
-_Note: There are multiple different types of acceptance tests. In this course, we mainly focus on documenting test cases, which show that the functional requirements are fulfilled from the perspective of the user (UAT)._
+[small]_Note: There are multiple different types of acceptance tests. In this course, we mainly focus on documenting test cases, which show that the functional requirements are fulfilled from the perspective of the user (UAT)._
 
 :Pre: Precondition(s)
 :Event: Event
@@ -948,12 +951,12 @@ Finally, he presses "Registrieren" to send the information.
 |{Event}      a|The user presses on one of the shown discs of the catalog.
 |{Result}     a|The user is shown (on a new page) the details about the disc he selected as specified in <<F0120>>.
 
-_Note: You could arguably describe the process in more detail, with concrete values (e.g. user selects disc named "Secretary" from the BluRay catalog, ...)_
+[small]_Note: You could arguably describe the process in more detail, with concrete values (e.g. user selects disc named "Secretary" from the BluRay catalog, ...)_
 |===
 
-_Note: This list of acceptance tests does obviously not cover every use case. The process is mostly the same for every acceptance test case, which is why we provide only some examples to show you the ropes._
+[small]_Note: This list of acceptance tests does obviously not cover every use case. The process is mostly the same for every acceptance test case, which is why we provide only some examples to show you the ropes._
 
-_Note: It is often also necessary to create test cases for non-functional requirements in order to prove that the requirement has been fulfilled by the finished system._
+[small]_Note: It is often also necessary to create test cases for non-functional requirements in order to prove that the requirement has been fulfilled by the finished system._
 
 [[Glossary]]
 == Glossary
@@ -961,13 +964,13 @@ _Note: It is often also necessary to create test cases for non-functional requir
 The glossary contains a list of all words and phrases used in this project, which require an description to avoid misunderstandings between stakeholders.
 Please also consult the list of <<actors, actors>>, the list of <<Stakeholders, stakeholders>> and the <<classes_enumerations, domain model>> for further definitions of terms.
 
-_Note: Some terms can be used regularily during a project, while all involved stakeholders think that the meaning is obvious. This not necessarily the case though, as different domains of expertise can mean different levels of knowledge or simply a different understanding of a term._ +
-_An example from a previous year of this course:_ +
-_Imagine a shift schedule, where every shift is occupied by 3 different kinds of staff._
-_The manager responsible for the schedule would use the term "shift" to describe the whole timeslot with all 3 involved staff members (e.g. "shift X is gonna be hard for you guys, prepare yourselves")._
-_One of the staff members occupying one of these slots would use the term "shift" to describe his one slot (of the three) in one timeslot of the day (e.g. "My shift this time puts me in touch with the customers, while the other two can relax in the warehouse")._ +
-_While this is common sense and does not really affect communication in the real world, it becomes an issue if you have to design a system which represents such a shift schedule. You could - in this case - use "shift" as in the understanding of the manager and use "slot" or "cell" to model what the staff member meant._
-_In such cases, you have to force all stakeholders to use this common wording in order to avoid misunderstandings._
+[small]_Note: Some terms can be used regularily during a project, while all involved stakeholders think that the meaning is obvious. This not necessarily the case though, as different domains of expertise can mean different levels of knowledge or simply a different understanding of a term._ +
+[small]_An example from a previous year of this course:_ +
+[small]_Imagine a shift schedule, where every shift is occupied by 3 different kinds of staff._
+[small]_The manager responsible for the schedule would use the term "shift" to describe the whole timeslot with all 3 involved staff members (e.g. "shift X is gonna be hard for you guys, prepare yourselves")._
+[small]_One of the staff members occupying one of these slots would use the term "shift" to describe his one slot (of the three) in one timeslot of the day (e.g. "My shift this time puts me in touch with the customers, while the other two can relax in the warehouse")._ +
+[small]_While this is common sense and does not really affect communication in the real world, it becomes an issue if you have to design a system which represents such a shift schedule. You could - in this case - use "shift" as in the understanding of the manager and use "slot" or "cell" to model what the staff member meant._
+[small]_In such cases, you have to force all stakeholders to use this common wording in order to avoid misunderstandings._
 
 :Client_Description: Synonym for the customer of this project ({company_name})
 :domain_ref: See <<classes_enumerations, domain overview>>
@@ -981,22 +984,18 @@ _In such cases, you have to force all stakeholders to use this common wording in
 |Administrator          | Synonym for a Boss
 |BluRay                 | {domain_ref}
 |Cart                   | {domain_ref}
-|CartItem               | {domain_ref}
-|ChargeLine             | {domain_ref}
 |Client                 | {Client_Description}
 |Comment                | {domain_ref}
 |Contractor             | Company responsible for implementing the software
-|Dvd                    | {domain_ref}
+|DVD                    | {domain_ref}
 |Inventory              | {domain_ref}
 |InventoryItem          | {domain_ref}
 |Login                  | Successful authentication after entering the correct (i.e. existing) credentials of a user
 |Order                  | {domain_ref}
-|OrderLine              | {domain_ref}
-|OrderManager           | {domain_ref}
-|OrderStatus            | {domain_ref}
+|OrderStatus            | Synonym for Status, {domain_ref}
 |Product                | Abstraction of a disc. Every disc is a product.
 |Register/Registration  | Process of creating a new account in the system (i.e. a new user representation)
-|ROLE/Role              | {domain_ref}
+|ROLE/Role              | Role of a User (Customer or Boss), {domain_ref}
 |Stock                  | Amount of discs of one type that are available
 |System                 | General term for the software system that has to be implemented during this project.
 |User                   | {domain_ref}

@@ -1,60 +1,45 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=#{register.title})}">
+    <head>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${registrationForm}">
 
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+                <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
+                    <p>Einige Angaben sind nicht korrekt.</p>
+                </div>
 
-    <title th:text="#{register.title}">Registrierung</title>
-</head>
-<body>
-<div class="ui container">
-    <header>
-        <h1 th:text="#{register.title}">Registrierung</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                    <div class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        <p>Der Name darf nicht leer sein.</p>
+                    </div>
+                </div>
 
-    <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${registrationForm}">
+                <div class="field">
+                    <label th:text="#{register.password}" for="password">Passwort</label>
+                    <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
+                           required="required"/><br/>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
+                        nicht leer sein.</p>
+                </div>
+                <div class="field">
+                    <label th:text="#{register.address}" for="address">Straße</label>
+                    <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
+                           required="required"/><br/>
+                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Die Adresse darf
+                        nicht leer sein.</p>
+                </div>
 
-        <h3 class="ui dividing header" th:text="#{register.userdata}">Nutzerdaten</h3>
-
-        <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
-            <p>Einige Angaben sind nicht korrekt.</p>
-        </div>
-
-        <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
-                <p>Der Name darf nicht leer sein.</p>
-            </div>
-        </div>
-
-        <div class="field">
-            <label th:text="#{register.password}" for="password">Passwort</label>
-            <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
-                   required="required"/><br/>
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
-                nicht leer sein.</p>
-        </div>
-        <div class="field">
-            <label th:text="#{register.address}" for="address">Straße</label>
-            <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
-                   required="required"/><br/>
-            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Die Adresse darf
-                nicht leer sein.</p>
-        </div>
-
-        <button type="submit" class="ui button" th:text="#{register.submit}">Registrieren</button>
-    </form>
-</div>
-</body>
+                <button type="submit" class="ui button" th:text="#{register.submit}">Registrieren</button>
+            </form>
+        </section>
+    </body>
 </html>
