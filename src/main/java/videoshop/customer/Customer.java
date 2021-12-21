@@ -15,11 +15,17 @@
  */
 package videoshop.customer;
 
+import videoshop.customer.Customer.CustomerIdentifier;
+
+import java.util.UUID;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.salespointframework.core.AbstractAggregateRoot;
+import org.salespointframework.core.SalespointIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 
 // (｡◕‿◕｡)
@@ -28,9 +34,9 @@ import org.salespointframework.useraccount.UserAccount;
 // Um den Customer in die Datenbank zu bekommen, schreiben wir ein CustomerRepository.
 
 @Entity
-public class Customer {
+public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 
-	private @Id @GeneratedValue long id;
+	private @EmbeddedId CustomerIdentifier id = new CustomerIdentifier(UUID.randomUUID().toString());
 
 	private String address;
 
@@ -48,7 +54,12 @@ public class Customer {
 		this.address = address;
 	}
 
-	public long getId() {
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.domain.Persistable#getId()
+	 */
+	@Override
+	public CustomerIdentifier getId() {
 		return id;
 	}
 
@@ -62,5 +73,27 @@ public class Customer {
 
 	public UserAccount getUserAccount() {
 		return userAccount;
+	}
+
+	@Embeddable
+	public static final class CustomerIdentifier extends SalespointIdentifier {
+
+		private static final long serialVersionUID = 7740660930809051850L;
+
+		/**
+		 * Creates a new unique identifier for {@link Customer}s.
+		 */
+		CustomerIdentifier() {
+			super();
+		}
+
+		/**
+		 * Only needed for property editor, shouldn't be used otherwise.
+		 *
+		 * @param customerIdentifier The string representation of the identifier.
+		 */
+		CustomerIdentifier(String customerIdentifier) {
+			super(customerIdentifier);
+		}
 	}
 }
