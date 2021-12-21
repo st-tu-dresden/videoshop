@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 /**
  * Integration test for the {@link CatalogController} on the web layer, i.e. simulating HTTP requests.
- * 
+ *
  * @author Oliver Gierke
  */
 @SpringBootTest
@@ -46,6 +46,7 @@ class CatalogControllerWebIntegrationTests {
 
 		mvc.perform(get("/blurays")). //
 				andExpect(status().isOk()).//
+				andExpect(model().attributeExists("catalog")).//
 				andExpect(model().attribute("catalog", is(not(emptyIterable()))));
 	}
 }
