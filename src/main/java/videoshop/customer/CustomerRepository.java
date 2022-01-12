@@ -15,6 +15,8 @@
  */
 package videoshop.customer;
 
+import videoshop.customer.Customer.CustomerIdentifier;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
 
@@ -24,7 +26,7 @@ import org.springframework.data.util.Streamable;
  * @author Paul Henke
  * @author Oliver Gierke
  */
-interface CustomerRepository extends CrudRepository<Customer, Long> {
+interface CustomerRepository extends CrudRepository<Customer, CustomerIdentifier> {
 
 	/**
 	 * Re-declared {@link CrudRepository#findAll()} to return a {@link Streamable} instead of {@link Iterable}.

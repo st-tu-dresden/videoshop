@@ -19,6 +19,7 @@ import videoshop.catalog.Disc.DiscType;
 
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.util.Streamable;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.
@@ -36,7 +37,7 @@ public interface VideoCatalog extends Catalog<Disc> {
 	 * @param sort must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	Iterable<Disc> findByType(DiscType type, Sort sort);
+	Streamable<Disc> findByType(DiscType type, Sort sort);
 
 	/**
 	 * Returns all {@link Disc}s by type ordered by their identifier.
@@ -44,7 +45,7 @@ public interface VideoCatalog extends Catalog<Disc> {
 	 * @param type must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	default Iterable<Disc> findByType(DiscType type) {
+	default Streamable<Disc> findByType(DiscType type) {
 		return findByType(type, DEFAULT_SORT);
 	}
 }
