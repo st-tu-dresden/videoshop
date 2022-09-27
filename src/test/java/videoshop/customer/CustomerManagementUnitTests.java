@@ -21,6 +21,7 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 
@@ -42,7 +43,7 @@ class CustomerManagementUnitTests {
 		// … a UserAccountManager
 		UserAccountManagement userAccountManager = mock(UserAccountManagement.class);
 		UserAccount userAccount = mock(UserAccount.class);
-		when(userAccountManager.create(any(), any(), any())).thenReturn(userAccount);
+		when(userAccountManager.create(any(), any(), any(Role.class))).thenReturn(userAccount);
 
 		// … and the CustomerManagement using both of them,
 		CustomerManagement customerManagement = new CustomerManagement(repository, userAccountManager);

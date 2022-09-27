@@ -17,6 +17,7 @@ package videoshop.customer;
 
 import videoshop.customer.Customer.CustomerIdentifier;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Embeddable;
@@ -24,8 +25,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import org.jmolecules.ddd.types.Identifier;
 import org.salespointframework.core.AbstractAggregateRoot;
-import org.salespointframework.core.SalespointIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 
 // (｡◕‿◕｡)
@@ -36,7 +37,7 @@ import org.salespointframework.useraccount.UserAccount;
 @Entity
 public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 
-	private @EmbeddedId CustomerIdentifier id = new CustomerIdentifier(UUID.randomUUID().toString());
+	private @EmbeddedId CustomerIdentifier id = new CustomerIdentifier();
 
 	private String address;
 
@@ -76,24 +77,58 @@ public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 	}
 
 	@Embeddable
-	public static final class CustomerIdentifier extends SalespointIdentifier {
+	public static final class CustomerIdentifier implements Identifier, Serializable {
 
 		private static final long serialVersionUID = 7740660930809051850L;
+		private final @SuppressWarnings("unused") UUID identifier;
 
 		/**
 		 * Creates a new unique identifier for {@link Customer}s.
 		 */
 		CustomerIdentifier() {
-			super();
+			this(UUID.randomUUID());
 		}
 
 		/**
 		 * Only needed for property editor, shouldn't be used otherwise.
 		 *
-		 * @param customerIdentifier The string representation of the identifier.
+		 * @param identifier The string representation of the identifier.
 		 */
-		CustomerIdentifier(String customerIdentifier) {
-			super(customerIdentifier);
+		CustomerIdentifier(UUID identifier) {
+			this.identifier = identifier;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode() {
+
+			final int prime = 31;
+			int result = 1;
+
+			result = prime * result + (identifier == null ? 0 : identifier.hashCode());
+
+			return result;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+
+			if (obj == this) {
+				return true;
+			}
+
+			if (!(obj instanceof CustomerIdentifier that)) {
+				return false;
+			}
+
+			return this.identifier.equals(that.identifier);
 		}
 	}
 }
