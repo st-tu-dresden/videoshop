@@ -15,12 +15,11 @@
  */
 package videoshop.catalog;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import videoshop.catalog.Disc.DiscType;
 
 import java.time.LocalDateTime;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.InventoryItem;

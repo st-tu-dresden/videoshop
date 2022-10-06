@@ -15,15 +15,14 @@
  */
 package videoshop.customer;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import videoshop.customer.Customer.CustomerIdentifier;
 
 import java.io.Serializable;
 import java.util.UUID;
-
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 import org.jmolecules.ddd.types.Identifier;
 import org.salespointframework.core.AbstractAggregateRoot;
