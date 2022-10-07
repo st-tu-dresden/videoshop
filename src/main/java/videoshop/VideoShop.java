@@ -45,7 +45,7 @@ public class VideoShop {
 		 * We configure {@code /login} to be directly routed to the {@code login} template without any controller
 		 * interaction.
 		 * 
-		 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry)
+		 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry)
 		 */
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
