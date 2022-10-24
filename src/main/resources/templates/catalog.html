@@ -9,7 +9,7 @@
         <header>
             <h1 th:text="#{${title}}">Katalog</h1>
         </header>
-        <nav th:include="navigation :: navigation"></nav>
+        <nav th:insert="~{navigation :: navigation}"></nav>
         <section layout:fragment="content">
         <div class="ui link cards" th:remove="all-but-first">
             <div class="ui card" th:each="disc : ${catalog}">
