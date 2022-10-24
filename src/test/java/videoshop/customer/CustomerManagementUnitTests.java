@@ -50,7 +50,7 @@ class CustomerManagementUnitTests {
 
 		// When
 		// … a registration form is submitted
-		RegistrationForm form = new RegistrationForm("name", "password", "address");
+		RegistrationForm form = new RegistrationForm("name", "password", "password", "address");
 		Customer customer = customerManagement.createCustomer(form);
 
 		// Then

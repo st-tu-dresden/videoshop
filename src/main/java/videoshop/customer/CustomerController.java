@@ -49,11 +49,18 @@ class CustomerController {
 			return "register";
 		}
 
+		
 		// (｡◕‿◕｡)
 		// Falles alles in Ordnung ist legen wir einen Customer an
+		try {
 		customerManagement.createCustomer(form);
+		}catch(Exception ex) {
+			result.reject("403", "existing user");
+			return "register";
 
+		}
 		return "redirect:/";
+		
 	}
 
 	@GetMapping("/register")

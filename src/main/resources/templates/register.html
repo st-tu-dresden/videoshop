@@ -15,6 +15,12 @@
                     <p>Einige Angaben sind nicht korrekt.</p>
                 </div>
 
+   <div class="ui negative message" th:if="${#fields.hasAnyErrors()}">
+    <ul>
+        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+    </ul>
+</div>
+
                 <div class="field">
                     <label for="name">Name</label>
                     <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
@@ -29,6 +35,12 @@
                            required="required"/><br/>
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
                         nicht leer sein.</p>
+                        
+                    <label th:text="#{register.passwordConfirmation}" for="passwordConfirmation">Passwort confirmation </label>
+                    <input id="passwordConfirmation" name="passwordConfirmation" th:field="*{passwordConfirmation}" th:errorclass="fieldError" type="password"
+                           required="required"/><br/>
+                    <p th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}">Das Passwort darf
+                        nicht leer sein.</p>    
                 </div>
                 <div class="field">
                     <label th:text="#{register.address}" for="address">Straße</label>

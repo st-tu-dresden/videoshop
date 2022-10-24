@@ -81,10 +81,10 @@ class CustomerDataInitializer implements DataInitializer {
 		var password = "123";
 
 		List.of(//
-				new RegistrationForm("hans", password, "wurst"),
-				new RegistrationForm("dextermorgan", password, "Miami-Dade County"),
-				new RegistrationForm("earlhickey", password, "Camden County - Motel"),
-				new RegistrationForm("mclovinfogell", password, "Los Angeles")//
+				new RegistrationForm("hans", password,password, "wurst"),
+				new RegistrationForm("dextermorgan", password, password,"Miami-Dade County"),
+				new RegistrationForm("earlhickey", password,password, "Camden County - Motel"),
+				new RegistrationForm("mclovinfogell", password, password,"Los Angeles")//
 		).forEach(customerManagement::createCustomer);
 	}
 }
