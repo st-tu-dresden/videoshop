@@ -307,26 +307,27 @@ image:diagrams/images/order.svg[class design diagram - order]
 [options="header"]
 |===
 |Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model)
-|BluRay                 a|
-						* catalog.Disc
-						* catalog.DiscType 
-|Cart                   |Salespoint.Cart 
-|CartItem               |Salespoint.CartItem (via Salespoint.Cart) 
-|ChargeLine             |Salespoint.ChargeLine (via Salespoint.Order) 
-|Comment                |catalog.Comment 
-|Dvd                    a|
-						* catalog.Disc
-						* catalog.DiscType 
-|Inventory              |Salespoint.UniqueInventory 
-|InventoryItem          |Salespoint.UniqueInventoryItem 
-|Order                  |Salespoint.Order 
-|OrderLine              |Salespoint.Orderline (via Salespoint.Order) 
-|OrderManager           |Salespoint.OrderManager<Order> 
-|OrderStatus            |Salespoint.OrderStatus 
-|ROLE/Role              |Salespoint.Role 
-|User                   a|
-						* Salespoint.UserAccount 
-						* customer.Customer 
+
+|BluRay                 |videoshop.catalog.DiscType
+|Boss        		   a|
+						* salespointframework.Role 						 
+						* salespointframework.UserAccount
+|Cart                   |salespointframework.Cart 
+|Item                   |salespointframework.CartItem (via Salespoint.Cart) 
+|Comment                |videoshop.catalog.Comment
+|Customer   		   a|
+						* salespointframework.Role 						 
+						* videoshop.customer.Customer 
+|Disc             		|videoshop.catalog.Disc
+|Dvd                    |videoshop.catalog.DiscType 
+|Image					|String
+|Inventory              |salespointframework.UniqueInventory 
+|InventoryItem          |salespointframework.UniqueInventoryItem 
+|Order                  |salespointframework.Order 
+|Status                 |salespointframework.OrderStatus 
+|User/Registered User  a|
+						* salespointframework.UserAccount
+|VideoCatalog           |salespointframework.catalog
 |Videoshop              |videoshop.Videoshop 
 |===
 
