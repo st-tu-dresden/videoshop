@@ -6,6 +6,7 @@
 |1.0	| October 9th, 2017 | Marc Kandler
 |2.0	| June 21st, 2019 | Daniel Schoenicke
 |2.5	| October 5th, 2021 | Markus Hamann
+|2.6	| September 7th, 2023 | Markus Hamann
 |===
 
 :project_name: Videoshop
@@ -172,19 +173,34 @@ The system context diagram shows the planned system in its environment.
 This includes all user types, their ways to access the system, as well as third-party systems, which
 access our system or are accessed by it (not the case here).
 
-[small]_Note: Informal graphics are usable as well (e.g. created with Visio)._
+[small]_Note: This context diagram is modeled in the UML syntax known from course Softwaretechnologie 1_
 
 
 [[context_diagram]]
-image:diagrams/images/videoshop_a_context.svg[context diagram]
+image::./diagrams/images/videoshop_a_context.svg[context diagram, 100%, 100%, pdfwidth=100%, title= "Context diagram of the {project_name} in UML", align=center]
+
+[small]_Note: More informal graphics are usable as well._
+[small]_In the following diagram pictures the same context diagram is modeled using the popular *C4* notation (https://c4model.com/). It shows the analysis form of the *C4 System Context Diagram*_
+[small]_This notation only shows non abstract users (see 6.1. Actors) and has more details in the diagram already. A disadvantage is that you often needs to switch modeling tools for this notation, which can cause consistency problems. The C4 diagrams in this was created under: https://app.diagrams.net/?libs=c4_
+
+[[context_diagram_c4]]
+image::./diagrams/images/videoshop_a_context_c4_c1.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Context diagram of the {project_name} in C4 notation (System Context)", align=center]
+
+[small]_Note: Alternativly there is also a crossover between UML an C4 that can be modeled in UML modeling tools. See: https://c4model.com/#Notation for more information._
 
 === Top-level architecture
 
 Top-Level view of the system.
 
 [[TLA]]
-image:diagrams/images/videoshop_a_top_level.svg[top-level architecture]
+image::./diagrams/images/videoshop_a_top_level.svg[top-level architecture, 100%, 100%, pdfwidth=100%, title= "Top Level Architecture of the {project_name} in UML", align=center]
 
+[small]_Note: More informal graphics are usable here as well._
+[small]_In the following diagram pictures the same top level architecture diagram is modeled using the  *C4* notation, again. It shows the analysis form of the *C4 Component Diagram*_
+[small]_See the note for C4 in the context diagram section for more explanations._
+
+[[TLA_c4]]
+image::./diagrams/images/videoshop_a_top_level_c4_c3.svg[top-level architecture, 100%, 100%, pdfwidth=100%, title= "Top Level Architecture of the {project_name} in C4 notation (Components)", align=center]
 == Use-Cases
 
 This section will give an overview of the use cases the system has to support.
@@ -213,7 +229,7 @@ Abstract actors (i.e. an actor which groups other actors, written in _italic_) a
 === Use-Case Diagram
 
 [[use_case_diagram]]
-image::./images/Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%, title= "Use case diagram of {project_name}", align=center]
+image::./images/Use_Case_Diagram.png[Use Case diagram, 100%, 100%, pdfwidth=100%, title= "Use case diagram of the {project_name}", align=center]
 
 === Use-Case Descriptions
 
