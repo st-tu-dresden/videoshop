@@ -16,10 +16,10 @@
 == Introduction and Goals
 === Task Definition
 
-_Note: This task aims to provide an example for the {project_name}._
-_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
-_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
-_Wherever information about the domain is provided, we used_ _italic_ _to show the representation in the domain model._
+[small]_Note: This task aims to provide an example for the {project_name}._
+[small]_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
+[small]_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
+[small]_Wherever information about the domain is provided, we used_ _italic_ [small]_to show the representation in the domain model._
 
 The times when people went to buy their movies physically in the store are mostly over.
 As we, the {company_name}, have always had our little secondary business of selling movies to students, this change affects us as well.
@@ -60,7 +60,7 @@ The user experience should be awesome, with a beautiful user interface and a lay
 
 To measure the quality of the application, quality demands have to be defined, which have to be fulfilled. 
 
-[small]_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^].
+[small]_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^]._
 
 Maintainability::
 This characteristic represents the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it or adapt it to changes in environment, and in requirements.
@@ -98,7 +98,7 @@ A list of necessary software to run and use the application.
 
 The following (or newer) Java version is necessary to run the application:
 
-* Java 17
+* Java 19
 
 The following (or newer) browser versions are necessary to use the application:
 
@@ -133,7 +133,7 @@ image::./diagrams/images/videoshop_d_context_c4_c1.svg[context diagram c4, 100%,
 
 == Solution Strategy
 === Quality Demand Fulfillment
-_Note: The following table shows the previous defined quality demands and solution approaches to fulfill them._
+[small]_Note: The following table shows the previous defined quality demands and solution approaches to fulfill them._
 
 [options="header"]
 |=== 
@@ -196,51 +196,43 @@ image::./diagrams/images/dialogue_map.svg[context diagram c4, 100%, 100%, pdfwid
 [small]_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
 
 === Use of external frameworks
+
+[small]_Note: Name the used external frameworks, in which packages you used them, and why you used them in your application. You only need to describe the high level artefact._
+
+
 [options="header"]
 |===
-|External package |Used by (applications' class)
-|salespointframework.catalog a|
-* catalog.Disc
-* catalog.VideoCatalog
-* order.OrderController 
-|salespointframework.core a|
-* catalog.CatalogInitializer
-* customer.CustomerDataInitializer
-* inventory.InventoryInitializer
-|salespointframework.inventory a|
-* catalog.CatalogController
-* inventory.InventoryController
-* inventory.InventoryInitializer
-|salespointframework.order | order.OrderController
-|salespointframework.payment | order.OrderController
-|salespointframework.quantity a|
-* catalog.CatalogController
-* inventory.InventoryInitializer
-* order.OrderController
-|salespointframework.SalespointSecurityConfiguration |videoshop.WebSecurityConfiguration
-|salespointframework.time | catalog.CatalogController
-|salespointframework.useraccount a|
-* customer.Customer
-* customer.CustomerDataInitializer
-* customer.CustomerManagement
-* order.OrderController
-|springframework.boot |videoshop.VideoShop
-|springframework.data a|
-* catalog.VideoCatalog
-* customer.CustomerManagement
-* customer.CustomerRepository
-|springframework.security | videoshop.WebSecurityConfiguration
-|springframework.ui a|
-* catalog.CatalogController
-* customer.CustomerController
-* inventory.InventoryController
-* order.OrderController
-|springframework.util a|
-* customer.CustomerController
-* customer.CustomerDataInitializer
-* order.OrderController
-|springframework.validation |customer.CustomerController
-|springframework.web |videoshop.VideoShopWebConfiguration
+|External package |Used by |Why
+|org.springframework.boot a|
+* videoshop
+| Simple configuration of Spring application
+|org.springframework.web a|
+* videoshop
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Application should be provided as a static website
+|org.springframework.security a|
+* videoshop
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Security features for the videoshop application and authorization of website access
+|org.springframework.data a|
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| JPA connection utility to the database layer
+|org.salespointframework a|
+* videoshop
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Reuse of SalesPoints POS functionality
+
 |===
 
 == Building block view
@@ -310,43 +302,32 @@ image:diagrams/images/order.svg[class design diagram - order]
 |===
 
 === Traceability between Analysis- and Design Model
-[small]_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage of this external class is defined in the *Usage*-Column,
-using one of the following options:_
-
-* Inherictance/Interface-Implementation
-* Class Attribute
-* Method Parameter
+[small]_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. Use it as a checklist to check that you did not forgot a domain concept_
 
 [options="header"]
 |===
-|Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model) |Usage
+|Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model)
 |BluRay                 a|
 						* catalog.Disc
-						* catalog.DiscType |
-|Cart                   |Salespoint.Cart | Method Parameter 
-|CartItem               |Salespoint.CartItem (via Salespoint.Cart) | Method Parameter (via Salespoint.Cart)
-|ChargeLine             |Salespoint.ChargeLine (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
-|Comment                |catalog.Comment |
+						* catalog.DiscType 
+|Cart                   |Salespoint.Cart 
+|CartItem               |Salespoint.CartItem (via Salespoint.Cart) 
+|ChargeLine             |Salespoint.ChargeLine (via Salespoint.Order) 
+|Comment                |catalog.Comment 
 |Dvd                    a|
 						* catalog.Disc
-						* catalog.DiscType |
-|Inventory              |Salespoint.UniqueInventory a|
-						* Class Attribute
-						* Method Parameter
-|InventoryItem          |Salespoint.UniqueInventoryItem | Method Parameter
-|Order                  |Salespoint.Order | Method Parameter
-|OrderLine              |Salespoint.Orderline (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
-|OrderManager           |Salespoint.OrderManager<Order> a|
-						* Class Attribute
-						* Method Parameter
-|OrderStatus            |Salespoint.OrderStatus | Method Parameter
-|ROLE/Role              |Salespoint.Role | Method Parameter
+						* catalog.DiscType 
+|Inventory              |Salespoint.UniqueInventory 
+|InventoryItem          |Salespoint.UniqueInventoryItem 
+|Order                  |Salespoint.Order 
+|OrderLine              |Salespoint.Orderline (via Salespoint.Order) 
+|OrderManager           |Salespoint.OrderManager<Order> 
+|OrderStatus            |Salespoint.OrderStatus 
+|ROLE/Role              |Salespoint.Role 
 |User                   a|
 						* Salespoint.UserAccount 
-						* customer.Customer a|
-						* Class Attribute
-						* Method Parameter
-|Videoshop              |videoshop.Videoshop |
+						* customer.Customer 
+|Videoshop              |videoshop.Videoshop 
 |===
 
 == Runtime view
@@ -365,31 +346,4 @@ image:diagrams/images/seq_inventory.svg[sequence diagram - inventory]
 === Order
 image:diagrams/images/seq_order.svg[sequence diagram - order]
 
-== Technical debt
 
-=== Quality Gates
-_Note: In this section, all failed Quality Gates are listed. These ratings go from *A* (best) to *E* (worst).
-This chapter should only be written at the end of your project._
-[options="header"] 
-|===
-|Quality Gate | Actual Value | Goal
-|Reliability | C | A
-|Coverage | 0.0% | 50.0%
-|===
-
-=== Issues
-_Note: In this section, all SonarQube issues of the priority *Blocker*, *Critical* and *Major* are listed, as well as common *Minor*-Issues_
-[options="header"]
-[options="header", cols="1, 2, 2, 2"]
-|===
-|Priority |Description |Location |Corresponding Quality Gate
-|Major |The return value of "orElseGet" must be used| videoshop.InventoryInitializer line 66 |Reliability
-|Minor |Assign this magic number _X_ to a well-named constant, and use the constant instead a|
-* 17 appearances within catalog.CatalogInitializer
-* 1 appearance within inventory.InventoryInitializer
-* 1 appearance within order.OrderController |None
-|Minor |Lines should not be longer than 120 characters a|
-* 1 appearance within catalog.Disc 
-* 1 appearance within customer.Customer 
-* 1 appearance within customer.RegistrationForm |None 
-|===
