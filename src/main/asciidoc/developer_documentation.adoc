@@ -3,6 +3,7 @@
 |===
 |Version | Processing Date   | Author 
 |1.0	| October 29th, 2019 | Daniel Schoenicke 
+|2.0	| September 11th, 2023 | Markus Hamann 
 |===
 
 :project_name: Videoshop
@@ -58,7 +59,8 @@ The user experience should be awesome, with a beautiful user interface and a lay
 === Quality Demands
 
 To measure the quality of the application, quality demands have to be defined, which have to be fulfilled. 
-_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^].
+
+[small]_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^].
 
 Maintainability::
 This characteristic represents the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it or adapt it to changes in environment, and in requirements.
@@ -119,9 +121,15 @@ Any data shall be stored persistently in a database and be accessible through th
 
 == Context and Scope
 === Context Diagram
-image:diagrams/images/videoshop_context.svg[context diagram]
 
-_Note: Since Salespoint and Spring Security are used in the implementation, there are no external interfaces._
+[[context_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_context_c4_c1.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Context diagram in C4 notation (Level 1: System Context)", align=center]
+
+[small]_Note: The context model is similar to the requirement specification, since it only shows the overview of the system._
+
+[small]_Note: We are using the *C4* notation for all architectural models, since it holds easy to understand views of al architectural levels. Please refer to the notes in the requirement specification for C4._
+
+[small]_Note: If you want, you can also alternatively use the UML notation known from the course Softwaretechnologie 1._
 
 == Solution Strategy
 === Quality Demand Fulfillment
@@ -146,19 +154,27 @@ _Note: The following table shows the previous defined quality demands and soluti
 |===
 
 === Software Architecture
-image:diagrams/images/videoshop_top_level.svg[tla]
 
-_Top Level Architecure of the application_
+[small]_Note: First, you want to give an overview of the container/components of your whole system. For this purpose you could use the *Container diagram* of C4, a more informal *Client-Server diagram*, or both._
 
-image:diagrams/images/videoshop_client_server.svg[client server model]
+[[container_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_context_c4_c2.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Container diagram in C4 notation (Level 2: Container)", align=center]
 
-_Client Server Model of the application. The client only contains HTML and CSS files. The application logic is implemented on the server._
+[[client_server_diagram]]
+image::./diagrams/images/videoshop_client_server.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Client Server Model of the application. The client only contains HTML and CSS files. The application logic is implemented on the server", align=center]
 
-*Note: JavaScript is compiled by the client. You can use JavaScript in your application but make sure, that you don't use it to implement any of the application logic!*
+*Explanation:* HTML-Templates are rendered clientside with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying H2 database saves data persistently.
 
-HTML-Templates are rendered clientside with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data
-by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying 
-H2 database saves data persistently.
+[small]_Note: Optional JavaScript code is part of the client. *You can use JavaScript in your application but make sure that you don't use it to implement any of the application logic*!_
+
+
+[[component_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_top_level_c4_c3.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Top Level Architecture of the _Web Application_ in C4 notation (Level 3: Component)", align=center]
+
+[small]_Note: The Top Level Architecture gives an overview of the components in your system (here the Web Application) and their relationships (here only to the database, but relationships between the components are possible, too). For this purpose you could use the *Component diagram* of C4, the *Top Level Architecture diagram* from the course Softwaretechnologie 1, or both._
+
+[small]_Note: The components are described in detail in the chapter: 5. Building Block View_
+
 
 === Architecture decisions
 
@@ -174,9 +190,10 @@ The persistence is deactivated by default. To activate persistence storage, the 
 ....
 
 ==== User Interface
-image:diagrams/images/dialogue_map.svg[dialogue map]
+[[context_diagram_d_c4]]
+image::./diagrams/images/dialogue_map.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Dialog Map of the Videoshop", align=center]
 
-_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
+[small]_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
 
 === Use of external frameworks
 [options="header"]
@@ -293,7 +310,7 @@ image:diagrams/images/order.svg[class design diagram - order]
 |===
 
 === Traceability between Analysis- and Design Model
-_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage of this external class is defined in the *Usage*-Column,
+[small]_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage of this external class is defined in the *Usage*-Column,
 using one of the following options:_
 
 * Inherictance/Interface-Implementation
@@ -334,7 +351,7 @@ using one of the following options:_
 
 == Runtime view
 
-_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
+[small]_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
 
 === Catalog
 image:diagrams/images/seq_catalog.svg[sequence diagram - catalog]
