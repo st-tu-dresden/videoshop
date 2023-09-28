@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d %5p %40.40c:%4L - %m%n</pattern>
-		</encoder>
-	</appender>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
-	<logger name="de.olivergierke.moduliths" level="info" />
-
-	<root level="warn">
-		<appender-ref ref="console" />
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
 	</root>
+
+	<logger name="com.tngtech.archunit" level="WARN" />
 
 </configuration>
