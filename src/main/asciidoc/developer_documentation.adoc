@@ -241,7 +241,9 @@ image::./diagrams/images/dialogue_map.svg[context diagram c4, 100%, 100%, pdfwid
 
 [small]_Note: If your package structure is more nested as in this example, add an *UML package diagram* to this document. This diagram only shows the packages of the application, their containment structure, and \<<use>>-relationships between them. The goal is to give an overview of the detailed architecture._
 
-[small]_Note: In this example the content package diagram would look like the Top Level Architecture, so it was omitted._
+[small]_Example: https://www.uml-diagrams.org/multi-layered-web-architecture-uml-package-diagram-example.html_
+
+[small]_Note: In this example project the content package diagram would look like the Top Level Architecture, so it was omitted._
 
 === Videoshop
 

@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-09-07T14:06:38.964Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/117.0" etag="zcIQ2yfjHykYhS6CLzIS" version="21.7.2" type="device">
+<mxfile host="app.diagrams.net" modified="2023-10-04T08:10:54.255Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0" etag="fQwE8uO2X2PHxEgNyRpf" version="22.0.2" type="device">
   <diagram name="Seite-1" id="PFW6ziijzle4DHmhYG3w">
-    <mxGraphModel dx="913" dy="455" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1500" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -93,14 +93,12 @@
           </mxCell>
         </object>
         <object placeholders="1" c4Type="Relationship" c4Description="Browse Catalog, rate products" label="&lt;div style=&quot;text-align: left&quot;&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;" id="3o2XZ1Ea7PJ3hoaD-PSg-25">
-          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.712;exitY=1.025;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="3o2XZ1Ea7PJ3hoaD-PSg-1" target="3o2XZ1Ea7PJ3hoaD-PSg-14" edge="1">
+          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="3o2XZ1Ea7PJ3hoaD-PSg-1" target="3o2XZ1Ea7PJ3hoaD-PSg-14" edge="1">
             <mxGeometry x="-0.0502" y="10" width="240" relative="1" as="geometry">
               <mxPoint x="320" y="302" as="sourcePoint" />
               <mxPoint x="777" y="520" as="targetPoint" />
               <Array as="points">
-                <mxPoint x="627" y="302" />
-                <mxPoint x="630" y="302" />
-                <mxPoint x="630" y="400" />
+                <mxPoint x="620" y="400" />
                 <mxPoint x="777" y="400" />
               </Array>
               <mxPoint as="offset" />
