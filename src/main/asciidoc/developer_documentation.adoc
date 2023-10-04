@@ -3,6 +3,7 @@
 |===
 |Version | Processing Date   | Author 
 |1.0	| October 29th, 2019 | Daniel Schoenicke 
+|2.0	| September 11th, 2023 | Markus Hamann 
 |===
 
 :project_name: Videoshop
@@ -15,10 +16,10 @@
 == Introduction and Goals
 === Task Definition
 
-_Note: This task aims to provide an example for the {project_name}._
-_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
-_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
-_Wherever information about the domain is provided, we used_ _italic_ _to show the representation in the domain model._
+[small]_Note: This task aims to provide an example for the {project_name}._
+[small]_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
+[small]_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
+[small]_Wherever information about the domain is provided, we used_ _italic_ [small]_to show the representation in the domain model._
 
 The times when people went to buy their movies physically in the store are mostly over.
 As we, the {company_name}, have always had our little secondary business of selling movies to students, this change affects us as well.
@@ -58,7 +59,8 @@ The user experience should be awesome, with a beautiful user interface and a lay
 === Quality Demands
 
 To measure the quality of the application, quality demands have to be defined, which have to be fulfilled. 
-_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^].
+
+[small]_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^]._
 
 Maintainability::
 This characteristic represents the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it or adapt it to changes in environment, and in requirements.
@@ -96,7 +98,7 @@ A list of necessary software to run and use the application.
 
 The following (or newer) Java version is necessary to run the application:
 
-* Java 17
+* Java 19
 
 The following (or newer) browser versions are necessary to use the application:
 
@@ -119,13 +121,19 @@ Any data shall be stored persistently in a database and be accessible through th
 
 == Context and Scope
 === Context Diagram
-image:diagrams/images/videoshop_context.svg[context diagram]
 
-_Note: Since Salespoint and Spring Security are used in the implementation, there are no external interfaces._
+[[context_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_context_c4_c1.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Context diagram in C4 notation (Level 1: System Context)", align=center]
+
+[small]_Note: The context model is similar to the requirement specification, since it only shows the overview of the system._
+
+[small]_Note: We are using the *C4* notation for all architectural models, since it holds easy to understand views of al architectural levels. Please refer to the notes in the requirement specification for C4._
+
+[small]_Note: If you want, you can also alternatively use the UML notation known from the course Softwaretechnologie 1._
 
 == Solution Strategy
 === Quality Demand Fulfillment
-_Note: The following table shows the previous defined quality demands and solution approaches to fulfill them._
+[small]_Note: The following table shows the previous defined quality demands and solution approaches to fulfill them._
 
 [options="header"]
 |=== 
@@ -146,19 +154,27 @@ _Note: The following table shows the previous defined quality demands and soluti
 |===
 
 === Software Architecture
-image:diagrams/images/videoshop_top_level.svg[tla]
 
-_Top Level Architecure of the application_
+[small]_Note: First, you want to give an overview of the container/components of your whole system. For this purpose you could use the *Container diagram* of C4, a more informal *Client-Server diagram*, or both._
 
-image:diagrams/images/videoshop_client_server.svg[client server model]
+[[container_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_context_c4_c2.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Container diagram in C4 notation (Level 2: Container)", align=center]
 
-_Client Server Model of the application. The client only contains HTML and CSS files. The application logic is implemented on the server._
+[[client_server_diagram]]
+image::./diagrams/images/videoshop_client_server.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Client Server Model of the application. The client only contains HTML and CSS files. The application logic is implemented on the server", align=center]
 
-*Note: JavaScript is compiled by the client. You can use JavaScript in your application but make sure, that you don't use it to implement any of the application logic!*
+*Explanation:* HTML-Templates are rendered clientside with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying H2 database saves data persistently.
 
-HTML-Templates are rendered clientside with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data
-by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying 
-H2 database saves data persistently.
+[small]_Note: Optional JavaScript code is part of the client. *You can use JavaScript in your application but make sure that you don't use it to implement any of the application logic*!_
+
+
+[[component_diagram_d_c4]]
+image::./diagrams/images/videoshop_d_top_level_c4_c3.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Top Level Architecture of the _Web Application_ in C4 notation (Level 3: Component)", align=center]
+
+[small]_Note: The Top Level Architecture gives an overview of the components in your system (here the Web Application) and their relationships (here only to the database, but relationships between the components are possible, too). For this purpose you could use the *Component diagram* of C4, the *Top Level Architecture diagram* from the course Softwaretechnologie 1, or both._
+
+[small]_Note: The components are described in detail in the chapter: 5. Building Block View_
+
 
 === Architecture decisions
 
@@ -174,59 +190,60 @@ The persistence is deactivated by default. To activate persistence storage, the 
 ....
 
 ==== User Interface
-image:diagrams/images/dialogue_map.svg[dialogue map]
+[[context_diagram_d_c4]]
+image::./diagrams/images/dialogue_map.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Dialog Map of the Videoshop", align=center]
 
-_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
+[small]_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
 
 === Use of external frameworks
+
+[small]_Note: Name the used external frameworks, in which packages you used them, and why you used them in your application. You only need to describe the high level artefact._
+
+
 [options="header"]
 |===
-|External package |Used by (applications' class)
-|salespointframework.catalog a|
-* catalog.Disc
-* catalog.VideoCatalog
-* order.OrderController 
-|salespointframework.core a|
-* catalog.CatalogInitializer
-* customer.CustomerDataInitializer
-* inventory.InventoryInitializer
-|salespointframework.inventory a|
-* catalog.CatalogController
-* inventory.InventoryController
-* inventory.InventoryInitializer
-|salespointframework.order | order.OrderController
-|salespointframework.payment | order.OrderController
-|salespointframework.quantity a|
-* catalog.CatalogController
-* inventory.InventoryInitializer
-* order.OrderController
-|salespointframework.SalespointSecurityConfiguration |videoshop.WebSecurityConfiguration
-|salespointframework.time | catalog.CatalogController
-|salespointframework.useraccount a|
-* customer.Customer
-* customer.CustomerDataInitializer
-* customer.CustomerManagement
-* order.OrderController
-|springframework.boot |videoshop.VideoShop
-|springframework.data a|
-* catalog.VideoCatalog
-* customer.CustomerManagement
-* customer.CustomerRepository
-|springframework.security | videoshop.WebSecurityConfiguration
-|springframework.ui a|
-* catalog.CatalogController
-* customer.CustomerController
-* inventory.InventoryController
-* order.OrderController
-|springframework.util a|
-* customer.CustomerController
-* customer.CustomerDataInitializer
-* order.OrderController
-|springframework.validation |customer.CustomerController
-|springframework.web |videoshop.VideoShopWebConfiguration
+|External package |Used by |Why
+|org.springframework.boot a|
+* videoshop
+| Simple configuration of Spring application
+|org.springframework.web a|
+* videoshop
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Application should be provided as a static website
+|org.springframework.security a|
+* videoshop
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Security features for the videoshop application and authorization of website access
+|org.springframework.data a|
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| JPA connection utility to the database layer
+|org.salespointframework a|
+* videoshop
+* videoshop.catalog
+* videoshop.customer
+* videoshop.inventory
+* videoshop.order
+| Reuse of SalesPoints POS functionality
+
 |===
 
 == Building block view
+
+=== Package diagram
+
+[small]_Note: If your package structure is more nested as in this example, add an *UML package diagram* to this document. This diagram only shows the packages of the application, their containment structure, and \<<use>>-relationships between them. The goal is to give an overview of the detailed architecture._
+
+[small]_Example: https://www.uml-diagrams.org/multi-layered-web-architecture-uml-package-diagram-example.html_
+
+[small]_Note: In this example project the content package diagram would look like the Top Level Architecture, so it was omitted._
 
 === Videoshop
 
@@ -293,48 +310,38 @@ image:diagrams/images/order.svg[class design diagram - order]
 |===
 
 === Traceability between Analysis- and Design Model
-_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. If an external class is used in the design model, the kind of usage of this external class is defined in the *Usage*-Column,
-using one of the following options:_
-
-* Inherictance/Interface-Implementation
-* Class Attribute
-* Method Parameter
+[small]_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. Use it as a checklist to check that you did not forgot a domain concept_
 
 [options="header"]
 |===
-|Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model) |Usage
-|BluRay                 a|
-						* catalog.Disc
-						* catalog.DiscType |
-|Cart                   |Salespoint.Cart | Method Parameter 
-|CartItem               |Salespoint.CartItem (via Salespoint.Cart) | Method Parameter (via Salespoint.Cart)
-|ChargeLine             |Salespoint.ChargeLine (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
-|Comment                |catalog.Comment |
-|Dvd                    a|
-						* catalog.Disc
-						* catalog.DiscType |
-|Inventory              |Salespoint.UniqueInventory a|
-						* Class Attribute
-						* Method Parameter
-|InventoryItem          |Salespoint.UniqueInventoryItem | Method Parameter
-|Order                  |Salespoint.Order | Method Parameter
-|OrderLine              |Salespoint.Orderline (via Salespoint.Order) | Method Parameter (via Salespoint.Order)
-|OrderManager           |Salespoint.OrderManager<Order> a|
-						* Class Attribute
-						* Method Parameter
-|OrderStatus            |Salespoint.OrderStatus | Method Parameter
-|ROLE/Role              |Salespoint.Role | Method Parameter
-|User                   a|
-						* Salespoint.UserAccount 
-						* customer.Customer a|
-						* Class Attribute
-						* Method Parameter
-|Videoshop              |videoshop.Videoshop |
+|Class/Enumeration (Analysis Model) |Class/Enumeration (Design Model)
+
+|BluRay                 |videoshop.catalog.DiscType
+|Boss        		   a|
+						* salespointframework.Role 						 
+						* salespointframework.UserAccount
+|Cart                   |salespointframework.Cart 
+|Item                   |salespointframework.CartItem (via Salespoint.Cart) 
+|Comment                |videoshop.catalog.Comment
+|Customer   		   a|
+						* salespointframework.Role 						 
+						* videoshop.customer.Customer 
+|Disc             		|videoshop.catalog.Disc
+|Dvd                    |videoshop.catalog.DiscType 
+|Image					|String
+|Inventory              |salespointframework.UniqueInventory 
+|InventoryItem          |salespointframework.UniqueInventoryItem 
+|Order                  |salespointframework.Order 
+|Status                 |salespointframework.OrderStatus 
+|User/Registered User  a|
+						* salespointframework.UserAccount
+|VideoCatalog           |salespointframework.catalog
+|Videoshop              |videoshop.Videoshop 
 |===
 
 == Runtime view
 
-_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
+[small]_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
 
 === Catalog
 image:diagrams/images/seq_catalog.svg[sequence diagram - catalog]
@@ -348,31 +355,4 @@ image:diagrams/images/seq_inventory.svg[sequence diagram - inventory]
 === Order
 image:diagrams/images/seq_order.svg[sequence diagram - order]
 
-== Technical debt
 
-=== Quality Gates
-_Note: In this section, all failed Quality Gates are listed. These ratings go from *A* (best) to *E* (worst).
-This chapter should only be written at the end of your project._
-[options="header"] 
-|===
-|Quality Gate | Actual Value | Goal
-|Reliability | C | A
-|Coverage | 0.0% | 50.0%
-|===
-
-=== Issues
-_Note: In this section, all SonarQube issues of the priority *Blocker*, *Critical* and *Major* are listed, as well as common *Minor*-Issues_
-[options="header"]
-[options="header", cols="1, 2, 2, 2"]
-|===
-|Priority |Description |Location |Corresponding Quality Gate
-|Major |The return value of "orElseGet" must be used| videoshop.InventoryInitializer line 66 |Reliability
-|Minor |Assign this magic number _X_ to a well-named constant, and use the constant instead a|
-* 17 appearances within catalog.CatalogInitializer
-* 1 appearance within inventory.InventoryInitializer
-* 1 appearance within order.OrderController |None
-|Minor |Lines should not be longer than 120 characters a|
-* 1 appearance within catalog.Disc 
-* 1 appearance within customer.Customer 
-* 1 appearance within customer.RegistrationForm |None 
-|===
