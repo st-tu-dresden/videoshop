@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>de.tudresden.inf.st.lab</groupId>
 		<artifactId>st-lab-parent</artifactId>
-		<version>4.0.0</version>
+		<version>4.1.0-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 

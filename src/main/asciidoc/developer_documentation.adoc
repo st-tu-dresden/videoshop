@@ -1,25 +1,33 @@
-[options="header"]
-[cols="1, 3, 3"]
-|===
-|Version | Processing Date   | Author 
-|1.0	| October 29th, 2019 | Daniel Schoenicke 
-|2.0	| September 11th, 2023 | Markus Hamann 
-|===
-
+= Developer Documentation
 :project_name: Videoshop
 :company_name: Chair of Software Technology
 :toc: left
 :numbered:
+:spring-modulith-docs: ../../../target/spring-modulith-docs
 
-= Developer Documentation
+[options="header"]
+[cols="1, 3, 3"]
+|===
+|Version
+|Processing Date
+|Author
+
+|1.0
+|October 29th, 2019
+| Daniel Schoenicke
+
+|2.0
+|September 11th, 2023
+| Markus Hamann
+|===
 
 == Introduction and Goals
 === Task Definition
 
-[small]_Note: This task aims to provide an example for the {project_name}._
-[small]_It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification._
-[small]_You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty._
-[small]_Wherever information about the domain is provided, we used_ _italic_ [small]_to show the representation in the domain model._
+NOTE: This task aims to provide an example for the {project_name}.
+It is written from the perspective of the client of this project ({company_name}) and therefore can be seen as a requirements specification.
+You usually cannot expect such a document to be complete or even consistent, which is why you should always ask in case of uncertainty.
+Wherever information about the domain is provided, we used _italic_ to show the representation in the domain model.
 
 The times when people went to buy their movies physically in the store are mostly over.
 As we, the {company_name}, have always had our little secondary business of selling movies to students, this change affects us as well.
@@ -58,9 +66,9 @@ The user experience should be awesome, with a beautiful user interface and a lay
 
 === Quality Demands
 
-To measure the quality of the application, quality demands have to be defined, which have to be fulfilled. 
+To measure the quality of the application, quality demands have to be defined, which have to be fulfilled.
 
-[small]_Note: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^]._
+NOTE: The following descriptions are derived from the https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^].
 
 Maintainability::
 This characteristic represents the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it or adapt it to changes in environment, and in requirements.
@@ -125,28 +133,26 @@ Any data shall be stored persistently in a database and be accessible through th
 [[context_diagram_d_c4]]
 image::./diagrams/images/videoshop_d_context_c4_c1.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Context diagram in C4 notation (Level 1: System Context)", align=center]
 
-[small]_Note: The context model is similar to the requirement specification, since it only shows the overview of the system._
-
-[small]_Note: We are using the *C4* notation for all architectural models, since it holds easy to understand views of al architectural levels. Please refer to the notes in the requirement specification for C4._
-
-[small]_Note: If you want, you can also alternatively use the UML notation known from the course Softwaretechnologie 1._
+NOTE: The context model is similar to the requirement specification, since it only shows the overview of the system.
+We are using the *C4* notation for all architectural models, since it holds easy to understand views of al architectural levels. Please refer to the notes in the requirement specification for C4.
+If you want, you can also alternatively use the UML notation known from the course Softwaretechnologie 1.
 
 == Solution Strategy
 === Quality Demand Fulfillment
-[small]_Note: The following table shows the previous defined quality demands and solution approaches to fulfill them._
+NOTE:The following table shows the previous defined quality demands and solution approaches to fulfill them._
 
 [options="header"]
-|=== 
+|===
 |Quality Demand |Solution approach
 |Maintainability a|
 * *Modularity* Compose the application out of discrete components such that changes of a component have less impact on other components.
 * *Reusability* Ensure that components of the system can be reused by other components or systems.
 * *Modifiabilty* Ensure that the application can be modified or extended without introducing errors or degrading the product quality.
 |Usability a|
-* *Learnability* Ensure that the system can be easily used and understood by its users. This can be realized by e.g. unambiguously describing the content of inputs with labels or tooltips. 
-* *User error protection / Error handling* Protect user against making errors. Invalid inputs must not lead to invalid system states. 
+* *Learnability* Ensure that the system can be easily used and understood by its users. This can be realized by e.g. unambiguously describing the content of inputs with labels or tooltips.
+* *User error protection / Error handling* Protect user against making errors. Invalid inputs must not lead to invalid system states.
 * *User interface aesthetics* Provide a pleasing and satisfying interaction for the user.
-* *Accessibility* Ensure that people with a wide range of characteristics can fully use the system. This can be realized by e.g. using suitable font sizes and color contrasts. 
+* *Accessibility* Ensure that people with a wide range of characteristics can fully use the system. This can be realized by e.g. using suitable font sizes and color contrasts.
 |Security a|
 * *Confidentiality* Ensure that only data can be only accessed by people who are authorized to access them. This can be realized with _Spring Security_ and _Thymeleaf_ (`sec:authorize` - tag).
 * *Integrity* Prevent unauthorized modification of data. This can be realized with _Spring Security_ (`@PreAuthorize` - annotation).
@@ -155,7 +161,7 @@ image::./diagrams/images/videoshop_d_context_c4_c1.svg[context diagram c4, 100%,
 
 === Software Architecture
 
-[small]_Note: First, you want to give an overview of the container/components of your whole system. For this purpose you could use the *Container diagram* of C4, a more informal *Client-Server diagram*, or both._
+NOTE: First, you want to give an overview of the container/components of your whole system. For this purpose you could use the *Container diagram* of C4, a more informal *Client-Server diagram*, or both._
 
 [[container_diagram_d_c4]]
 image::./diagrams/images/videoshop_d_context_c4_c2.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Container diagram in C4 notation (Level 2: Container)", align=center]
@@ -163,17 +169,17 @@ image::./diagrams/images/videoshop_d_context_c4_c2.svg[context diagram c4, 100%,
 [[client_server_diagram]]
 image::./diagrams/images/videoshop_client_server.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Client Server Model of the application. The client only contains HTML and CSS files. The application logic is implemented on the server", align=center]
 
-*Explanation:* HTML-Templates are rendered clientside with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying H2 database saves data persistently.
+*Explanation:* HTML-Templates are rendered on the server and displayed by the client with their corresponding CSS-Stylesheets. The data shown in the templates is provided by Thymeleaf. Thymeleaf receives the requested data by the controller classes, which are implemented in the backend. These controller classes on the other hand use instances and methods of the model classes. By default, an underlying H2 database saves data persistently.
 
-[small]_Note: Optional JavaScript code is part of the client. *You can use JavaScript in your application but make sure that you don't use it to implement any of the application logic*!_
+NOTE: Optional JavaScript code is part of the client. *You can use JavaScript in your application but make sure that you don't use it to implement any of the application logic*!
 
 
 [[component_diagram_d_c4]]
-image::./diagrams/images/videoshop_d_top_level_c4_c3.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Top Level Architecture of the _Web Application_ in C4 notation (Level 3: Component)", align=center]
+plantuml::{spring-modulith-docs}/components.puml[format=svg,title="Top-level application architecture"]
 
-[small]_Note: The Top Level Architecture gives an overview of the components in your system (here the Web Application) and their relationships (here only to the database, but relationships between the components are possible, too). For this purpose you could use the *Component diagram* of C4, the *Top Level Architecture diagram* from the course Softwaretechnologie 1, or both._
-
-[small]_Note: The components are described in detail in the chapter: 5. Building Block View_
+NOTE: The Top Level Architecture gives an overview of the components in your system (here the Web Application) and their relationships (here only to the database, but relationships between the components are possible, too).
+For this purpose you could use the *Component diagram* of C4, the *Top Level Architecture diagram* from the course Softwaretechnologie 1, or both.
+The components are described in detail in the chapter: 5. Building Block View.
 
 
 === Architecture decisions
@@ -190,67 +196,43 @@ The persistence is deactivated by default. To activate persistence storage, the 
 ....
 
 ==== User Interface
-[[context_diagram_d_c4]]
+
+[[user-interface]]
 image::./diagrams/images/dialogue_map.svg[context diagram c4, 100%, 100%, pdfwidth=100%, title= "Dialog Map of the Videoshop", align=center]
 
-[small]_Note: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
+NOTE: The blue boxes display a HTML-Template. The white boxes within the templates represent buttons, which redirect to the templates, their outgoing arrows point to._
 
 === Use of external frameworks
 
-[small]_Note: Name the used external frameworks, in which packages you used them, and why you used them in your application. You only need to describe the high level artefact._
+NOTE: Name the used external frameworks, in which packages you used them, and why you used them in your application. You only need to describe the high level artifact.
 
 
 [options="header"]
 |===
-|External package |Used by |Why
-|org.springframework.boot a|
-* videoshop
-| Simple configuration of Spring application
-|org.springframework.web a|
-* videoshop
-* videoshop.catalog
-* videoshop.customer
-* videoshop.inventory
-* videoshop.order
-| Application should be provided as a static website
-|org.springframework.security a|
-* videoshop
-* videoshop.customer
-* videoshop.inventory
-* videoshop.order
-| Security features for the videoshop application and authorization of website access
-|org.springframework.data a|
-* videoshop.catalog
-* videoshop.customer
-* videoshop.inventory
-* videoshop.order
-| JPA connection utility to the database layer
-|org.salespointframework a|
-* videoshop
-* videoshop.catalog
-* videoshop.customer
-* videoshop.inventory
-* videoshop.order
-| Reuse of SalesPoints POS functionality
-
+|External library|Category|Description
+|Spring Boot|General purpose|…
+|Spring Data JPA|Persistence|…
+|Spring Security|Security|…
+|Semantic UI|UI|…
+|jQuery|UI|…
 |===
 
 == Building block view
 
 === Package diagram
 
-[small]_Note: If your package structure is more nested as in this example, add an *UML package diagram* to this document. This diagram only shows the packages of the application, their containment structure, and \<<use>>-relationships between them. The goal is to give an overview of the detailed architecture._
+NOTE: If your package structure is more nested as in this example, add an *UML package diagram* to this document. This diagram only shows the packages of the application, their containment structure, and \<<use>>-relationships between them. The goal is to give an overview of the detailed architecture._
 
-[small]_Example: https://www.uml-diagrams.org/multi-layered-web-architecture-uml-package-diagram-example.html_
+_Example: https://www.uml-diagrams.org/multi-layered-web-architecture-uml-package-diagram-example.html_
 
-[small]_Note: In this example project the content package diagram would look like the Top Level Architecture, so it was omitted._
+NOTE: In this example project the content package diagram would look like the Top Level Architecture, so it was omitted._
 
 === Videoshop
 
 image:diagrams/images/videoshop.svg[class design diagram - videoshop]
 
 [options="header"]
-|=== 
+|===
 |Class/Enumeration |Description
 |VideoShop|The central application class to configure the Spring container and run the application
 |VideoShopWebConfiguration|Configuration class to route `/login` directly to the `login.html` template
@@ -259,10 +241,13 @@ image:diagrams/images/videoshop.svg[class design diagram - videoshop]
 
 === Catalog
 
+plantuml::{spring-modulith-docs}/module-videoshop.catalog.puml[format=svg, title="The catalog component"]
+include::{spring-modulith-docs}/module-videoshop.catalog.adoc[]
+
 image:diagrams/images/catalog.svg[class design diagram - catalog]
 
 [options="header"]
-|=== 
+|===
 |Class/Enumeration |Description
 |CatalogController |A Spring MVC Controller to handle requests to show ``Disc``s and create ``Comment``s
 |CatalogInitializer |An implementation of the DataInitializer to create dummy DVDs and BluRays on application startup
@@ -275,10 +260,13 @@ image:diagrams/images/catalog.svg[class design diagram - catalog]
 
 === Customer
 
+plantuml::{spring-modulith-docs}/module-videoshop.customer.puml[format=svg,title="The customer component"]
+include::{spring-modulith-docs}/module-videoshop.customer.adoc[]
+
 image:diagrams/images/customer.svg[class design diagram - customer]
 
 [options="header"]
-|=== 
+|===
 |Class/Enumeration |Description
 |Customer|Custom class to extend the Salespoint-UserAccount with an address
 |CustomerController|A Spring MVC Controller to handle requests to register and show customers
@@ -290,10 +278,13 @@ image:diagrams/images/customer.svg[class design diagram - customer]
 
 === Inventory
 
+plantuml::{spring-modulith-docs}/module-videoshop.inventory.puml[format=svg,title="The inventory component"]
+include::{spring-modulith-docs}/module-videoshop.inventory.adoc[]
+
 image:diagrams/images/inventory.svg[class design diagram - inventory]
 
 [options="header"]
-|=== 
+|===
 |Class/Enumeration |Description
 |InventoryController|A Spring MVC Controller to handle the request to show the stock of the shop
 |InventoryInitilalizer|An implementation of the DataInitializer to create dummy data on application startup
@@ -301,16 +292,19 @@ image:diagrams/images/inventory.svg[class design diagram - inventory]
 
 === Order
 
+plantuml::{spring-modulith-docs}/module-videoshop.order.puml[format=svg,title="The order component"]
+include::{spring-modulith-docs}/module-videoshop.order.adoc[]
+
 image:diagrams/images/order.svg[class design diagram - order]
 
 [options="header"]
-|=== 
+|===
 |Class/Enumeration |Description
 |OrderController|A Spring MVC Controller to handle the cart
 |===
 
 === Traceability between Analysis- and Design Model
-[small]_Note: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. Use it as a checklist to check that you did not forgot a domain concept_
+NOTE: The following table shows the Forward- and Backward Traceability from the Analysis Model to the Design Model and vice versa. Use it as a checklist to check that you did not forgot a domain concept_
 
 [options="header"]
 |===
@@ -318,30 +312,30 @@ image:diagrams/images/order.svg[class design diagram - order]
 
 |BluRay                 |videoshop.catalog.DiscType
 |Boss        		   a|
-						* salespointframework.Role 						 
+						* salespointframework.Role
 						* salespointframework.UserAccount
-|Cart                   |salespointframework.Cart 
-|Item                   |salespointframework.CartItem (via Salespoint.Cart) 
+|Cart                   |salespointframework.Cart
+|Item                   |salespointframework.CartItem (via Salespoint.Cart)
 |Comment                |videoshop.catalog.Comment
 |Customer   		   a|
-						* salespointframework.Role 						 
-						* videoshop.customer.Customer 
+						* salespointframework.Role
+						* videoshop.customer.Customer
 |Disc             		|videoshop.catalog.Disc
-|Dvd                    |videoshop.catalog.DiscType 
+|Dvd                    |videoshop.catalog.DiscType
 |Image					|String
-|Inventory              |salespointframework.UniqueInventory 
-|InventoryItem          |salespointframework.UniqueInventoryItem 
-|Order                  |salespointframework.Order 
-|Status                 |salespointframework.OrderStatus 
+|Inventory              |salespointframework.UniqueInventory
+|InventoryItem          |salespointframework.UniqueInventoryItem
+|Order                  |salespointframework.Order
+|Status                 |salespointframework.OrderStatus
 |User/Registered User  a|
 						* salespointframework.UserAccount
 |VideoCatalog           |salespointframework.catalog
-|Videoshop              |videoshop.Videoshop 
+|Videoshop              |videoshop.Videoshop
 |===
 
 == Runtime view
 
-[small]_Note: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
+NOTE: For your developer documentation you only have to create a diagram of one component, which shows the most relevant interactions_
 
 === Catalog
 image:diagrams/images/seq_catalog.svg[sequence diagram - catalog]

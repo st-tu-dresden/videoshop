@@ -24,6 +24,9 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Setup Graphviz
+      uses: ts-graphviz/setup-graphviz@v1
+
     - name: Configure cache
       uses: actions/cache@v1
       with:
