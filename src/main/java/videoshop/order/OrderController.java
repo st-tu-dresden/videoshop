@@ -33,9 +33,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -142,7 +144,13 @@ class OrderController {
 			return "redirect:/";
 		}).orElse("redirect:/cart");
 	}
-
+	
+	@RequestMapping("/deleteAll")
+	String delete(@ModelAttribute Cart cart) {
+		cart.clear();
+		return "redirect:/";
+	}
+	
 	@GetMapping("/orders")
 	@PreAuthorize("hasRole('BOSS')")
 	String orders(Model model) {

@@ -54,11 +54,19 @@
                                 <button type="submit" class="ui button" th:text="#{cart.buy}">Kaufen</button>
                             </form>
                         </div>
+                        
+                        <div class="column">
+							<form  class="ui form" method="post" th:action="@{/deleteAll}">
+								<button type="submit" class="ui button"> Leeren </button>
+							</form>
+						</div>
                     </div>
                 </div>
             </div>
 
             <h2 th:if="${cart.empty}" th:text="#{cart.empty}">Leer</h2>
+            
+            
         </section>
     </body>
 </html>
