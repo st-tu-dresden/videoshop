@@ -81,13 +81,15 @@ class OrderController {
 	 * Salespoint extension will directly load the object instance from the database. If the identifier provided is
 	 * invalid (invalid format or no {@link Product} with the id found), {@literal null} will be handed into the method.
 	 *
-	 * @param disc the disc that should be added to the cart (may be {@literal null}).
+	 * @param disc   the disc that should be added to the cart (may be {@literal null}).
 	 * @param number number of discs that should be added to the cart.
-	 * @param cart must not be {@literal null}.
+	 * @param cart   must not be {@literal null}.
 	 * @return the view name.
 	 */
 	@PostMapping("/cart")
-	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+	String addDisc(@RequestParam("pid") Disc disc,
+				   @RequestParam("number") int number,
+				   @ModelAttribute Cart cart) {
 
 		// (｡◕‿◕｡)
 		// Das Inputfeld im View ist eigentlich begrenzt, allerdings sollte man immer auch serverseitig validieren
@@ -108,6 +110,28 @@ class OrderController {
 				return "redirect:blurays";
 		}
 	}
+
+	@PostMapping("/changeAmount")
+	String changeAmount(@RequestParam("number") int number,
+						@RequestParam("pid") Disc disc,
+						@ModelAttribute Cart cart,
+						@LoggedIn Optional<UserAccount> userAccount) {
+
+		int amount = number > 5 ? 5 : number;
+		if (amount <= 0) {
+			return userAccount.map(account -> {
+				cart.removeItem(disc.getName());
+				return "redirect:/cart";
+			}).orElse("redirect:/cart");
+		} else {
+			cart.addOrUpdateItem(disc, Quantity.of(amount));
+		}
+		return "redirect:/cart";
+	}
+
+
+
+
 
 	@GetMapping("/cart")
 	String basket() {

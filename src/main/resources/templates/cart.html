@@ -20,8 +20,21 @@
 
                     <tr th:each="item : ${cart} ">
                         <td th:text="${item.productName}">Last Action Hero</td>
-                        <td th:text="${item.quantity}">10</td>
-                        <td th:text="${{item.price}}">10 Euro</td>
+                        <td>
+                            <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/changeAmount}">
+                                <input  type="hidden" name="pid" value="0" th:value="${item.id}"/>
+                                <label for="number">Anzahl</label>
+                                <input class="input is-primary cart-item-qty"
+                                       type="number"
+                                       name="number"
+                                       id="number"
+                                       min="0" max="5"
+                                       value="1"
+                                       th:value="${item.quantity}"/>
+                                <button type="submit" class="ui button">Ändern</button>
+                            </form>
+                        </td>
+                        <td th:text="${item.price.number}">Total Price</td>
                     </tr>
                     <tr>
                         <td>Last Action Hero</td>
