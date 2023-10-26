@@ -21,21 +21,21 @@
                     <tr th:each="item : ${cart} ">
                         <td th:text="${item.productName}">Last Action Hero</td>
                         <td>
-                            <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/changeAmount}">
-                                <input  type="hidden" name="pid" value="0" th:value="${item.id}"/>
-                                <label for="number">Anzahl</label>
-                                <input class="input is-primary cart-item-qty"
-                                       type="number"
-                                       name="number"
-                                       id="number"
-                                       min="0" max="5"
-                                       value="1"
-                                       th:value="${item.quantity}"/>
-                                <button type="submit" class="ui button">Ändern</button>
+                            <form class="ui form" method="post" th:action="@{/changeAmount}" sec:authorize="hasRole('CUSTOMER')">
+                                <input type="hidden" name="pid" th:value="${item.product.id}"/>
+                                <input type="hidden" name="itemId" th:value="${item.id}"/>
+                                <div class="field">
+                                    <label for="number">Anzahl</label>
+                                    <input id="number" type="number" name="number" min="0" max="5"
+                                           th:value="${item.quantity}"/><br/>
+                                </div>
+                                <button type="submit" class="ui button" th:text="#{cart.change}">Ändern</button>
                             </form>
                         </td>
-                        <td th:text="${item.price.number}">Total Price</td>
+                        <td th:text="${{item.price}}">Total Price</td>
+
                     </tr>
+
                     <tr>
                         <td>Last Action Hero</td>
                         <td>10</td>

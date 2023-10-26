@@ -114,17 +114,20 @@ class OrderController {
 	@PostMapping("/changeAmount")
 	String changeAmount(@RequestParam("number") int number,
 						@RequestParam("pid") Disc disc,
+						@RequestParam("itemId") String itemId,
 						@ModelAttribute Cart cart,
 						@LoggedIn Optional<UserAccount> userAccount) {
 
 		int amount = number > 5 ? 5 : number;
 		if (amount <= 0) {
 			return userAccount.map(account -> {
-				cart.removeItem(disc.getName());
+				cart.removeItem(itemId);
 				return "redirect:/cart";
 			}).orElse("redirect:/cart");
 		} else {
+			cart.removeItem(itemId);
 			cart.addOrUpdateItem(disc, Quantity.of(amount));
+
 		}
 		return "redirect:/cart";
 	}
