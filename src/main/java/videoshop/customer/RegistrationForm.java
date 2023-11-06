@@ -15,7 +15,6 @@
  */
 package videoshop.customer;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
 import org.springframework.validation.Errors;

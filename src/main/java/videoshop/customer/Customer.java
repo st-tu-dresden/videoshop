@@ -79,7 +79,7 @@ public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 	public static final class CustomerIdentifier implements Identifier, Serializable {
 
 		private static final long serialVersionUID = 7740660930809051850L;
-		private final @SuppressWarnings("unused") UUID identifier;
+		private final UUID identifier;
 
 		/**
 		 * Creates a new unique identifier for {@link Customer}s.

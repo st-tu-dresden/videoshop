@@ -20,7 +20,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 // (｡◕‿◕｡)
@@ -30,9 +29,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "COMMENTS")
-public class Comment implements Serializable {
-
-	private static final long serialVersionUID = -7114101035786254953L;
+public class Comment {
 
 	// (｡◕‿◕｡)
 	// Falls man die Id nicht selber setzen will, kann die mit @GeneratedValue vom JPA-Provider generiert und gesetzt
