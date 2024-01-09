@@ -37,3 +37,4 @@ jobs:
 
     - name: Build with Maven
       run: ./mvnw -Pci -B verify
+
