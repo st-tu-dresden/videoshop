@@ -23,10 +23,11 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.moduliths.docs.Documenter;
-import org.moduliths.docs.Documenter.Options;
-import org.moduliths.model.Module;
-import org.moduliths.model.Modules;
+import org.springframework.modulith.core.ApplicationModule;
+import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.modulith.docs.Documenter;
+import org.springframework.modulith.docs.Documenter.CanvasOptions;
+import org.springframework.modulith.docs.Documenter.DiagramOptions;
 import org.springframework.util.StringUtils;
 
 /**
@@ -40,8 +41,8 @@ class VideoshopModularityTests {
 	private static final Class<?> APPLICATION_CLASS = VideoShop.class;
 	private static final String BASE_PACKAGE = APPLICATION_CLASS.getSimpleName().toLowerCase(Locale.ENGLISH);
 
-	Modules modules = Modules.of(APPLICATION_CLASS);
-	Predicate<Module> isSalespointModule = it -> it.getBasePackage().getName().startsWith("org.salespoint");
+	ApplicationModules modules = ApplicationModules.of(APPLICATION_CLASS);
+	Predicate<ApplicationModule> isSalespointModule = it -> it.getBasePackage().getName().startsWith("org.salespoint");
 
 	@Test
 	void assertModularity() {
@@ -51,18 +52,15 @@ class VideoshopModularityTests {
 	@Test // #120
 	void writeComponentDiagrams() throws IOException {
 
-		var options = Options.defaults() //
+		var options = DiagramOptions.defaults() //
 				.withColorSelector(this::getColorForModule) //
 				.withDefaultDisplayName(this::getModuleDisplayName) //
 				.withTargetOnly(isSalespointModule);
 
-		var documenter = new Documenter(modules);
-		documenter.writeModulesAsPlantUml(options);
-		documenter.writeModuleCanvases();
-		documenter.writeIndividualModulesAsPlantUml(options);
+		new Documenter(modules).writeDocumentation(options, CanvasOptions.defaults());
 	}
 
-	private Optional<String> getColorForModule(Module module) {
+	private Optional<String> getColorForModule(ApplicationModule module) {
 
 		var packageName = module.getBasePackage().getName();
 
@@ -75,7 +73,7 @@ class VideoshopModularityTests {
 		}
 	}
 
-	private String getModuleDisplayName(Module module) {
+	private String getModuleDisplayName(ApplicationModule module) {
 
 		return module.getBasePackage().getName().startsWith(BASE_PACKAGE) //
 				? String.format("%s :: %s", APPLICATION_CLASS.getSimpleName(), StringUtils.capitalize(module.getDisplayName())) //

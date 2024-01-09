@@ -28,7 +28,7 @@ import org.springframework.data.util.Streamable;
  */
 public interface VideoCatalog extends Catalog<Disc> {
 
-	static final Sort DEFAULT_SORT = Sort.by("productIdentifier").descending();
+	static final Sort DEFAULT_SORT = Sort.sort(Disc.class).by(Disc::getId).descending();
 
 	/**
 	 * Returns all {@link Disc}s by type ordered by the given {@link Sort}.

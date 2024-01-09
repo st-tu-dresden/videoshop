@@ -19,8 +19,6 @@ import videoshop.catalog.Disc;
 
 import java.util.Optional;
 
-import org.salespointframework.catalog.Product;
-import org.salespointframework.core.AbstractEntity;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
@@ -130,7 +128,7 @@ class OrderController {
 			// (｡◕‿◕｡)
 			// Mit completeOrder(…) wird der Warenkorb in die Order überführt, diese wird dann bezahlt und abgeschlossen.
 			// Orders können nur abgeschlossen werden, wenn diese vorher bezahlt wurden.
-			var order = new Order(account, Cash.CASH);
+			var order = new Order(account.getId(), Cash.CASH);
 
 			cart.addItemsTo(order);
 

@@ -15,7 +15,6 @@
  */
 package videoshop.inventory;
 
-import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -15,13 +15,12 @@
  */
 package videoshop.catalog;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 // (｡◕‿◕｡)
 // Eigene Entity Klasse um Kommentare für Discs zu speichern
@@ -30,9 +29,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "COMMENTS")
-public class Comment implements Serializable {
-
-	private static final long serialVersionUID = -7114101035786254953L;
+public class Comment {
 
 	// (｡◕‿◕｡)
 	// Falls man die Id nicht selber setzen will, kann die mit @GeneratedValue vom JPA-Provider generiert und gesetzt

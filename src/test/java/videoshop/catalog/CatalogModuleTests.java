@@ -18,19 +18,19 @@ package videoshop.catalog;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.moduliths.test.ModuleTest;
-import org.moduliths.test.ModuleTest.BootstrapMode;
 import org.salespointframework.accountancy.Accountancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.modulith.test.ApplicationModuleTest;
+import org.springframework.modulith.test.ApplicationModuleTest.BootstrapMode;
 
 /**
  * Module tests for catalog.
  *
  * @author Oliver Gierke
  */
-@ModuleTest(mode = BootstrapMode.DIRECT_DEPENDENCIES)
+@ApplicationModuleTest(mode = BootstrapMode.DIRECT_DEPENDENCIES)
 class CatalogModuleTests {
 
 	@Autowired VideoCatalog catalog;
