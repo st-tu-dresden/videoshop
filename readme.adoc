@@ -41,11 +41,11 @@ Make sure that the wrapped Maven picks up the same JDK version and that the foll
 [source, bash]
 ----
 $ ./mvnw --version
-Apache Maven 3.8.6 (84538c9988a25aec085021c365c560670ad80f63)
-Maven home: /Users/martin/.m2/wrapper/dists/apache-maven-3.8.6-bin/67568434/apache-maven-3.8.6
-Java version: 17.0.4.1, vendor: Eclipse Adoptium, runtime: /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
-Default locale: de_DE, platform encoding: UTF-8
-OS name: "mac os x", version: "12.6", arch: "aarch64", family: "mac"
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: /.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1
+Java version: 21.0.4, vendor: Eclipse Adoptium, runtime: /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "14.7", arch: "aarch64", family: "mac"
 ----
 
 ### Git
