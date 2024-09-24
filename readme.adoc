@@ -7,7 +7,7 @@ Purpose of this sample project is to make students familiar with basic technolog
 
 ## Quickstart
 
-NOTE: The Quickstart requires Java 17 and a recent Git (2.20 or newer preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
+NOTE: The Quickstart requires Java 21 and a recent Git (2.46 or newer preferred) to be available on your machine. If you miss any of those go through the steps described in <<prerequisites>>.
 Also, note that you have to run `mvnw.cmd` instead of `./mvnw` if you run Windows by accident.
 
 [source, shell]
@@ -24,16 +24,16 @@ Note that the standard admin user is named `boss` and has the password `123`.
 
 ## Prerequisites
 
-### Java 17
+### Java 21
 
-https://adoptium.net/temurin/releases/?version=17[Download] the binaries, install. Make sure the console shows something like this:
+https://adoptium.net/temurin/releases/?version=21[Download] the binaries, install. Make sure the console shows something like this:
 
 [source, bash]
 ----
 $ java -version
-openjdk version "17.0.4.1" 2022-08-12
-OpenJDK Runtime Environment Temurin-17.0.4.1+1 (build 17.0.4.1+1)
-OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode)
+openjdk version "21.0.4" 2024-07-16 LTS
+OpenJDK Runtime Environment Temurin-21.0.4+7 (build 21.0.4+7-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.4+7 (build 21.0.4+7-LTS, mixed mode)
 ----
 
 Make sure that the wrapped Maven picks up the same JDK version and that the following command shows similar output:
@@ -55,7 +55,7 @@ https://git-scm.com/download[Download] the binaries, run the installer. Verify t
 [source, bash]
 ----
 $ git --version
-git version 2.33.0
+git version 2.46.1
 ----
 
 ## IDE Setup
