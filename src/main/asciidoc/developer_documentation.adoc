@@ -209,6 +209,9 @@ This diagram only shows the packages of the application, their containment struc
 
 _Example: https://www.uml-diagrams.org/multi-layered-web-architecture-uml-package-diagram-example.html_
 
+[[package_diagram]]
+image::./diagrams/images/videoshop_d_package.svg[package diagram]
+
 
 NOTE: In the following sections, you will find the detailed class diagrams of the packages shown in the package diagram.
 You can add some short descriptions of the classes below but the general description of the classes should be in
