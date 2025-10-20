@@ -34,6 +34,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+// ------------------------------------------------------------
+//  imports for price sorting
+// ------------------------------------------------------------
+import org.springframework.web.bind.annotation.RequestParam;
+import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.StreamSupport;
+// ------------------------------------------------------------
+
 @Controller
 class CatalogController {
 
@@ -97,6 +107,49 @@ class CatalogController {
 
 		return "redirect:/disc/" + disc.getId();
 	}
+    // -----------------------------------------------------
+    //  tiny helpers to sort by price
+    // --------------------------------------------------------
+
+    /** Return price as BigDecimal so we can compare easily. */
+    private static BigDecimal getFilmPrice(Disc film) {
+        return film.getPrice().getNumber().numberValueExact(BigDecimal.class);
+    }
+
+    /** Sort any list of films by price, ascending or descending. */
+    private static List<Disc> sortFilmsByPrice(Iterable<Disc> films, boolean ascending) {
+        var stream = StreamSupport.stream(films.spliterator(), false);
+        var comparator = Comparator.comparing(CatalogController::getFilmPrice);
+        return stream.sorted(ascending ? comparator : comparator.reversed()).toList();
+    }
+
+    // ------------------------------------------------------------
+    // ONE unified route – sorts ALL films by price (no type distinction = all films)
+    // ------------------------------------------------------------
+    @GetMapping("/catalog/sort")
+    String sortWholeCatalogByPrice(
+            @RequestParam(name = "dir", defaultValue = "asc") String direction,
+            Model model) {
+
+        // 1) Get ALL films (DVDs, Blurays, alles zusammen)
+        var allFilms = catalog.findAll();
+
+        // 2) Determine direction (default: ascending)
+        var ascending = !("desc".equalsIgnoreCase(direction));
+
+        // 3) Sort
+        var sorted = sortFilmsByPrice(allFilms, ascending);
+
+        // 4) Hand over to the same template
+        model.addAttribute("catalog", sorted);
+        // i18n key = a translation key used to show text in different languages, just in case for language options
+        model.addAttribute("title", "All films (sorted by price)");
+        model.addAttribute("sort", "price");
+        model.addAttribute("dir", ascending ? "asc" : "desc");
+
+        return "catalog";
+    }
+    // ----------------------------------------------
 
 	/**
 	 * Describes the payload to be expected to add a comment.
