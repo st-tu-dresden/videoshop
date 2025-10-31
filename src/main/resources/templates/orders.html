@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html(title=#{orders.title})}">
+      th:replace="~{layout :: layout(content=~{:: #content}, title=#{orders.title})}">
     <head>
     </head>
     <body>
-        <section layout:fragment="content">
+        <section id="content">
             <h2 th:text="#{orders.completed}"></h2>
             <table class="ui celled table">
                 <thead>

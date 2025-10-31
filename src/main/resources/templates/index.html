@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html}">
+      th:replace="~{layout :: layout(~{:: #content})}">
     <head>
     </head>
     <body>
-        <section layout:fragment="content">
+        <section id="content">
             <h2 th:text="#{home.welcome}">Willkommen zu unserem Videoshop.</h2>
             <p sec:authorize="isAuthenticated()" th:text="${'Hallo ' + #authentication?.name}">Hallo Nutzer</p>
         </section>

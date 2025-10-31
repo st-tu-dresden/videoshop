@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      th:fragment="layout(content)">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -23,7 +23,7 @@
                 <h1 th:text="${#strings.isEmpty(title)} ? #{home.title} : ${title}">Videoshop</h1>
             </header>
             <nav th:insert="~{navigation :: navigation}"></nav>
-            <section layout:fragment="content"></section>
+            <section th:insert="${content}"></section>
         </div>
     </body>
 </html>

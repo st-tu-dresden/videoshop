@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html(title=#{${title}})}">
+      th:replace="~{layout :: layout(content=~{:: #content}, title=#{${title}})}">
     <head>
     </head>
     <body>
@@ -10,7 +9,7 @@
             <h1 th:text="#{${title}}">Katalog</h1>
         </header>
         <nav th:insert="~{navigation :: navigation}"></nav>
-        <section layout:fragment="content">
+        <section id="content">
         <div class="ui link cards" th:remove="all-but-first">
             <div class="ui card" th:each="disc : ${catalog}">
                 <div class="content">

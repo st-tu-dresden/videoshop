@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html(title=${disc.name})}">
+      th:replace="~{layout :: layout(content=~{:: #content}, title=${disc.name})}">
     <head>
     </head>
     <body>
-        <section layout:fragment="content">
+        <section id="content">
             <div class="ui items">
                 <div class="item">
                     <div class="image">
