@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2020 the original author or authors.
+ * Copyright 2013-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,16 +103,12 @@ class CatalogController {
 	 *
 	 * @author Oliver Gierke
 	 */
-	interface CommentAndRating {
+	record CommentAndRating(@NotEmpty String comment,
+							@Range(min = 1, max = 5) Integer rating) {
 
-		@NotEmpty
-		String getComment();
 
-		@Range(min = 1, max = 5)
-		Integer getRating();
-
-		default Comment toComment(LocalDateTime time) {
-			return new Comment(getComment(), getRating(), time);
+		Comment toComment(LocalDateTime time) {
+			return new Comment(comment(), rating(), time);
 		}
 	}
 }
