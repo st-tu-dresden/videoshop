@@ -26,7 +26,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.ui.ExtendedModelMap;
 
 /**
- * Integration tests for {@link InventoryController} that interact with the controller directly.
+ * Integration tests for {@link CustomerController} that interact with the controller directly.
  * 
  * @author Oliver Gierke
  */
