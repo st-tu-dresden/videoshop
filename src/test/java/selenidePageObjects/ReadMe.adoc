@@ -1,0 +1,815 @@
+:project_name: Videoshop-Tests
+:author: Oliver Geisel
+:company_name: Chair of Software Technology
+:revnumber: 0.1
+:revdate: {docdatetime}
+:revremark: First draft
+:doctype: book
+:icons: font
+:source-highlighter: coderay
+:toc: left
+:numbered:
+
+= Selenide Tests
+
+This package contains the important classes for the *Selenide* tests.
+Selenide is an open-source framework for test automation powered by _Selenium WebDriver_.
+It is designed to make writing automated tests (*acceptance tests*) in Java easier and more efficient.
+This documents base on the official Selenide documentation and provides an overview of the most important features and concepts of Selenide.
+You can find the official documentation at https://selenide.org/documentation.html[https://selenide.org/documentation.html].
+For most of these chapter you can find additional information in the official documentation.
+
+WARNING: Selenide is only for Frontend tests. It is not for testing the backend or the database.
+For this you have to  write your own tests.
+You should not test the status code of a response or what is in the JSON response.
+And don't even think about testing the database with Selenide.
+All you test is the "visible" part of the website. The frontend. The user interface.
+The HTML, CSS and JavaScript code that is sent to the browser.
+For all other parts there are other tests-methods and frameworks.
+
+== Difference to Selenium
+Selenium is the basis for Selenide.
+Selenium is a framework that allows you to interact with a web browser and
+perform actions like clicking buttons, filling out forms, and navigating between pages.
+You can 'simulate a real user' by using Selenium.
+But there is a lot of boilerplate code that you have to write to get Selenium working.
+
+- You have get the WebDriver
+- set it up, choose the browser
+- set the path to the driver
+- find the elements
+- wait for them to be visible
+
+Many of these steps are repetitive and can be time-consuming.
+Selenide simplifies this process by providing a higher-level API that abstracts away much of the boilerplate code, allowing you to focus on writing tests that are easy to read and maintain.
+
+Another difference is that Selenium is a general-purpose framework that can be used with python, Java, C#, Ruby, etc. Selenide is a Java framework that is built on top of Selenium and provides additional features and functionality specifically for Java developers.
+
+== Basics
+Selenide wants to be simple. So you have tests, that are easy to read.
+You don't have to select the browser or webdirver every time.
+This all can be configured in the `src/test/resources/selenide.properties` file
+(see [Selenide Properties]).
+
+=== Opening a website
+
+First of all you need to call the website you want to test.
+This is done by calling the `open(String)` method.
+[source, jshell]
+----
+import static com.codeborne.selenide.Selenide.open;
+
+open("http://localhost:8080/dvds");
+----
+
+When you did this, the browser will open and you can start to interact with the website.
+That's all.
+No setup of the WebDriver, no configuration of the browser, no waiting for elements to be visible.
+All defaults of Selenide are used.
+
+There is a shorter way to call the website.
+Use only the path and we will get the same result
+[source, jshelllanguage]
+----
+open("dvds");
+// equivalent to
+open("http://localhost:8080/dvds")
+
+----
+
+NOTE: Make sure you have the correct URL and that the website is accessible.
+The URL can be relative or absolute.
+If it starts with `http://` or `https://` its absolute.
+Otherwise its relative to the base url in Selenide.
+
+WARNING: The default url is `http://localhost:8080/` if you don't specify a url in the `open()` method.
+If you want to use a different url, or port you have to specify it in the `open()` method or in the `selenide.properties` file.
+
+=== Interacting with elements
+
+Next you want to get some elements of the website and interact with them.
+Selenide provides a simple and intuitive API for interacting with web elements.
+You can use the `$(String)` method to find an element by its
+https://w3schools.com/cssref/css_selectors.asp[CSS selector].
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.$;
+
+public class VideoshopExampleTest {
+    @Test
+    public void getFirstProduct() {
+        open("https://localhost:8080/dvds");
+
+        // The first element with the class "ui card" will be selected
+        var firstProduct = $( ".ui.card" );
+    }
+}
+----
+
+The `$(String)` method returns a `SelenideElement` object, which represents the web element you want to interact with.
+There is an alternative way to find elements by using the $()-method.
+You can use a more 'human-readable' syntax to find elements by their attributes,
+like `$(By.id("q"))` , `$(By.className("container"))` or `$(By.name("q"))`
+
+[source,java]
+----
+import org.openqa.selenium.By;
+import static com.codeborne.selenide.Selenide.$;
+
+public class VideoshopExampleTest {
+    @Test
+    public void getFirstProduct() {
+        open("http://localhost:8080/dvds");
+
+        var firstProduct = $( By.className("ui card"));
+    }
+}
+----
+
+All available Selectors are listed in the
+https://selenide.org/javadoc/current/com/codeborne/selenide/Selectors.html[Selenide Selectors] documentation.
+A big advantage of SelenideElements is that they are inherited from the `WebElement` class from Selenium.
+So if you don't like this Syntax you can also call the `find()` method on a `SelenideElement` object to find a child element.
+But this is not recommended, because you loose many advantages of Selenide you will see later.
+
+
+If you want to find more than one element (like in our example with the catalog products), you can use the `$$` method,
+which returns a collection of `SelenideElement` objects.
+
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.$$;
+
+public class VideoshopExampleTest {
+    @Test
+    public void getAllProduct() {
+        open("http://localhost:8080/dvds");
+        // Find all cards on the page
+        var allDivs = $$( ".ui.card" );
+    }
+}
+----
+
+A big advantage of the SelenideElements is that you can call the $()-method on it to.
+So you can find child elements and get to your target element step by step; if you want.
+
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+public class VideoshopExampleTest {
+    @Test
+    public void getFirstProductText() {
+        open("http://localhost:8080/dvds");
+
+        // The first element with the class "ui card" will be selected
+        var firstProduct = $( ".ui.card" );
+        // Find the child element with the class "header"
+        var productTitle = firstProduct.$(".content").$(".header");
+        // Print the text of the product title
+        System.out.println(productTitle.getText());
+    }
+}
+----
+
+
+=== Waiting for elements
+Sometimes you want to interact with an element that is not visible on the page yet.
+This can have different reasons, like the element is loaded dynamically or the page is not fully loaded yet.
+In Selenium you have to ask for there presence or wirte explicit wait or sleep statements to wait for the element to be visible before interacting with it.
+But Selenide waits by default for the element (default timeout is 4 seconds).
+This means you don't have to write any explicit waits or sleep statements in your tests.
+
+=== manipulating elements
+Since we can find elements, we can also manipulate them.
+The `SelenideElement` class provides methods for interacting with web elements, such as `setValue(String)`, `click()`, `submit()`, and many more.
+You can use these methods to perform actions on the web elements you have found.
+
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+public class VideoshopExampleTest {
+    @Test
+    public void manipulateElement() {
+        open("http://localhost:8080/dvds");
+        // The first element with the class "ui card" will be selected
+        var firstProduct = $( ".ui.card" );
+        // Find the child element with the class "header"
+        var productTitle = firstProduct.$(".content").$(".header");
+        productTitle.click(); // Click on the product title
+    }
+}
+----
+
+NOTE: Read the
+https://selenide.org/javadoc/current/com/codeborne/selenide/SelenideElement.html[SelenideElement Javadoc]
+for a complete list of methods available in the `SelenideElement` class.
+
+=== Test the website
+The best advantage of Selenide is that you can write tests that are easy to read and understand.
+In normal Selenium you only can manipulate elements. There is no direct way to test the website.
+You have to write your own assertions and checks.
+This would look like this:
+
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+public class VideoshopExampleTest {
+    @Test
+    public void testWebsiteWithEquals() {
+        open("http://localhost:8080/dvds");
+
+        // The first element with the class "ui card" will be selected
+        var firstProduct = $( ".ui.card" );
+        // Find the child element with the class "header"
+        var productTitle = firstProduct.$(".content").$(".header");
+
+        // Check if the title is present
+        assertNotEquals("", productTitle.getText());
+    }
+}
+----
+
+This works but is not very readable. Selenide provides a better way to test the website.
+
+[source, java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+public class VideoshopExampleTest {
+    @Test
+    public void testWebsiteWithEquals() {
+        open("http://localhost:8080/dvds");
+
+        // The first element with the class "ui card" will be selected
+        var firstProduct = $( ".ui.card" );
+        // Find the child element with the class "header"
+        var productTitle = firstProduct.$(".content").$(".header");
+
+        // Check if not empty title is present
+        productTitle.shouldNotHave(text(""));
+    }
+}
+----
+
+
+
+This shouldNotHave(text("")) method is much more readable than the assertNotEquals("", productTitle.getText()) method.
+There are many more methods available in the `SelenideElement` class for testing the website.
+But they all do the same thing.
+All of them are just synonyms for `should`-method.
+The only difference is the name of the method.
+
+The important for the check is the `Condition` inside the `should`-method.
+There are plenty of Conditions available in the `Condition` class for testing the website.
+There is a special class for the ElementsCollection  (result from $$()-method) called
+`CollectionCondition` for testing the collection of elements.
+See the official documentation for a complete list of methods and conditions available in the
+https://selenide.org/javadoc/current/com/codeborne/selenide/CollectionCondition.html[CollectionCondition] and
+https://selenide.org/javadoc/current/com/codeborne/selenide/Condition.html[Condition] classes.
+
+Here is a small list of things you can test with Selenide with the `should`-method:
+
+- text(String) -> Check if the element has the specified text
+- exactText(String) -> Check if the element has the exact specified text
+- exist -> Check if the element exists in the DOM
+- clickable -> Check if the element is clickable
+- visible -> Check if the element is visible (can be in DOM but not visible)
+- attribute(String, String) -> Check if the element has the specified attribute with the specified value
+- id(String) -> Check if the element has the specified id
+- tagName(String) -> Check if the element has the specified tag name
+
+NOTE: Be aware of that there are attributes and methods in the Condition class.
+So the list above don't miss Parameters for some entries. They are attributes.
+
+The conditions for ElementsCollections are a bit different since you check the collection of elements and not a single element.
+
+- size(int) -> Check if the collection has the specified size
+- empty -> Check if the collection is empty
+- sizeGreaterThan(int) -> Check if the collection has more than the specified size
+- allMatch(String, Predicate<WebElement>) -> Check if all elements in the collection match the specified predicate-function
+
+
+TIP: Use your IDE. There is autocomplete for the methods available (`Ctrl + Space` in most IDEs).
+Read the `naming in tests` site in further reading for more information about the naming of the methods in Selenide.
+
+
+
+=== Complete example
+
+After we now know how to open a website, find elements, manipulate them and test the website, we can write a complete test.
+
+Let's do this scenario: We open the dvd catalog, click on the first product and check if the product details page is
+opened. Then we add it to basket and end on the login-page.
+
+[source,java]
+----
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
+
+public class VideoshopExampleTest {
+    @Test
+    public void complexExample() {
+        open("https://localhost:8080/dvds");
+        var firstProduct = $( ".ui.card" );
+
+        // Check if the first product is visible
+        firstProduct.shouldBe(visible);
+
+        // Next we want to click on the first product and check if the product details page is opened.
+        firstProduct.click();
+        // find the add basket button and click on it
+        var addBasketButton = $( "button .ui.labeled.icon.button" );
+        addBasketButton.click();
+
+        var url = webdriver().getCurrentUrl();
+        assertTrue(url.endsWith("/login"), "When adding a product to the basket, the user should be redirected to the login page.");
+    }
+}
+----
+
+[NOTE]
+The `SelenideElement` objects are valid for the current page.
+If you navigate to another page, the `SelenideElement` objects will be invalid, and you have to find them again.
+So if you reuse the `SelenideElement` objects after a page navigation, you will get a `StaleElementReferenceException`.
+
+
+=== Reset the application after each test
+
+Normally you run more than one test.
+And not all test are read-only or independent.
+Some tests change the state of the application.
+This can lead to problems, since the normal JUnit test runner does not reset the application after each test and the
+order of the tests is not guaranteed.
+So the easiest way is to rest the application after each test.
+With Selenide it's not so easy.
+There are two things that need to be done. First we have to reset the application and second we have to clear the browser cache and cookies.
+
+==== Reset the browser
+The browser cache and cookies can be done relative easy.
+Every browser has a local storage and a session storage.
+So the easiest way is to close the browser after each test and open a new one for the next test.
+[source,java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+class VideoshopExampleTest {
+
+    @AfterEach
+    public void resetBrowser() {
+        close();
+    }
+}
+----
+
+The `close()` method closes the browser and clears the local storage and session storage.
+But as consequence, the next open() method will take much longer until the browser is started again.
+
+There is a better way to reset the browser without closing it.
+You can clear the local storage and session storage after each test.
+And lucky for us, Selenide provides a method to clear the local storage and session storage.
+
+[source,java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+class VideoshopExampleTest {
+
+    @AfterEach
+    public void resetBrowser() {
+        localStorage().clear();
+        cookies().clear();
+    }
+}
+----
+
+This will not close the browser after a test.
+So the windows will stay open and the next test will be faster.
+
+When all test are done then the browser should be closed completely to avoid annoying windows after the test execution.
+You can do this by calling the `closeWebDriver()` or `closeWindow()` method in the `@AfterAll` method of the test class.
+[source,java]
+----
+import static com.codeborne.selenide.Selenide.*;
+
+class VideoshopExampleTest {
+
+    @AfterAll
+    public static void closeBrowser() {
+        closeWindow();
+        // close() does the same - closes only the current window
+
+        closeWebDriver();
+        // quit() does the same - kills all windows and ends the WebDriver session
+    }
+}
+----
+The difference between `closeWindow()` and `closeWebDriver()` is that `closeWindow()` only closes the current window
+and keeps the WebDriver session alive. So if you have multiple windows open, the WebDriver session will still be alive and you can switch to another window.
+When you call `closeWebDriver()`, it will close all windows and ends the WebDriver session.
+This is the preferred way to close the browser after all tests are done.
+
+[NOTE]
+Dont forget to use the `static` keyword and the `AfterAll` annotation.
+Without these two parts it will not work.
+
+==== Reset the application
+
+Resetting the application is a bit more complicated.
+The Browser has no direct connection to the backend and so it cannot reset the application directly.
+Often you find a solution to revert changes in database after each test by annotating the test class with
+`@Transactional` and `@Rollback`.
+But this only works for tests that are run in the same transaction.
+And Selenide does not run in the same transaction as the backend. So this will not work for Selenide tests.
+
+[WARNING]
+Don't use `@Transactional` and `@Rollback` for Selenide tests. This will not work and will lead to unexpected results.
+
+
+But Spring Boot provides a way to reset the application.
+I admit that this is not the best way to do it, but it works.
+By annotating each test class with `@DirtyContext` the application context will be reset after each test.
+
+[source,java]
+----
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+
+@SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+class VideoshopExampleTest {
+    @Test
+    public void testSomething() {
+        // test code here
+    }
+}
+----
+
+The `@DirtiesContext` annotation tells Spring Boot to reset the application context after each test method.
+For this the attribute of the annotation is set to `AFTER_EACH_TEST_METHOD`.
+This means that the application context will be reset after each test method.
+Your console output will be increased, but you will have a clean application context for each test method.
+
+==== Docker it
+
+There is an even better way to reset the application after each test.
+There is a framework called *Testcontainers*.
+This framework allows you to create containers in *Docker* for your tests.
+So if you need a database, you can create a container with the database and use it for your tests.
+Selenide can be used in combination with Testcontainers too.
+Deploying of containers is much faster than starting a Spring Boot application and you can reset the application by simply stopping and starting the container.
+
+But this is a topic for another time.
+If you are interested in this topic, you can read the official documentation at
+https://www.testcontainers.org/[https://www.testcontainers.org/].
+
+
+
+== Page Objects
+
+Okay what did we learn so far? We can open a website, find elements, manipulate them and test the website.
+But what if we have a lot of tests and we want to reuse the same elements in different tests? What is if the frontend
+was changed and new Elements were added or the CSS selectors were changed? Then we have to change all our tests. This is not very maintainable.
+
+So can we do something to decouple the tests from the elements? Yes and we already know how to do this.
+The magic word is: *OOP*.
+Create a wrapper class for a single page and only edit the attributes and methods of this class, when something is changed.
+All what the tests have to do is to call the methods of this class. This is called the *Page Object Pattern*.
+
+=== Let's use OOP
+Before we create the correct page objects for the videoshop, let's create a simple class that represents a page with
+attributes and methods.
+Let's create a 'simple page object' for the DVD catalog page and encapsulate the elements and actions.
+
+[source,java]
+----
+public class DvdCatalogPage {
+
+    private SelenideElement firstProduct = $( ".ui.card" );
+    private SelenideElement addBasketButton = $( "button .ui.labeled.icon.button" );
+
+    public void open() {
+        open("https://localhost:8080/dvds");
+    }
+
+    public void clickFirstProduct() {
+        firstProduct.click();
+    }
+
+    public void clickAddBasketButton() {
+        addBasketButton.click();
+    }
+}
+----
+
+==== Attributes
+
+Looks good; Right? It should work in our tests, but there is a problem.
+The `firstProduct` and `addBasketButton` attributes are initialized when the class is created.
+This means that if the page is not opened yet, the elements will not be found and the test will fail.
+So we have to initialize the elements after the page is opened.
+For this we can use the `@FindBy` annotation from Selenium.
+This annotation allows us to specify the CSS selector for the element and Selenide will find the element when it is needed.
+
+Our new properties will look like this:
+[source,java]
+----
+import org.openqa.selenium.support.FindBy;
+
+public class DvdCatalogPage {
+
+    @FindBy(css = ".ui.card")
+    private SelenideElement firstProduct;
+
+    @FindBy(css = "button .ui.labeled.icon.button")
+    private SelenideElement addBasketButton;
+
+    //...
+}
+
+----
+
+Okay now we avoid the problem of initializing the elements before the page is opened.
+But now we have another problem. The `@FindBy` annotation need a context to when the elements should be found.
+The solution is simple. It's the initial question. When do we need the elements? After the page was *opened*.
+So the open()-method provides the context for the needed elements.
+Then give it to the method.
+
+[source,java]
+----
+import org.openqa.selenium.*;
+
+class ImprovedVideoshopTests{
+
+    @Test
+    void createPageObjects(){
+
+        // handle everything over the page object
+        DvdCatalogPage page = open("https://localhost:8080/dvds", DvdCatalogPage.class);
+        page.clickFirstProduct();
+    }
+}
+----
+
+==== Methods
+
+So we have an object that hides all 'attributes' of page and we can call actions to interact with the page.
+But there are still some problems.
+The methods don't give anything back.
+So if we want to check the values of one of the elements, we still have to call the $()-method.
+So we than add return values to the methods.
+But instead of returning just (lists of) SelenideElements, give more meaningful return values.
+
+So let's change the return type for `clickFirstProduct()` to a new class called `DvdDetailsPage`.
+
+[source,java]
+----
+import selenidePageObjects.LoginPage;class DvdDetailsPage {
+
+    @FindBy(css = "#content")
+    private SelenideElement contentSection;
+
+    @FindBy(css = ".comments")
+    private SelenideElement comments;
+
+    public List<SelenideElement> allComments() {
+        return comments.$$(By.cssSelector(".comment"));
+    }
+
+    public Page clickAddBasketButton() {
+        addBasketButton.click();
+        return new Page();
+    }
+}
+----
+
+So you see two methods.
+The `allComments()` method returns a list of all comments on the page.
+The `clickAddBasketButton()` method clicks the add to basket button and returns a new page.
+
+As you can see, the `clickAddBasketButton()` returns again a new _page object_.
+This can be spinning out of control, if you have a lot of pages and a lot of methods that return new pages.
+So you create a new complete page object for every page and every method that returns a new page.
+This will lead to a Sisyphus work plus we will create a Cycle of dependencies between the page objects.
+
+So the solution is to create classes, that only represent a result/change of the action.
+For this you can use record classes or simple classes that represent the result of the action.
+So instead of returning a just the simple List or primitive type, you wrap them in a class and give it a better meaning.
+This is also known as *strong typing* or *Value Objects*.
+For more information about this topic, see e.g. https://de.wikipedia.org/wiki/Value_Object[Wikipedia Value Object] and
+https://martinfowler.com/bliki/ValueObject.html[Martin Fowler's Value Object].
+
+
+
+
+=== The Default Page Object
+Since we derived the page object in the last chapter, we can now discuss the default page object.
+
+
+
+== Selenide Properties
+So Selenide as many thing predefined. It so configured that is "ready at start".
+But sometimes the default behavior does not fit.
+For this you can edit more or less all things you want.
+Some of the thing you can configure:
+
+- the used browser
+- the base url
+- run in headless mode (no extra visible window)
+- the resolution and position of the browser
+- the timeout
+
+=== Do it during the test
+The first way you can set special behavior is via the Selenide or webdriver object.
+Read the official documentation for all available methods.
+https://selenide.org/javadoc/current/com/codeborne/selenide/Configuration.html[Selenide Configuration]
+
+
+=== Do it via the selenide.properties file
+A bit more convenient is to set the properties in the `src/test/resources/selenide.properties` file in your maven
+project.
+
+[source, properties]
+----
+selenide.base=http://localhodt:8080/dvds
+selenide.headless=false
+selenide.timeout=10000
+----
+
+
+
+== Extensions
+This chapter only lists some available extensions for Selenide. So you can decide by yourself if you want to use them or not.
+
+- Take screenshots during test execution
+- Run with a delay to see what is happening in the browser
+- Run with a cursor to see where the mouse is
+- Highlight elements during test execution
+- Run with different browsers and browser versions
+
+
+== Summary and Overview
+
+Let's summarize what we have learned about Selenide, the Page Object Pattern and acceptance tests in general.
+
+Selenide is a powerful framework for test automation that simplifies the process of writing automated tests in Java.
+It provides a clean and readable API for interacting with web elements and performing actions on them.
+
+
+=== Cheat sheet
+
+
+==== Basic operations
+
+[source,java]
+----
+// importing the Selenide static methods
+import static com.codeborne.selenide.Selenide.*;
+
+class CheatSheet {
+    @Test
+    void testSelenideBasics() {
+        // open a website
+        open("http://localhost:8080/dvds");
+
+        // find an element by CSS selector
+        var firstProduct = $( ".ui.card" );
+        var manyProducts = $$( ".ui.card" ); // find all elements with the class "ui card"
+
+        // find a child element
+        var productTitle = firstProduct.$(".content").$(".header");
+
+        // click on the product title
+        productTitle.click();
+
+        // check if the product title is not empty
+        productTitle.shouldNotBe(text(""));
+    }
+}
+----
+
+==== Page Objects
+
+===== Definition of Page Objects
+
+[source,java]
+----
+import com.codeborne.selenide.ElementsCollection;
+import static com.codeborne.selenide.Selenide.*;
+
+class CheatSheetPage {
+    // Page objects are classes that represent a page in the application.
+    // They encapsulate the elements and actions of the page and provide a clean API for interacting with the page.
+
+    // Example of action on the page that returns to get all comments on the page
+    public List<SelenideElement> allComments() {
+        return comments.$$(By.cssSelector(".comment"));
+    }
+
+    // Example of action on the page that returns a new page object
+    public Page clickAddBasketButton() {
+        var addBasketButton =  $("button");
+        addBasketButton.click();
+        // Don't forget to return the new page object by calling the `page()` method with the class of the new page object.
+        return page(Page.class);
+    }
+
+    public SearchResult search(){
+        // input some data before
+        $("#search-button").click();
+        return page(SearchResult.class);
+    }
+
+    public class SearchResult{
+
+        ElementsCollection results(){
+            return $$(".result");
+        }
+    }
+
+    class Page{
+        // Dummy object
+        public String getURL(){
+            return "DUMMY";
+        }
+    }
+}
+----
+
+===== Use of Page Objects
+
+[source,java]
+----
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selenide.open;
+
+class CheatSheet{
+
+    @Test
+    void usePageObjects(){
+        var page = open("http://localhost:8080/dvds", CheatSheetPage.class);
+        var result = page.allComents();
+        assertTrue(result.size() > 0, "There should be at least one element");
+    }
+}
+----
+
+
+==== Configs and other
+
+===== Reset changes
+
+Just assure you have these parts in your test class to reset the application and the browser after each test.
+
+[source,java]
+----
+import org.junit.jupiter.api.AfterAll;import org.junit.jupiter.api.AfterEach;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import static com.codeborne.selenide.Selenide.*;
+
+@SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+class CheatSheet{
+
+    @AfterEach
+    void tearDown(){
+        cookies().clear();
+    }
+
+    @AfterAll
+    static void closeAll(){
+        closeWebDriver();
+    }
+}
+----
+
+===== Properties
+Some important properties you can set.
+[source, properties]
+----
+# Set the browser to use (e.g., chrome, firefox, edge)
+selenide.browser=chrome
+# set the base URL for the application under test
+selenide.baseUrl=http://localhost:8080
+# set the timeout for waiting for elements (in milliseconds)
+selenide.timeout=4000
+# set the browser to run in headless mode (true or false)
+selenide.headless=false
+
+----
+
+
+
+
+== Sources and further reading
+
+* https://selenide.org[Selenide official website]
+* https://selenide.org/javadoc[Selenide Javadoc]
+* https://selenide.org/documentation/page-objects.html[Selenide Page Objects ]
+* https://w3schools.com/cssref/css_selectors.asp[CSS Selectors]
+* https://github.com/selenide/selenide/wiki/do-not-use-getters-in-tests[Naming in tests]
