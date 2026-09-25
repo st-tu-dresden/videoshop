@@ -1,7 +1,7 @@
 :project_name: Videoshop
 :author: Marc Kandler
 :company_name: Chair of Software Technology
-:revnumber: 2.7
+:revnumber: 2.8
 :revdate: {docdatetime}
 :revremark: Work in Progress
 :doctype: book
@@ -15,12 +15,13 @@
 [options="header"]
 [cols="1, 3, 3"]
 |===
-|Version | Processing Date   | Author
-|1.0	| October 9th, 2017 | Marc Kandler
-|2.0	| June 21st, 2019 | Daniel Schoenicke
-|2.5	| October 5th, 2021 | Markus Hamann
-|2.6	| September 7th, 2023 | Markus Hamann
-|2.7    | September 30th, 2024 | Oliver Geisel
+| Version | Processing Date      | Author
+| 1.0	  | October    9th, 2017 | Marc Kandler
+| 2.0	  | June      21st, 2019 | Daniel Schoenicke
+| 2.5	  | October    5th, 2021 | Markus Hamann
+| 2.6	  | September  7th, 2023 | Markus Hamann
+| 2.7     | September 30th, 2024 | Oliver Geisel
+| 2.8     | September 25th, 2026 | Oliver Geisel
 |===
 
 == Purpose of this Document
@@ -960,6 +961,19 @@ which show that the functional requirements are fulfilled from the perspective o
 - He loses all access to functionality only open to authenticated users or certain roles
 |===
 
+[[AT0012]]
+[cols="1h, 4"]
+|===
+|ID            |<<AT0012>>
+|Use Case      |<<UC0010>>
+|{Pre}        a|An unauthenticated user is using the system
+|{Event}      a| 1. The authenticated user presses "Login"
+2. The user enters the credentials of an existing user but with a wrong password and presses "Login"
+|{Result}     a|
+- He stays at the login screen
+- He is still unauthenticated
+|===
+
 [[AT0020]]
 [cols="1h, 4"]
 |===
@@ -1028,6 +1042,20 @@ Finally, he presses "Registrieren" to send the information.
 NOTE: You could arguably describe the process in more detail, with concrete values (e.g. user selects disc named
 "Secretary" from the BluRay catalog, ...)
 |===
+
+[[AT0200]]
+[cols="1h, 4"]
+|===
+|ID            |<<AT0200>>
+|Use Case      |<<UC0200>>, <<UC0210>>, <<UC0220>>, <<UC0310>>, <<UC0320>>
+|{Pre}        a|A user is using the system and is either viewing the DVD catalog (<<AT0100>>) or the BluRay catalog (<<AT0101>>).
+|{Event}      a|A user goes to the catalog and select the first disc of the catalog. He adds it to his cart with a quantity of 1. He then goes to his cart and presses "Kaufen".
+|{Result}     a|The boss-user sees a new order in the "orders" section.
+|===
+
+TIP: The last acceptance test case is a bit more complex, as it covers multiple use cases. You should try to create
+acceptance test cases for every use case separately, to ensure that the system fulfills the requirements of the client.
+This acceptance test case is more general as the rest and is more an "acceptance scenario".
 
 NOTE: This list of acceptance tests does obviously not cover every use case. The process is mostly the same for every
 acceptance test case, which is why we provide only some examples to show you the ropes.
