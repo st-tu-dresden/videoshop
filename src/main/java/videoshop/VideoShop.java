@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2023 the original author or authors.
+ * Copyright 2013-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -64,14 +65,13 @@ public class VideoShop {
 		 * Disabling Spring Security's CSRF support as we do not implement pre-flight request handling for the sake of
 		 * simplicity. Setting up basic security and defining login and logout options.
 		 *
-		 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
 		 */
 		@Bean
-		SecurityFilterChain videoShopSecurity(HttpSecurity http) throws Exception {
+		SecurityFilterChain videoShopSecurity(HttpSecurity http) {
 
 			return http
 					.headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin))
-					.csrf(csrf -> csrf.disable())
+					.csrf(AbstractHttpConfigurer::disable)
 					.formLogin(login -> login.loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE))
 					.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/")).build();
 		}
