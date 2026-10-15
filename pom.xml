@@ -29,6 +29,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>7.18.2</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
     <build>
