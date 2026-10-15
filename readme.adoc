@@ -24,16 +24,16 @@ Note that the standard admin user is named `boss` and has the password `123`.
 
 ## Prerequisites
 
-### Java 21
+### Java 25
 
-https://adoptium.net/temurin/releases/?version=21[Download] the binaries, install. Make sure the console shows something like this:
+https://adoptium.net/temurin/releases/?version=25[Download] the binaries, install. Make sure the console shows something like this:
 
 [source, bash]
 ----
-$ java -version
-openjdk version "21.0.4" 2024-07-16 LTS
-OpenJDK Runtime Environment Temurin-21.0.4+7 (build 21.0.4+7-LTS)
-OpenJDK 64-Bit Server VM Temurin-21.0.4+7 (build 21.0.4+7-LTS, mixed mode)
+$ java --version
+openjdk 25.0.4 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-25.0.4+7 (build 25.0.4+7-LTS)
+OpenJDK 64-Bit Server VM Temurin-25.0.4+7 (build 25.0.4+7-LTS, mixed mode, sharing)
 ----
 
 Make sure that the wrapped Maven picks up the same JDK version and that the following command shows similar output:
@@ -41,11 +41,11 @@ Make sure that the wrapped Maven picks up the same JDK version and that the foll
 [source, bash]
 ----
 $ ./mvnw --version
-Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
-Maven home: /.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1
-Java version: 21.0.4, vendor: Eclipse Adoptium, runtime: /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
-Default locale: en_US, platform encoding: UTF-8
-OS name: "mac os x", version: "14.7", arch: "aarch64", family: "mac"
+Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)
+Maven home: /Users/odrotbohm/.m2/wrapper/dists/apache-maven-3.10.0/dae9a06d
+Java version: 25.0.4, vendor: Eclipse Adoptium, runtime: /Users/odrotbohm/.sdkman/candidates/java/25.0.4-tem
+Default locale: en_US, platform encoding: UTF-8, time zone: Europe/Berlin
+OS name: "mac os x", version: "27.0.1", arch: "aarch64", family: "mac"
 ----
 
 ### Git
@@ -55,7 +55,7 @@ https://git-scm.com/download[Download] the binaries, run the installer. Verify t
 [source, bash]
 ----
 $ git --version
-git version 2.46.1
+git version 2.56.0
 ----
 
 ## IDE Setup
