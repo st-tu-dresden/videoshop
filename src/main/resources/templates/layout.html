@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" lang="de"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:fragment="layout(content)">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script th:src="@{/webjars/jquery/jquery.min.js}"
-                src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-                src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+                src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
         <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-              href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+              href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" type="text/css"/>
         <link th:href="@{/resources/css/style.css}" rel="stylesheet"
               href="../static/resources/css/style.css" type="text/css"/>
 
