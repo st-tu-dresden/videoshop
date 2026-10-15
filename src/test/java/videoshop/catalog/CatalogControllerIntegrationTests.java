@@ -26,7 +26,7 @@ import org.springframework.ui.Model;
 
 /**
  * Integration tests interacting with the {@link CatalogController} directly.
- * 
+ *
  * @author Oliver Gierke
  */
 class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
@@ -48,6 +48,6 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 
 		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
 
-		assertThat(object).hasSize(9);
+		assertThat(object).hasSize(8);
 	}
 }

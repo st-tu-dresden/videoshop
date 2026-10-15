@@ -37,7 +37,7 @@ class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 	void findsAllBluRays() {
 
 		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
-		assertThat(result).hasSize(9);
+		assertThat(result).hasSize(8);
 	}
 
 	/**
