@@ -1,7 +1,7 @@
 :project_name: Videoshop-Tests
 :author: Oliver Geisel
 :company_name: Chair of Software Technology
-:revnumber: 0.1
+:revnumber: 0.2
 :revdate: {docdatetime}
 :revremark: First draft
 :doctype: book
@@ -28,10 +28,10 @@ The HTML, CSS and JavaScript code that is sent to the browser.
 For all other parts there are other tests-methods and frameworks.
 
 == Difference to Selenium
-Selenium is the basis for Selenide.
+*Selenium* is the foundation for Selenide.
 Selenium is a framework that allows you to interact with a web browser and
-perform actions like clicking buttons, filling out forms, and navigating between pages.
-You can 'simulate a real user' by using Selenium.
+perform actions like _clicking buttons_, _filling out forms_, and _navigating between pages_.
+You can '*simulate a real user*' by using Selenium.
 But there is a lot of boilerplate code that you have to write to get Selenium working.
 
 - You have get the WebDriver
@@ -41,9 +41,10 @@ But there is a lot of boilerplate code that you have to write to get Selenium wo
 - wait for them to be visible
 
 Many of these steps are repetitive and can be time-consuming.
-Selenide simplifies this process by providing a higher-level API that abstracts away much of the boilerplate code, allowing you to focus on writing tests that are easy to read and maintain.
+*Selenide* simplifies this process by providing a higher-level API that abstracts away much of the boilerplate code, allowing you to focus on writing tests that are easy to read and maintain.
 
-Another difference is that Selenium is a general-purpose framework that can be used with python, Java, C#, Ruby, etc. Selenide is a Java framework that is built on top of Selenium and provides additional features and functionality specifically for Java developers.
+Another difference is that Selenium is a general-purpose framework that can be used with python, Java, C#, Ruby, etc.
+Selenide is a Java framework that is built on top of Selenium and provides additional features and functionality specifically for Java developers.
 
 == Basics
 Selenide wants to be simple. So you have tests, that are easy to read.
@@ -180,7 +181,7 @@ In Selenium you have to ask for there presence or wirte explicit wait or sleep s
 But Selenide waits by default for the element (default timeout is 4 seconds).
 This means you don't have to write any explicit waits or sleep statements in your tests.
 
-=== manipulating elements
+=== Manipulating elements
 Since we can find elements, we can also manipulate them.
 The `SelenideElement` class provides methods for interacting with web elements, such as `setValue(String)`, `click()`, `submit()`, and many more.
 You can use these methods to perform actions on the web elements you have found.
@@ -210,7 +211,7 @@ for a complete list of methods available in the `SelenideElement` class.
 === Test the website
 The best advantage of Selenide is that you can write tests that are easy to read and understand.
 In normal Selenium you only can manipulate elements. There is no direct way to test the website.
-You have to write your own assertions and checks.
+You had to write your own *assertions and checks*.
 This would look like this:
 
 [source, java]
@@ -234,6 +235,7 @@ public class VideoshopExampleTest {
 ----
 
 This works but is not very readable. Selenide provides a better way to test the website.
+Every `SelenideElement` has a `should`-method that allows you to test the element with a `Condition`.
 
 [source, java]
 ----
@@ -255,15 +257,13 @@ public class VideoshopExampleTest {
 }
 ----
 
-
-
 This shouldNotHave(text("")) method is much more readable than the assertNotEquals("", productTitle.getText()) method.
 There are many more methods available in the `SelenideElement` class for testing the website.
 But they all do the same thing.
 All of them are just synonyms for `should`-method.
 The only difference is the name of the method.
 
-The important for the check is the `Condition` inside the `should`-method.
+The important part for the check is the `Condition` inside the `should`-method.
 There are plenty of Conditions available in the `Condition` class for testing the website.
 There is a special class for the ElementsCollection  (result from $$()-method) called
 `CollectionCondition` for testing the collection of elements.
@@ -271,26 +271,26 @@ See the official documentation for a complete list of methods and conditions ava
 https://selenide.org/javadoc/current/com/codeborne/selenide/CollectionCondition.html[CollectionCondition] and
 https://selenide.org/javadoc/current/com/codeborne/selenide/Condition.html[Condition] classes.
 
-Here is a small list of things you can test with Selenide with the `should`-method:
+Here is a small list of things (Conditions) you can test with Selenide with the `should`-method:
 
-- text(String) -> Check if the element has the specified text
-- exactText(String) -> Check if the element has the exact specified text
-- exist -> Check if the element exists in the DOM
-- clickable -> Check if the element is clickable
-- visible -> Check if the element is visible (can be in DOM but not visible)
-- attribute(String, String) -> Check if the element has the specified attribute with the specified value
-- id(String) -> Check if the element has the specified id
-- tagName(String) -> Check if the element has the specified tag name
+- `text(String)` -> Check if the element has the specified text
+- `exactText(String)` -> Check if the element has the exact specified text
+- `exist` -> Check if the element exists in the DOM
+- `clickable` -> Check if the element is clickable
+- `visible` -> Check if the element is visible (can be in DOM but not visible)
+- `attribute(String, String)` -> Check if the element has the specified attribute with the specified value
+- `id(String)` -> Check if the element has the specified id
+- `tagName(String)` -> Check if the element has the specified tag name
 
-NOTE: Be aware of that there are attributes and methods in the Condition class.
-So the list above don't miss Parameters for some entries. They are attributes.
+NOTE: Be aware of that there are attributes and methods in the `Condition` class.
+So the list above don't miss Parameters for some entries. They are attributes from the `Condition` class.
 
 The conditions for ElementsCollections are a bit different since you check the collection of elements and not a single element.
 
-- size(int) -> Check if the collection has the specified size
-- empty -> Check if the collection is empty
-- sizeGreaterThan(int) -> Check if the collection has more than the specified size
-- allMatch(String, Predicate<WebElement>) -> Check if all elements in the collection match the specified predicate-function
+- `size(int)` -> Check if the collection has the specified size
+- `empty` -> Check if the collection is empty
+- `sizeGreaterThan(int)` -> Check if the collection has more than the specified size
+- `allMatch(String, Predicate<WebElement>)` -> Check if all elements in the collection match the specified predicate-function
 
 
 TIP: Use your IDE. There is autocomplete for the methods available (`Ctrl + Space` in most IDEs).
@@ -460,7 +460,7 @@ There is a framework called *Testcontainers*.
 This framework allows you to create containers in *Docker* for your tests.
 So if you need a database, you can create a container with the database and use it for your tests.
 Selenide can be used in combination with Testcontainers too.
-Deploying of containers is much faster than starting a Spring Boot application and you can reset the application by simply stopping and starting the container.
+Deploying of containers is much faster than starting a Spring Boot application, and you can reset the application by simply stopping and starting the container.
 
 But this is a topic for another time.
 If you are interested in this topic, you can read the official documentation at
@@ -471,13 +471,17 @@ https://www.testcontainers.org/[https://www.testcontainers.org/].
 == Page Objects
 
 Okay what did we learn so far? We can open a website, find elements, manipulate them and test the website.
-But what if we have a lot of tests and we want to reuse the same elements in different tests? What is if the frontend
-was changed and new Elements were added or the CSS selectors were changed? Then we have to change all our tests. This is not very maintainable.
+But what if we have a lot of tests and we want to reuse the same elements in different tests?
+What is if the frontend was changed and new Elements were added or the CSS selectors were changed?
+Then we have to change all our tests.
+This is not very maintainable.
 
-So can we do something to decouple the tests from the elements? Yes and we already know how to do this.
+So can we do something to decouple the tests from the elements?
+Yes and we already know how to do this.
 The magic word is: *OOP*.
 Create a wrapper class for a single page and only edit the attributes and methods of this class, when something is changed.
-All what the tests have to do is to call the methods of this class. This is called the *Page Object Pattern*.
+All what the tests have to do is to call the methods of this class.
+This is called the *Page Object Pattern*.
 
 === Let's use OOP
 Before we create the correct page objects for the videoshop, let's create a simple class that represents a page with
@@ -510,7 +514,7 @@ public class DvdCatalogPage {
 Looks good; Right? It should work in our tests, but there is a problem.
 The `firstProduct` and `addBasketButton` attributes are initialized when the class is created.
 This means that if the page is not opened yet, the elements will not be found and the test will fail.
-So we have to initialize the elements after the page is opened.
+So we have to initialize the elements *after* the page is opened.
 For this we can use the `@FindBy` annotation from Selenium.
 This annotation allows us to specify the CSS selector for the element and Selenide will find the element when it is needed.
 
@@ -533,10 +537,14 @@ public class DvdCatalogPage {
 ----
 
 Okay now we avoid the problem of initializing the elements before the page is opened.
-But now we have another problem. The `@FindBy` annotation need a context to when the elements should be found.
-The solution is simple. It's the initial question. When do we need the elements? After the page was *opened*.
-So the open()-method provides the context for the needed elements.
-Then give it to the method.
+But now we have a new problem.
+The `@FindBy` annotation need a _context_ when the elements should be found.
+The solution is simple. It's the initial question. When do we need the elements?
+After the page was *opened*.
+There is a second version of the `open()` method that takes a class as second parameter.
+This class is the *page object class*.
+So the open()-method provides the context for the elements we want to find.
+So we have to change the open()-method to this:
 
 [source,java]
 ----
@@ -554,13 +562,15 @@ class ImprovedVideoshopTests{
 }
 ----
 
+Assign the result of the open()-method to a variable of type wanted page object class, and you can use the methods of this class to interact with the page.
+
 ==== Methods
 
 So we have an object that hides all 'attributes' of page and we can call actions to interact with the page.
 But there are still some problems.
 The methods don't give anything back.
 So if we want to check the values of one of the elements, we still have to call the $()-method.
-So we than add return values to the methods.
+So we should add return values to the methods.
 But instead of returning just (lists of) SelenideElements, give more meaningful return values.
 
 So let's change the return type for `clickFirstProduct()` to a new class called `DvdDetailsPage`.
@@ -588,7 +598,7 @@ import selenidePageObjects.LoginPage;class DvdDetailsPage {
 
 So you see two methods.
 The `allComments()` method returns a list of all comments on the page.
-The `clickAddBasketButton()` method clicks the add to basket button and returns a new page.
+The `clickAddBasketButton()` method clicks the `add to basket` button and returns a **new page**.
 
 As you can see, the `clickAddBasketButton()` returns again a new _page object_.
 This can be spinning out of control, if you have a lot of pages and a lot of methods that return new pages.
@@ -597,12 +607,11 @@ This will lead to a Sisyphus work plus we will create a Cycle of dependencies be
 
 So the solution is to create classes, that only represent a result/change of the action.
 For this you can use record classes or simple classes that represent the result of the action.
-So instead of returning a just the simple List or primitive type, you wrap them in a class and give it a better meaning.
+So instead of returning just the simple `List` or primitive type, you wrap them in a class and give it a
+better meaning.
 This is also known as *strong typing* or *Value Objects*.
 For more information about this topic, see e.g. https://de.wikipedia.org/wiki/Value_Object[Wikipedia Value Object] and
 https://martinfowler.com/bliki/ValueObject.html[Martin Fowler's Value Object].
-
-
 
 
 === The Default Page Object
@@ -610,13 +619,16 @@ Since we derived the page object in the last chapter, we can now discuss the def
 
 
 
+
+
+
 == Selenide Properties
-So Selenide as many thing predefined. It so configured that is "ready at start".
+Selenide has many thing predefined. It's so configured that is "ready at start".
 But sometimes the default behavior does not fit.
 For this you can edit more or less all things you want.
 Some of the thing you can configure:
 
-- the used browser
+- the used browser (Firefox, Chrome, Edge, etc.)
 - the base url
 - run in headless mode (no extra visible window)
 - the resolution and position of the browser
@@ -639,16 +651,40 @@ selenide.headless=false
 selenide.timeout=10000
 ----
 
+These three properties for example set the base url, the headless mode and the timeout for waiting for elements.
 
+Some of them has to be set carefully, because they can have side effects on the tests.
+So if you set time-outs too low, the tests will fail because the elements are not found in time.
+
+[WARNING]
+If you run your tests in a CI/CD pipeline, you should set the `headless` mode to `true`.
+Either by setting it in the `selenide.properties` file or via command line parameter `-Dselenide.headless=true`
 
 == Extensions
-This chapter only lists some available extensions for Selenide. So you can decide by yourself if you want to use them or not.
+This chapter only lists some available extensions for Selenide.
+So you can decide by yourself if you want to use them or not.
 
 - Take screenshots during test execution
 - Run with a delay to see what is happening in the browser
 - Run with a cursor to see where the mouse is
 - Highlight elements during test execution
 - Run with different browsers and browser versions
+
+
+Some of these extensions are implemented as an example in this project.
+See the `src/test/java/selenidePageObjects/SlowMotionListener.java` class for an example of how to implement a
+Selenide listener that slows down the test execution.
+If you want to use a red cursor during the test execution, you can use the
+`src/test/java/customer/frontend/LoginAcceptanceTests.java` class with the `enableCursor()`-method.
+[WARNING]
+Be aware of the timing of the tests. In this project the default timeout is set to 10 seconds.
+Also every action has an extra delay before and after the action.
+So if you have a lot of actions in your test, the
+test will take a long time to finish.
+On the other hand, if you set all time-outs off, some actions, that are not managed by Selenide, will fail because
+the browser is not ready yet.
+This is the case when you do a redirect to another page. If you don't wait some time, the check of the page-URL will
+fail because the old URL is still in the browser address bar.
 
 
 == Summary and Overview
