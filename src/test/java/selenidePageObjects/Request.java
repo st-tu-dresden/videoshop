@@ -36,6 +36,11 @@ public abstract class Request {
 		return page(GeneralRequest.class);
 	}
 
+	public LoginPage goToLoginPage() {
+		$("a[href='/login']").click();
+		return page(LoginPage.class);
+	}
+
 //region setter/getter
 	/**
 	 * Get the current page URL. Example: <a href="http://localhost:8080/login">http://localhost:8080/login</a>
@@ -52,6 +57,11 @@ public abstract class Request {
 	 * @return The current page path as a String
 	 */
 	public String getPagePath() {
+		try { // Wait to avoid redirecting conflicts. Maybe use $(".someElement").shouldBe(visible) instead of Thread.sleep()
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 		return getPageUrl().replaceAll("http://localhost:\\d+", "");
 	}
 

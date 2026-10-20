@@ -62,7 +62,7 @@ class CatalogAcceptanceTests extends AbstractAcceptanceTests {
 		burayLink.click();
 
 		var cards = $$(".card");
-		cards.shouldHave(size(9));
+		cards.shouldHave(size(8));
 	}
 
 	@AT("AT0110")

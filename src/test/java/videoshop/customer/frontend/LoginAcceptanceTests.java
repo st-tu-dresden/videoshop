@@ -27,8 +27,7 @@ import videoshop.AT;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A test class for acceptance tests of the login functionality of the application. The tests are the related acceptance tests
@@ -124,11 +123,9 @@ class LoginAcceptanceTests {
 		assertEquals("/", result.getPagePath(),
 				"Login with normal user should redirect to home page");
 
-		try {
+		assertDoesNotThrow(() -> {
 			result.logout();
-		} catch (Exception e) {
-			fail("There was an exception during logout: " + e.getMessage());
-		}
+		}, "There was an unexpected exception during logout");
 	}
 
 	@Test
@@ -157,8 +154,8 @@ class LoginAcceptanceTests {
 		var registerPage = open("http://localhost:" + port + "/register", RegisterPage.class);
 		result = registerPage.register(userName, password, address);
 
-		page = open("http://localhost:" + port + "/login", LoginPage.class); // Go back to login page
-
+		// Go back to login page and login with the new user
+		page = result.goToLoginPage();
 		page.login(userName, password);
 
 		assertEquals("/", result.getPagePath(), "Login with new user should redirect to home page");
