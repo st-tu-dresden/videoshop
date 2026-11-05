@@ -13,6 +13,7 @@
                         <th th:text="#{cart.movieTitle}">Titel</th>
                         <th th:text="#{cart.count}">Anzahl</th>
                         <th th:text="#{cart.price}">Preis</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody th:remove="all-but-first">
@@ -21,6 +22,12 @@
                         <td th:text="${item.productName}">Last Action Hero</td>
                         <td th:text="${item.quantity}">10</td>
                         <td th:text="${{item.price}}">10 Euro</td>
+                        <td>
+                            <form method="post" th:action="@{/cart/remove}">
+                                <input type="hidden" name="id" th:value="${item.id}">
+                                <button type="submit" class="ui button" th:text="#{cart.remove}">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                     <tr>
                         <td>Last Action Hero</td>
@@ -47,6 +54,11 @@
                                 <div class="label" th:text="#{cart.total}">Summe</div>
                                 <div class="value"><span th:text="${{cart.price}}">1337</span></div>
                             </div>
+                        </div>
+                        <div class="column">
+                            <form class="ui form" method="post" th:action="@{/cart/clear}">
+                                <button type="submit" class="ui button" th:text="#{cart.clear}">Clear cart</button>
+                            </form>
                         </div>
                         <div class="column">
                             <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/checkout}">
