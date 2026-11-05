@@ -112,6 +112,18 @@ class OrderController {
 		return "cart";
 	}
 
+	@PostMapping("/cart/clear")
+	String clearCart(@ModelAttribute Cart cart) {
+		cart.clear();
+		return "redirect:/cart";
+	}
+
+	@PostMapping("/cart/remove")
+	String removeItem(@RequestParam("id") String id, @ModelAttribute Cart cart) {
+		cart.removeItem(id);
+		return "redirect:/cart";
+	}
+
 	/**
 	 * Checks out the current state of the {@link Cart}. Using a method parameter of type {@code Optional<UserAccount>}
 	 * annotated with {@link LoggedIn} you can access the {@link UserAccount} of the currently logged in user.
